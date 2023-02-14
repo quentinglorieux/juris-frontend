@@ -2,7 +2,6 @@
   <div class="nav-source pl-2">
     <i class="pi pi-fw pi-file"></i>
     <span class="py-1 text-xl"> SOURCES </span>
-
     <div style="margin-bottom: 1em">
       <Button
         type="button"
@@ -15,34 +14,51 @@
         icon="pi pi-minus"
         label="Collapse All"
         @click="collapseAll()"
-      >
-      </Button>
+      />
     </div>
-    <Tree :value="nodes" v-model:expandedKeys="expandedKeys" :filter="true" filterMode="lenient"></Tree>
+    <Tree
+      :value="nodes"
+      v-model:expandedKeys="expandedKeys"
+      :filter="true"
+      filterMode="lenient"
+      selectionMode="single"
+      v-model:selectionKeys="selectedKey"
+      @node-select="onNodeSelect"
+     
+    ></Tree>
   </div>
 </template>
 
 <script setup>
+//  "$emit('source-selected', selectedKey)"
 // import NodeService from '@/utils/NodeService';
-import dataJson from "@/assets/data/treenodes.json";
+import dataJson from "~/assets/data/sourcenodes.json";
+
+
+const emit = defineEmits(['sourceSelected'])
+const onNodeSelect = (node) => {
+emit('sourceSelected', node.text)
+}
+
 
 onMounted(() => {
   // nodeService.value.getTreeNodes().then(data => nodes.value = data);
   nodes.value = dataJson.root;
 });
 
-
-
 const nodes = ref(null);
 // const nodeService = ref(new NodeService());
 const expandedKeys = ref({});
+const selectedKey = ref(null);
 
 const expandAll = () => {
+  
   for (let node of nodes.value) {
     expandNode(node);
   }
   expandedKeys.value = { ...expandedKeys.value };
-  console.log(expandedKeys.value)
+  console.log(expandedKeys.value);
+  
 };
 
 const collapseAll = () => {
@@ -57,8 +73,6 @@ const expandNode = (node) => {
     }
   }
 };
-
-
 </script>
 
 <style scoped>
@@ -70,4 +84,3 @@ const expandNode = (node) => {
   margin-right: 0.5rem;
 }
 </style>
-
