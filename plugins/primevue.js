@@ -7,6 +7,7 @@ import Card from "primevue/card";
 import Sidebar from 'primevue/sidebar';
 import RadioButton from 'primevue/radiobutton';
 import InputSwitch from 'primevue/inputswitch';
+import Tree from 'primevue/tree';
 
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -17,5 +18,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('Sidebar', Sidebar);
     nuxtApp.vueApp.component('RadioButton', RadioButton);
     nuxtApp.vueApp.component('InputSwitch', InputSwitch);
+    nuxtApp.vueApp.component('Tree', Tree);
 });
 
