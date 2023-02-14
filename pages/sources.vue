@@ -1,8 +1,8 @@
 <template>
     <div class="flex"> 
-    <NavSource  @sourceSelected="(e) => source=e"/> 
-    <MainSource :source=source />
-    <SingleSource />
+    <NavSource  class="" @sourceSelected = "(e) => source = e"/> 
+    <MainSource class="" :sourceNode = source />
+    <!-- <SingleSource class="" /> -->
     </div>
 </template>
 

@@ -24,41 +24,33 @@
       selectionMode="single"
       v-model:selectionKeys="selectedKey"
       @node-select="onNodeSelect"
-     
     ></Tree>
   </div>
 </template>
 
 <script setup>
-//  "$emit('source-selected', selectedKey)"
-// import NodeService from '@/utils/NodeService';
 import dataJson from "~/assets/data/sourcenodes.json";
 
+const emit = defineEmits(["sourceSelected"]);
 
-const emit = defineEmits(['sourceSelected'])
 const onNodeSelect = (node) => {
-emit('sourceSelected', node.text)
-}
-
+  emit("sourceSelected", node);
+};
 
 onMounted(() => {
-  // nodeService.value.getTreeNodes().then(data => nodes.value = data);
   nodes.value = dataJson.root;
 });
 
 const nodes = ref(null);
-// const nodeService = ref(new NodeService());
 const expandedKeys = ref({});
 const selectedKey = ref(null);
 
 const expandAll = () => {
-  
   for (let node of nodes.value) {
     expandNode(node);
   }
   expandedKeys.value = { ...expandedKeys.value };
   console.log(expandedKeys.value);
-  
 };
 
 const collapseAll = () => {
@@ -78,7 +70,7 @@ const expandNode = (node) => {
 <style scoped>
 .nav-source {
   height: calc(100vh - 5rem);
-  width: 300px;
+  min-width: 300px;
 }
 .p-button {
   margin-right: 0.5rem;

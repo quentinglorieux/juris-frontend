@@ -8,6 +8,7 @@ import Sidebar from 'primevue/sidebar';
 import RadioButton from 'primevue/radiobutton';
 import InputSwitch from 'primevue/inputswitch';
 import Tree from 'primevue/tree';
+import Tag from 'primevue/tag';
 
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -19,5 +20,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('RadioButton', RadioButton);
     nuxtApp.vueApp.component('InputSwitch', InputSwitch);
     nuxtApp.vueApp.component('Tree', Tree);
+    nuxtApp.vueApp.component('Tag', Tag);
 });
 

@@ -3,60 +3,85 @@
     {
       "key": "1",
       "label": "Article 1",
+      "selectable": false,
       "children": [
         {
           "key": "1-1",
-          "label": "Section 1"
+          "label": "Section 1",
+          "text": "All legislative Powers herein granted shall be vested in a Congress of the United States, which shall consist of a Senate and House of Representatives.",
+          "keywords": ["legislative", "Congress", "Senate"],
+          "comments": [
+            {
+              "title": "John Locke, Second Treatise, §§ 134--42",
+              "content": "1689"
+            },
+            {
+              "title": "William Blackstone, Commentaries 1:149--51, 156--57",
+              "content": "II. The constituent parts of a parliament are the next objects of our enquiry. And these are, the king's majesty, sitting there in his royal political capacity, and the three estates of the realm; the lords spiritual, the lords temporal, (who sit, together with the king, in one house) and the commons, who sit by themselves in another. And the king and these three estates, together, form the great corporation or body politic of the kingdom, of which the king is said to be caput, principium, et finis. For upon their coming together the king meets them, either in person or by representation; without which there can be no beginning of a parliament; and he also has alone the power of dissolving them."
+            },
+            {
+              "title": "Records of the Federal Convention",
+              "content": "6. Resolved that each branch ought to possess the right of originating Acts; that the National Legislature ought to be impowered to enjoy the Legislative Rights vested in Congress by the Confederation & moreover to legislate in all cases to which the separate States are incompetent, or in which the harmony of the United States may be interrupted by the exercise of individual Legislation; to negative all laws passed by the several States, contravening in the opinion of the National Legislature the articles of Union; and to call forth the force of the Union agst. any member of the Union failing to fulfill its duty under the articles thereof."
+            }
+          ]
         },
         {
           "key": "1-2",
           "label": "Section 2",
+          "selectable": false,
           "children": [
             {
               "key": "1-2-1",
-              "label": "Clause 1"
+              "label": "Clause 1",
+              "text": "The House of Representatives shall be composed of Members chosen every second Year by the People of the several States, and the Electors in each State shall have the Qualifications requisite for Electors of the most numerous Branch of the State Legislature.",
+              "keywords": ["Congress", "House"]
             },
             {
-                "key": "1-2-2",
-                "label": "Clause 2"
-              }
+              "key": "1-2-2",
+              "label": "Clause 2",
+              "text": "No Person shall be a Representative who shall not have attained to the age of twenty five Years, and been seven Years a Citizen of the United States, and who shall not, when elected, be an Inhabitant of that State in which he shall be chosen.",
+              "keywords": ["Representative", "House"]
+            }
           ]
         }
       ]
     },
     {
-        "key": "2",
-        "label": "Article 2",
-        "children": [
-          {
-            "key": "2-1",
-            "label": "Section 1",
-            "children": [
-                {
-                  "key": "2-1-1",
-                  "label": "Clause 1"
-                },
-                {
-                    "key": "2-1-23",
-                    "label": "Clause 2 et 3"
-                  }
-              ]
-          },
-          {
-            "key": "2-2",
-            "label": "Section 2",
-            "children": [
-                {
-                  "key": "2-2-1",
-                  "label": "Clause 1"
-                },
-                {
-                    "key": "2-2-23",
-                    "label": "Clause 2 et 3"
-                  }
-              ]
-          }
-        ]
-      }
+      "key": "2",
+      "label": "Article 2",
+      "selectable": false,
+      "children": [
+        {
+          "key": "2-1",
+          "label": "Section 1",
+          "selectable": false,
+          "children": [
+            {
+              "key": "2-1-1",
+              "label": "Clause 1"
+            },
+            {
+              "key": "2-1-23",
+              "label": "Clause 2 et 3"
+            }
+          ]
+        },
+        {
+          "key": "2-2",
+          "label": "Section 2",
+          "selectable": false,
+          "children": [
+            {
+              "key": "2-2-1",
+              "label": "Clause 1"
+            },
+            {
+              "key": "2-2-23",
+              "label": "Clause 2 et 3"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

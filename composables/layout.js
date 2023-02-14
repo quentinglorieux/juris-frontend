@@ -1,7 +1,7 @@
 const contextPath = import.meta.env.BASE_URL;
 
 const layoutConfig = reactive({
-    ripple: false,
+    ripple: true,
     darkTheme: false,
     inputStyle: 'outlined',
     menuMode: 'static',

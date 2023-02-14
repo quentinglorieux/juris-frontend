@@ -1,0 +1,65 @@
+{
+  "root": [
+    {
+      "key": "1",
+      "label": "Article 1",
+      "children": [
+        {
+          "key": "1-1",
+          "label": "Section 1",
+          "text" : "All legislative Powers herein granted shall be vested in a Congress of the United States, which shall consist of a Senate and House of Representatives."
+        },
+        {
+          "key": "1-2",
+          "label": "Section 2",
+          "children": [
+            {
+              "key": "1-2-1",
+              "label": "Clause 1",
+              "text" : "The House of Representatives shall be composed of Members chosen every second Year by the People of the several States, and the Electors in each State shall have the Qualifications requisite for Electors of the most numerous Branch of the State Legislature."
+            },
+            {
+                "key": "1-2-2",
+                "label": "Clause 2",  
+                "text" : "No Person shall be a Representative who shall not have attained to the age of twenty five Years, and been seven Years a Citizen of the United States, and who shall not, when elected, be an Inhabitant of that State in which he shall be chosen."
+              }
+          ]
+        }
+      ]
+    },
+    {
+        "key": "2",
+        "label": "Article 2",
+        "children": [
+          {
+            "key": "2-1",
+            "label": "Section 1",
+            "children": [
+                {
+                  "key": "2-1-1",
+                  "label": "Clause 1"
+                },
+                {
+                    "key": "2-1-23",
+                    "label": "Clause 2 et 3"
+                  }
+              ]
+          },
+          {
+            "key": "2-2",
+            "label": "Section 2",
+            "children": [
+                {
+                  "key": "2-2-1",
+                  "label": "Clause 1"
+                },
+                {
+                    "key": "2-2-23",
+                    "label": "Clause 2 et 3"
+                  }
+              ]
+          }
+        ]
+      }
+  ]
+}
