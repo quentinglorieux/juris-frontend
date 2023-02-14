@@ -1,5 +1,5 @@
 <template>
-    <div class="px-10 bg-slate-50">
+    <div class="bg-slate-50">
 
         <h1 class="bg-slate-400 py-10 text-6xl text-center"> Hello </h1>
 
