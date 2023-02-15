@@ -58,7 +58,7 @@ p {
   font-size: 18px;
 }
 .layout-comment-sidebar {
-    min-width: 600px !important;
+    min-width: 40%;
 }
 
 </style>

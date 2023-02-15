@@ -80,6 +80,7 @@ Button {
 .nav-source {
   height: calc(100vh - 5rem);
   min-width: 300px;
+  width: 300px;
 }
 .p-button {
   margin-right: 0.5rem;
