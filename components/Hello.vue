@@ -1,7 +1,7 @@
 <template>
     <div class="bg-slate-50">
 
-        <h1 class="bg-slate-400 py-10 text-6xl text-center"> Hello </h1>
+        <h1 class="bg-slate-400 py-10 text-6xl text-center"> Home of Juris Lab - Visit SOURCES -> </h1>
 
 
 <div class="flex space-x-2">
