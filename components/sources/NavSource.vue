@@ -1,8 +1,10 @@
 <template>
-  <div class="nav-source pl-2">
-    <i class="pi pi-fw pi-file"></i>
-    <span class="py-1 text-xl"> SOURCES </span>
-    <div style="margin-bottom: 1em">
+  <div class="nav-source pl-2 ">
+    <div class="flex  justify-center items-center py-2">
+        <i class=" pi pi-fw pi-file"></i>
+    <div class=" text-xl font-semibold "> SOURCES </div>
+</div>
+    <div class="flex justify-center" style="margin-bottom: 1em">
       <Button
         type="button"
         icon="pi pi-plus"
@@ -68,6 +70,13 @@ const expandNode = (node) => {
 </script>
 
 <style scoped>
+Button {
+    background-color:  #0288D1;
+    font-size: 0.85rem ;
+    font-weight: 600;
+    padding: 0.25rem 0.4rem;
+    border-radius: 3px;
+}
 .nav-source {
   height: calc(100vh - 5rem);
   min-width: 300px;
