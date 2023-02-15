@@ -1,7 +1,8 @@
 <template>
+  <div class="pl-4"> 
     <li v-for="com in sourceNode.comments">
       <div class="flex">
-        <ul class="mx-4">
+        <ul class="mr-3 text-lg">
           {{
             com.title
           }}
@@ -9,7 +10,7 @@
         <Button @click="onCommentButtonClick(com)"> Read </Button>
       </div>
     </li>
-
+  </div>
     <Sidebar
       v-model:visible="visible"
       position="right"

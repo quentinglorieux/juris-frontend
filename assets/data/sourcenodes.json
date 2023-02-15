@@ -13,7 +13,7 @@
           "comments": [
             {
               "title": "John Locke, Second Treatise, §§ 134--42",
-              "content": "1689"
+              "content": "89. Where-ever therefore any number of Men are so united into one Society, as to quit every one his Executive Power of the Law of Nature, and to resign it to the publick, there and there only is a Political, or Civil Society. And this is done where-ever any number of Men, in the state of Nature, enter into Society to make one People, one Body Politick under one Supreme Government, or else when any one joyns himself to, and incorporates with any Government already made. For hereby he authorizes the Society, or which is all one, the Legislative thereof to make Laws for him as the publick good of the Society shall require; to the Execution whereof, his own assistance (as to his own Decrees) is due. And this puts Men out of a State of Nature into that of a Commonwealth, by setting up a Judge on Earth, with Authority to determine all the Controversies, and redress the Injuries, that may happen to any Member of the Commonwealth; which Judge is the Legislative, or Magistrates appointed by it. And where-ever there are any number of Men, however associated, that have no such decisive power to appeal to, there they are still in the state of Nature."
             },
             {
               "title": "William Blackstone, Commentaries 1:149--51, 156--57",
@@ -34,13 +34,41 @@
               "key": "1-2-1",
               "label": "Clause 1",
               "text": "The House of Representatives shall be composed of Members chosen every second Year by the People of the several States, and the Electors in each State shall have the Qualifications requisite for Electors of the most numerous Branch of the State Legislature.",
-              "keywords": ["Congress", "House"]
+              "keywords": ["Congress", "House"],
+              "comments": [
+                {
+                  "title": "Delaware Charter of 1701",
+                  "content": "FOR the well governing of this Province and Territories, there shall be an Assembly yearly chosen, by the Freemen thereof, . . ."
+                },
+                {
+                  "title": "Address of General Assembly of New York to Lt. Governor George Clarke",
+                  "content": "7 Sept. 1737J. Gen. Assembly Colony of New York 1:706--7 1764. Persons that are fairly and freely chosen, have only right to represent the People, and are most likely to do the most effectual, as well as the most acceptable Service to the Publick: Whereas those who have recourse to Frauds and unbecoming Arts, to procure themselves to be raised to those Stations, must be under the Government of narrow and selfish Views, unworthy any Representation of a free People, and will no doubt basely submit to the same detestable Measures, to continue themselves (by any Means) in the Exercise of a Trust unjustly acquired. It is by such as these, that the Liberties of the most free People have been in various Ages of the World, undermined and subverted: And it is to prevent this, as much as we may, that we gave Leave to bring in the Bill, for regulating of Elections."
+                },
+                {
+                  "title": "William Blackstone, Commentaries 1:165--66",
+                  "content": "1. As to the qualifications of the electors. The true reason of requiring any qualification, with regard to property, in voters, is to exclude such persons as are in so mean a situation that they are esteemed to have no will of their own. If these persons had votes, they would be tempted to dispose of them under some undue influence or other. This would give a great, an artful, or a wealthy man, a larger share in elections than is consistent with general liberty. If it were probable that every man would give his vote freely, and without influence of any kind, then, upon the true theory and genuine principles of liberty, every member of the community, however poor, should have a vote in electing those delegates, to whose charge is committed the disposal of his property, his liberty, and his life. But, since that can hardly be expected in persons of indigent fortunes, or such as are under the immediate dominion of others, all popular states have been obliged to establish certain qualifications; whereby some, who are suspected to have no will of their own, are excluded from voting, in order to set other individuals, whose wills may be supposed independent, more thoroughly upon a level with each other."
+                }
+              ]
             },
             {
               "key": "1-2-2",
               "label": "Clause 2",
               "text": "No Person shall be a Representative who shall not have attained to the age of twenty five Years, and been seven Years a Citizen of the United States, and who shall not, when elected, be an Inhabitant of that State in which he shall be chosen.",
-              "keywords": ["Representative", "House"]
+              "keywords": ["Representative", "House"],
+              "comments": [
+                {
+                  "title": "John Locke, Second Treatise, §§ 134--42",
+                  "content": "1689"
+                },
+                {
+                  "title": "William Blackstone, Commentaries 1:149--51, 156--57",
+                  "content": "II. The constituent parts of a parliament are the next objects of our enquiry. And these are, the king's majesty, sitting there in his royal political capacity, and the three estates of the realm; the lords spiritual, the lords temporal, (who sit, together with the king, in one house) and the commons, who sit by themselves in another. And the king and these three estates, together, form the great corporation or body politic of the kingdom, of which the king is said to be caput, principium, et finis. For upon their coming together the king meets them, either in person or by representation; without which there can be no beginning of a parliament; and he also has alone the power of dissolving them."
+                },
+                {
+                  "title": "Records of the Federal Convention",
+                  "content": "6. Resolved that each branch ought to possess the right of originating Acts; that the National Legislature ought to be impowered to enjoy the Legislative Rights vested in Congress by the Confederation & moreover to legislate in all cases to which the separate States are incompetent, or in which the harmony of the United States may be interrupted by the exercise of individual Legislation; to negative all laws passed by the several States, contravening in the opinion of the National Legislature the articles of Union; and to call forth the force of the Union agst. any member of the Union failing to fulfill its duty under the articles thereof."
+                }
+              ]
             }
           ]
         }
