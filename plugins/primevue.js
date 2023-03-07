@@ -10,6 +10,10 @@ import RadioButton from 'primevue/radiobutton';
 import InputSwitch from 'primevue/inputswitch';
 import Tree from 'primevue/tree';
 import Tag from 'primevue/tag';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import InputText from 'primevue/inputtext';
+
 
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -22,5 +26,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('InputSwitch', InputSwitch);
     nuxtApp.vueApp.component('Tree', Tree);
     nuxtApp.vueApp.component('Tag', Tag);
+    nuxtApp.vueApp.component('DataTable', DataTable);
+    nuxtApp.vueApp.component('Column', Column);
+    nuxtApp.vueApp.component('InputText', InputText);
 });
 

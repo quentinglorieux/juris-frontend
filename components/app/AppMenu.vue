@@ -9,7 +9,7 @@ const model = ref([
         label: 'Entrées',
         items: [
             { label: 'Sources', icon: 'pi pi-fw pi-file', to: '/sources' },
-            { label: 'Commentaires', icon: 'pi pi-fw pi-comment', to: '/commentaires' },
+            // { label: 'Commentaires', icon: 'pi pi-fw pi-comment', to: '/commentaires' },
             { label: 'Thèmes', icon: 'pi pi-fw pi-list', to: '/themes' },
             { label: 'Mots Clés', icon: 'pi pi-fw pi-tags', to: '/keywords' },
             { label: 'Auteurs', 

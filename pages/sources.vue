@@ -1,6 +1,6 @@
 <template>
     <div class="flex"> 
-    <NavSource  class="" @sourceSelected = "(e) => source = e"/> 
+    <NavSource2 class="" @sourceSelected = "(e) => source = e"/> 
     <MainSource class="" :sourceNode = source />
     <!-- <SingleSource class="" /> -->
     </div>

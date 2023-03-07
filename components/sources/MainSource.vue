@@ -20,6 +20,10 @@
     <SourceComments :sourceNode=sourceNode /> 
 
     <h2>Thèmes</h2>
+
+    <h2>Traduction(s)</h2>
+    <SourceComments :sourceNode=sourceNode /> 
+   
   </div>
 
 </div>
