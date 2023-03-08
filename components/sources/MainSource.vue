@@ -1,28 +1,27 @@
 <template>
     
   <div class="flex flex-column bg-slate-200 p-3 w-full">
-    <div v-if="!sourceNode"> 
+    <div v-if="!source"> 
         <h1>Sélectionnez une Source </h1>
-        (par exemple Article 1 - Section 1)
      </div>   
-    <div v-if="sourceNode"> 
+    <div v-if="source"> 
     <div  class="">
-      <h1>Source : {{ sourceNode.label }}</h1>
-      <h2>Texte</h2>
-      <p v-if="sourceNode.text">“{{ sourceNode.text }}”</p>
+      <h1>Titre : {{ source.data.titre }}</h1>
+      <p v-if="source.data">Type : {{ source.data.type }}</p>
+      <div v-html="markdownToHtml"></div>
     </div>
 
     <h2>Mots Clés</h2>
-    <SourceKeywords :sourceNode=sourceNode /> 
+    <SourceKeywords :source=source /> 
 
 
     <h2>Commentaires</h2>
-    <SourceComments :sourceNode=sourceNode /> 
+    <SourceComments :source=source /> 
 
     <h2>Thèmes</h2>
 
     <h2>Traduction(s)</h2>
-    <SourceComments :sourceNode=sourceNode /> 
+  
    
   </div>
 
@@ -30,29 +29,16 @@
 </template>
 
 <script setup>
-import textJson from "~/assets/data/sourcetext.json";
+import { marked } from "marked";
 
-const props = defineProps(["sourceNode"]);
-const found = ref("");
+const props = defineProps(["source"]);
 
-const nodes = ref(null);
-onMounted(() => {
-  nodes.value = textJson.root;
+const markdownToHtml = computed(() => {
+  return marked(props.source.data.content);
 });
 
-watch(
-  () => props.sourceNode.key,
-  (newKey) => {
-    found.value = getTextByKey(newKey);
-  }
-);
 
-function getTextByKey(key) {
-  return nodes.value.filter(function (data) {
-    console.log(data.key);
-    return data.key == key;
-  });
-}
+
 
 
 </script>

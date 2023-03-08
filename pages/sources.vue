@@ -1,11 +1,10 @@
 <template>
     <div class="flex"> 
-    <NavSource2 class="" @sourceSelected = "(e) => source = e"/> 
-    <MainSource class="" :sourceNode = source />
-    <!-- <SingleSource class="" /> -->
+    <NavSource2 class="" @sourceSelected = "(e) => sourceSelection = e"/> 
+    <MainSource class="" :source = sourceSelection />
     </div>
 </template>
 
 <script setup>
-const source = ref('')
+const sourceSelection = ref('')
 </script>

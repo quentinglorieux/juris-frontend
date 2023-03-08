@@ -1,10 +1,10 @@
 <template>
   <div class="pl-4"> 
-    <li v-for="com in sourceNode.comments">
+    <li v-for="com in source.data.commentaires">
       <div class="flex">
         <ul class="mr-3 text-lg">
           {{
-            com.title
+            com.titre
           }}
         </ul>
         <Button @click="onCommentButtonClick(com)"> Read </Button>
@@ -17,8 +17,10 @@
       :transitionOptions="'.3s cubic-bezier(0, 0, 0.2, 1)'"
       class="layout-comment-sidebar"
     >
-      <h3>{{ selectedCom.title }} </h3>
+      <h3>{{ selectedCom.titre }} </h3>
+      {{ selectedCom.id }}
       {{ selectedCom.content }}
+      <!-- {{ selectedCom.keywords_id.keywords_id.titre }} -->
     </Sidebar>
 
 
@@ -26,7 +28,8 @@
 </template>
 
 <script setup>
-const props = defineProps(["sourceNode"]);
+const props = defineProps(["source"]);
+
 
 const selectedCom = ref("");
 const visible = ref(false);

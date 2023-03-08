@@ -1,14 +1,29 @@
 <template>
-        <div class="flex">
+  <div class="flex">
+    <div v-for="com in source.data.commentaires">
       <Tag
-        v-for="kw in sourceNode.keywords"
+        v-for="kw in com.keywords_id"
         class="mr-2 text-sm"
         severity="info"
-        :value="kw"
+        :value="kw.keywords_id.titre"
       ></Tag>
     </div>
+
+  </div>
 </template>
 
 <script setup>
-const props = defineProps(["sourceNode"]);
+import { Directus } from "@directus/sdk";
+
+const props = defineProps(["source"]);
+
+const directus = new Directus("https://devdirectus.rubidiumweb.eu");
+
+const listItems = ref([]);
+async function retrieveKeywords() {
+  const publicData = await directus.items("keywords").readByQuery();
+  var L = publicData.data;
+  listItems.value = L;
+}
+retrieveKeywords();
 </script>
