@@ -2,18 +2,17 @@
   <div class="nav-source pl-2">
     <div class="flex justify-center items-center py-2">
       <i class="pi pi-fw pi-file"></i>
-      <div class="text-xl font-semibold">SOURCES</div>
+      <div class="text-xl font-semibold">KEYWORDS</div>
     </div>
     <DataTable
       :value="listItems"
-      v-model:selection="selectedSource"
       v-model:filters="filter1"
       filterDisplay="menu"
       :globalFilterFields="['titre']"
       selectionMode="single"
       dataKey="id"
       responsiveLayout="scroll"
-      class="p-datatable-sm"
+      class="p-datatable-ml"
       :scrollable="true"
       scrollHeight="flex"
       :resizableColumns="true"
@@ -33,33 +32,35 @@
             <i class="pi pi-search" />
             <InputText
               v-model="filter1['global'].value"
-              placeholder="Source Search"
+              placeholder="Keyword Search"
             />
           </span>
         </div>
       </template>
 
       <Column field="titre" header="Titre" :sortable="true"></Column>
-      <Column field="meta" header="Date" :sortable="true"></Column>
+      <Column field="commentaires.length" header="# Commentaires" :sortable="true"></Column>
     </DataTable>
   </div>
 </template>
 
 <script setup>
-import { Directus } from "@directus/sdk";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
+import { Directus } from "@directus/sdk";
 
 const directus = new Directus("https://devdirectus.rubidiumweb.eu");
 
 const listItems = ref([]);
-async function retrieveSources() {
-  const publicData = await directus.items("sources").readByQuery({
-    fields: ["titre,type,meta,content,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre"],
+async function retrieveKeywords() {
+  const publicData = await directus.items("keywords").readByQuery({
+    fields: [
+      "titre,meta,introduction,commentaires.commentaires_id.titre,commentaires.commentaires_id.id",
+    ]
   });
   var L = publicData.data;
   listItems.value = L;
 }
-retrieveSources();
+retrieveKeywords();
 
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -81,9 +82,9 @@ const initFilters1 = () => {
   };
 };
 
-const emit = defineEmits(["sourceSelected"]);
-const onRowSelect = (node) => {
-  emit("sourceSelected", node);
+const emit = defineEmits(["kwSelected"]);
+const onRowSelect = (row) => {
+  emit("kwSelected", row);
 };
 </script>
 

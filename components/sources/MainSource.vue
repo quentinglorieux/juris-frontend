@@ -19,6 +19,7 @@
     <SourceComments :source=source /> 
 
     <h2>Thèmes</h2>
+    <SourceThemes :source=source /> 
 
     <h2>Traduction(s)</h2>
   

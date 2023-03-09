@@ -9,15 +9,14 @@ const model = ref([
         label: 'Entrées',
         items: [
             { label: 'Sources', icon: 'pi pi-fw pi-file', to: '/sources' },
-            // { label: 'Commentaires', icon: 'pi pi-fw pi-comment', to: '/commentaires' },
             { label: 'Thèmes', icon: 'pi pi-fw pi-list', to: '/themes' },
             { label: 'Mots Clés', icon: 'pi pi-fw pi-tags', to: '/keywords' },
             { label: 'Auteurs', 
             icon: 'pi pi-fw pi-user', 
             items: [
-                            { label: 'Auteur 1', icon: 'pi pi-fw pi-bookmark' , to: '/auteur1'},
-                            { label: 'Auteur 2', icon: 'pi pi-fw pi-bookmark' , to: '/auteur2'},
-                            { label: 'Auteur 3', icon: 'pi pi-fw pi-bookmark' , to: '/auteur3'}
+                            { label: 'Auteur 1', icon: 'pi pi-fw pi-bookmark' , to: '/auteur-1'},
+                            { label: 'Auteur 2', icon: 'pi pi-fw pi-bookmark' , to: '/auteur-2'},
+                            { label: 'Auteur 3', icon: 'pi pi-fw pi-bookmark' , to: '/auteur-3'}
                         ] },   
             
            
