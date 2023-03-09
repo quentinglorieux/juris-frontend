@@ -6,7 +6,6 @@
     </div>
     <DataTable
       :value="listItems"
-      v-model:selection="selectedSource"
       v-model:filters="filter1"
       filterDisplay="menu"
       :globalFilterFields="['titre']"

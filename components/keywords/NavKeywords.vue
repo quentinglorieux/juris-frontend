@@ -54,7 +54,7 @@ const listItems = ref([]);
 async function retrieveKeywords() {
   const publicData = await directus.items("keywords").readByQuery({
     fields: [
-      "titre,meta,introduction,commentaires.commentaires_id.titre,commentaires.commentaires_id.id",
+      "titre,meta,introduction,commentaires.commentaires_id.titre,commentaires.commentaires_id.id,commentaires.commentaires_id.auteur_id.first_name,commentaires.commentaires_id.auteur_id.last_name",
     ]
   });
   var L = publicData.data;

@@ -1,4 +1,25 @@
 <script setup>
+import { Directus } from "@directus/sdk";
+const directus = new Directus("https://devdirectus.rubidiumweb.eu");
+
+const listItems = ref([]);
+async function retrieveAuthors() {
+  const publicData = await directus.items("directus_users").readByQuery({
+    fields: ["first_name,last_name,role"],
+    filter: {
+        "role":{
+            "_starts_with": "aeeefb57-7b36"
+        }
+    }
+});
+  var L = publicData.data;
+  listItems.value = L;
+  for (let author of listItems.value){
+model.value[1].items[3].items.push({ label: author.last_name, icon: 'pi pi-fw pi-bookmark' , to: '/auteur-' + author.last_name})
+}
+
+}
+
 
 const model = ref([
     {
@@ -14,9 +35,7 @@ const model = ref([
             { label: 'Auteurs', 
             icon: 'pi pi-fw pi-user', 
             items: [
-                            { label: 'Auteur 1', icon: 'pi pi-fw pi-bookmark' , to: '/auteur-1'},
-                            { label: 'Auteur 2', icon: 'pi pi-fw pi-bookmark' , to: '/auteur-2'},
-                            { label: 'Auteur 3', icon: 'pi pi-fw pi-bookmark' , to: '/auteur-3'}
+                           
                         ] },   
             
            
@@ -30,6 +49,13 @@ const model = ref([
     },
     
 ]);
+// add authors
+onMounted(() => {
+    retrieveAuthors();
+})
+
+
+
 </script>
 
 <template>

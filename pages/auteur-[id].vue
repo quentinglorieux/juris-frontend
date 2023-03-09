@@ -1,5 +1,5 @@
 <template>
-  Auteur {{ route.params.id }}
+  Auteur: {{ route.params.id }}
   <li v-for="item in listItems"> 
     <ul>
       {{ item.titre }}
@@ -10,12 +10,11 @@
 <script setup>
 import { Directus } from "@directus/sdk";
 const route = useRoute()
-console.log(route.params.id)
 
 const directus = new Directus("https://devdirectus.rubidiumweb.eu");
 
 const listItems = ref([]);
-async function retrieveSources() {
+async function retrieveComments() {
   const publicData = await directus.items("commentaires").readByQuery({
     fields: ["titre,content,id,auteur_id.id,auteur_id.first_name"],
     filter: {
@@ -25,10 +24,18 @@ async function retrieveSources() {
 		}
 	}
 }
-    
-  });
+});
   var L = publicData.data;
   listItems.value = L;
 }
-retrieveSources();
+onMounted(() => {
+  retrieveComments();
+})
+
+
+watch(route, (newX) => {
+retrieveComments() ;
+})
+
+
 </script>
