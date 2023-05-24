@@ -48,5 +48,6 @@ Button {
     font-weight: 600;
     padding: 0.25rem 0.4rem;
     border-radius: 3px;
+    z-index: 0;
 }
 </style>
