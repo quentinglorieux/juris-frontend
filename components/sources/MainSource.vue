@@ -65,18 +65,5 @@ p {
 .section {
   position: relative;
   top: -8rem;
-  /* color: red !important; */
-  /* offset-anchor: top 200px; */
-}
-
-.stick {
-  position: sticky;
-  top: 5rem;
-}
-.section {
-  position: relative;
-  top: -8rem;
-  /* color: red !important; */
-  /* offset-anchor: top 200px; */
 }
 </style>
