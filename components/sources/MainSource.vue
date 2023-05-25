@@ -17,22 +17,21 @@
       <h2 id="keywords">Mots Clés</h2>
       <SourceKeywords :source="source" />
 
-    <div class="section" id="keywords"></div>
-    <h2>Mots Clés</h2>
-    <SourceKeywords :source=source /> 
+      <div class="section" id="keywords"></div>
+      <h2>Mots Clés</h2>
+      <SourceKeywords :source="source" />
 
-    <div class="section" id="comments"></div>
-    <h2>Commentaires</h2>
-    <SourceComments :source=source /> 
-    
-    <div class="section" id="themes"></div>
-    <h2>Thèmes</h2>
-    <SourceThemes :source=source /> 
+      <div class="section" id="comments"></div>
+      <h2>Commentaires</h2>
+      <SourceComments :source="source" />
 
-    <h2>Traduction(s)</h2>
-    <div v-html="markdownToHtml"></div>
-  
-   
+      <div class="section" id="themes"></div>
+      <h2>Thèmes</h2>
+      <SourceThemes :source="source" />
+
+      <h2>Traduction(s)</h2>
+      <div v-html="markdownToHtml"></div>
+    </div>
   </div>
 </template>
 
@@ -42,9 +41,8 @@ import { marked } from "marked";
 const selComm = ref();
 
 const callback1 = (e) => {
-  selComm.value = e 
+  selComm.value = e;
 };
-
 
 const props = defineProps(["source"]);
 
