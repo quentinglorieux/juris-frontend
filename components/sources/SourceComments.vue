@@ -1,57 +1,50 @@
 <template>
-  <div class="pl-4"> 
-    <li v-for="com in source.data.commentaires">
-      <div class="flex">
-        <ul class="mr-3 text-lg">
-          {{
-            com.titre
-          }}
-        </ul>
-        <Button @click="onCommentButtonClick(com)"> Read </Button>
-        <Button @click="emit('ComSelected',com)"> Emit </Button>
-      </div>
-    </li>
+  <div class="pl-4">
+    <Splitter class="mb-5" style="background-color: rgb(226 232 240); border: none">
+      <SplitterPanel :size="75" class="">
+        <li v-for="com in source.data.commentaires">
+          <div class="flex">
+            <ul class="mr-3 text-lg">
+              {{
+                com.titre
+              }}
+            </ul>
+            <Button @click="onCommentButtonClick(com)"> Read </Button>
+           
+          </div>
+        </li>
+      </SplitterPanel>
+      <SplitterPanel :size="25" v-if="comIsSelected">
+        <div>
+          {{ selectedCom}}
+        </div>
+      </SplitterPanel>
+    </Splitter>
   </div>
-
-  selectedCom.id : {{  selectedCom.id }}
-    <!-- <Sidebar
-      v-model:visible="visible"
-      position="right"
-      :transitionOptions="'.3s cubic-bezier(0, 0, 0.2, 1)'"
-      class="layout-comment-sidebar"
-    >
-      <h3>{{ selectedCom.titre }} </h3>
-      {{ selectedCom.id }}
-      {{ selectedCom.content }}
-    </Sidebar> -->
-
-
 
 </template>
 
 <script setup>
 const props = defineProps(["source"]);
-
-
+const comIsSelected=ref(false)
 const selectedCom = ref("");
 const visible = ref(false);
 const onCommentButtonClick = (com) => {
   visible.value = !visible.value;
   selectedCom.value = com;
+  comIsSelected.value=!comIsSelected.value;
 };
 
-const emit = defineEmits(['ComSelected']);
-
-
+const emit = defineEmits(["ComSelected"]);
 </script>
 
 <style scoped>
 Button {
-    background-color:  #0288D1;
-    font-size: 0.85rem ;
-    font-weight: 600;
-    padding: 0.25rem 0.4rem;
-    border-radius: 3px;
-    z-index: 0;
+  background-color: #0288d1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.25rem 0.4rem;
+  border-radius: 3px;
+  z-index: 0;
 }
 </style>

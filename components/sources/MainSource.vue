@@ -9,7 +9,7 @@
       </div>
 
       <div class="">
-      <div v-html="html"></div>  
+      
         <div class="section" id="main-source"></div>
         <div class="">
           <h1>Titre : {{ source.data.titre }}</h1>
@@ -21,17 +21,9 @@
         <SourceKeywords :source="source" />
 
         <div class="section" id="comments"></div>
-        <Splitter class="mb-5" style='background-color:rgb(226 232 240); border:none'>
-          <SplitterPanel :size="75" class="">
-            <h2>Commentaires</h2>
-            <SourceComments :source="source" @ComSelected="callback1" />
-          </SplitterPanel>
-          <SplitterPanel :size="25" v-if="sourceIsSelected">
-            <div>
-              {{ selComm.id }}
-            </div>
-          </SplitterPanel>
-        </Splitter>
+        <h2>Commentaires</h2>
+        <SourceComments :source="source"/>
+       
 
         <div class="section" id="themes"></div>
         <h2>Thèmes</h2>
@@ -46,16 +38,13 @@
 <script setup>
 import { marked } from "marked";
 
-import { Directus } from "@directus/sdk";
+
 
 
 const selComm = ref();
-const sourceIsSelected = ref(false);
 
-const callback1 = (e) => {
-  selComm.value = e;
-  sourceIsSelected.value = !sourceIsSelected.value;
-};
+
+
 
 const props = defineProps(["source"]);
 
