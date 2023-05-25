@@ -23,7 +23,8 @@
 
       <div class="section" id="comments"></div>
       <h2>Commentaires</h2>
-      <SourceComments :source="source" />
+      <SourceComments :source="source" @ComSelected="callback1"/>
+      {{  selComm }}
 
       <div class="section" id="themes"></div>
       <h2>Thèmes</h2>
