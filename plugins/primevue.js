@@ -14,9 +14,10 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
-
-
-
+import Splitter from 'primevue/splitter';
+import SplitterPanel from 'primevue/splitterpanel';
+import Menu from 'primevue/menu';
+import Menubar from 'primevue/menubar';
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(PrimeVue, {ripple: true});
 
@@ -32,5 +33,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('InputText', InputText);
     nuxtApp.vueApp.component('Dropdown', Dropdown);
 
+    nuxtApp.vueApp.component('Splitter', Splitter);
+    nuxtApp.vueApp.component('SplitterPanel', SplitterPanel);
+    nuxtApp.vueApp.component('Menu', Menu);
+    nuxtApp.vueApp.component('Menubar', Menubar);
 });
 
