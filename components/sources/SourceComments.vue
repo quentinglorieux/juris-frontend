@@ -8,7 +8,7 @@
           }}
         </ul>
         <Button @click="onCommentButtonClick(com)"> Read </Button>
-        <Button @click="emit('ComSelected',com)"> EMit </Button>
+        <Button @click="emit('ComSelected',com)"> Emit </Button>
       </div>
     </li>
   </div>

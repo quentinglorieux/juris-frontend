@@ -1,9 +1,13 @@
 <template>
   <div class="nav-source pl-2">
     <div class="flex justify-center items-center py-2">
+      <button class="layout-topbar-button" @click="onMenuToggle()">
+        <i class="pi pi-bars"></i>
+      </button>
       <i class="pi pi-fw pi-file"></i>
       <div class="text-xl font-semibold">SOURCES</div>
     </div>
+    
     <DataTable
       :value="listItems"
       v-model:filters="filter1"
@@ -30,14 +34,10 @@
           />
           <span class="p-input-icon-left">
             <i class="pi pi-search" />
-            <InputText
-              v-model="filter1['global'].value"
-              placeholder="Source Search"
-            />
+            <InputText v-model="filter1['global'].value" placeholder="Source Search" />
           </span>
         </div>
       </template>
-
       <Column field="titre" header="Titre" :sortable="true"></Column>
       <Column field="meta" header="Meta" :sortable="true"></Column>
     </DataTable>
@@ -81,16 +81,17 @@ const initFilters1 = () => {
     },
   };
 };
-
+const sourceIsSelected = ref(false);
 const emit = defineEmits(["sourceSelected"]);
 const onRowSelect = (node) => {
   emit("sourceSelected", node);
+  sourceIsSelected.value = !sourceIsSelected.value;
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 Button {
-  background-color: #0288d1;
+  /* background-color: #0288d1; */
   font-size: 0.85rem;
   font-weight: 600;
   padding: 0.25rem 0.4rem;
@@ -103,5 +104,32 @@ Button {
 }
 .p-button {
   margin-right: 0.5rem;
+}
+
+.layout-topbar-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--text-color-secondary);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    color: var(--text-color);
+    background-color: var(--surface-hover);
+  }
+
+  i {
+    font-size: 1.5rem;
+  }
+
+  span {
+    font-size: 1rem;
+    display: none;
+  }
 }
 </style>

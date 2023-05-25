@@ -1,14 +1,6 @@
 
 <template>
-    
-
-    <!-- <div class="justify-content-center">
-        <Menu :model="items" />
-    </div> -->
-  
         <Menubar :model="items" />
-
-
 </template>
 
 
@@ -19,7 +11,6 @@ const items = ref([
         label: 'Source',
         to:{hash: '#main-source'},
        
-
     },
     {
         label: 'Mots clés',

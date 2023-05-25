@@ -11,8 +11,4 @@ const props = defineProps(["selectedCom"]);
 const selectedCom = ref("");
 </script>
 
-
-
-<style scoped>
-
-</style>
+<style scoped></style>
