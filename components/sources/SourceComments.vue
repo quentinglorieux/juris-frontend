@@ -2,6 +2,7 @@
   <div class="pl-4">
     <Splitter class="mb-5" style="background-color: rgb(226 232 240); border: none">
       <SplitterPanel :size="75" class="">
+
         <li v-for="com in source.data.commentaires">
           <div class="flex">
             <ul class="mr-3 text-lg">
@@ -16,7 +17,7 @@
       </SplitterPanel>
       <SplitterPanel :size="25" v-if="comIsSelected">
         <div>
-          {{ selectedCom}}
+          {{ selectedCom.id}}
         </div>
       </SplitterPanel>
     </Splitter>
@@ -26,16 +27,22 @@
 
 <script setup>
 const props = defineProps(["source"]);
+
 const comIsSelected=ref(false)
 const selectedCom = ref("");
-const visible = ref(false);
+
 const onCommentButtonClick = (com) => {
-  visible.value = !visible.value;
-  selectedCom.value = com;
-  comIsSelected.value=!comIsSelected.value;
+  if (selectedCom.value==com){
+    selectedCom.value = '';
+    comIsSelected.value=false
+  }
+  else{
+    selectedCom.value = com;
+    comIsSelected.value=true;
+  }
 };
 
-const emit = defineEmits(["ComSelected"]);
+
 </script>
 
 <style scoped>
