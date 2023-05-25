@@ -1,7 +1,9 @@
 <template>
     <div class="flex"> 
-    <NavSource2 class="" @sourceSelected = "(e) => sourceSelection = e"/> 
+    <NavSource class="" @sourceSelected = "(e) => sourceSelection = e"/> 
     <MainSource class="" :source = sourceSelection />
+    Heuy
+    <SourceCommentsCol :selectedCom="a" />
     </div>
 </template>
 

@@ -3,7 +3,6 @@
 
         <h1 class="bg-slate-400 py-10 text-6xl text-center"> Home of Juris Lab </h1>
 
-
 <div class="flex space-x-2">
         <Card style="width: 25em">
             <template #header>

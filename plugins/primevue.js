@@ -13,6 +13,7 @@ import Tag from 'primevue/tag';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
+import Dropdown from 'primevue/dropdown';
 
 
 
@@ -29,5 +30,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('DataTable', DataTable);
     nuxtApp.vueApp.component('Column', Column);
     nuxtApp.vueApp.component('InputText', InputText);
+    nuxtApp.vueApp.component('Dropdown', Dropdown);
+
 });
 

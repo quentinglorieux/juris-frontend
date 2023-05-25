@@ -8,10 +8,13 @@
           }}
         </ul>
         <Button @click="onCommentButtonClick(com)"> Read </Button>
+        <Button @click="emit('ComSelected',com)"> EMit </Button>
       </div>
     </li>
   </div>
-    <Sidebar
+
+  selectedCom.id : {{  selectedCom.id }}
+    <!-- <Sidebar
       v-model:visible="visible"
       position="right"
       :transitionOptions="'.3s cubic-bezier(0, 0, 0.2, 1)'"
@@ -20,8 +23,7 @@
       <h3>{{ selectedCom.titre }} </h3>
       {{ selectedCom.id }}
       {{ selectedCom.content }}
-      <!-- {{ selectedCom.keywords_id.keywords_id.titre }} -->
-    </Sidebar>
+    </Sidebar> -->
 
 
 
@@ -37,6 +39,8 @@ const onCommentButtonClick = (com) => {
   visible.value = !visible.value;
   selectedCom.value = com;
 };
+
+const emit = defineEmits(['ComSelected']);
 
 
 </script>
