@@ -1,8 +1,8 @@
 <template>
   <div class="nav-source pl-2">
     <div class="flex justify-center items-center py-2">
-      <button class="layout-topbar-button" @click="onMenuToggle()">
-        <i class="pi pi-bars"></i>
+      <button class="layout-topbar-button" @click="$emit('closeNavSource')">
+        <i class="pi pi-times"></i>
       </button>
       <i class="pi pi-fw pi-file"></i>
       <div class="text-xl font-semibold">SOURCES</div>
