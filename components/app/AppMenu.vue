@@ -1,6 +1,7 @@
 <script setup>
 import { Directus } from "@directus/sdk";
-const directus = new Directus("https://devdirectus.rubidiumweb.eu");
+const config = useRuntimeConfig();
+const directus = new Directus(config.public.API_BASE_URL);
 
 const listItems = ref([]);
 async function retrieveAuthors() {
