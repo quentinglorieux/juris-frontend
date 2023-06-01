@@ -53,7 +53,7 @@ const onCommentButtonClick = (com) => {
 
 </script>
 
-<style>
+<style scoped>
 p {
   font-size: 18px;
 }
