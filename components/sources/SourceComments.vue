@@ -18,6 +18,7 @@
 const props = defineProps(["source"]);
 const emit = defineEmits(["ComSelected"]);
 const selectedCom = ref("");
+
 function togleCommentPanel(com) {
   emit("ComSelected", com);
   if (selectedCom.value == com) {

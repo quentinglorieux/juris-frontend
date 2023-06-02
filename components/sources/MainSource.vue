@@ -13,7 +13,7 @@
           class="mb-5"
           style="background-color: rgb(226 232 240); border: none"
         >
-          <SplitterPanel :size="75" class="">
+          <SplitterPanel :size="50" class="">
             <div class="section" id="main-source"></div>
             <div class="">
               <h1>Titre : {{ source.data.titre }}</h1>
@@ -33,10 +33,14 @@
             <h2>Thèmes</h2>
             <SourceThemes :source="source" />
           </SplitterPanel>
-          <SplitterPanel :size="25" v-if="sourceIsSelected">
+          <SplitterPanel :size="50" v-if="sourceIsSelected">
             <div>
-              {{ selComm.id }}
+              <h2>Titre : {{ selComm.titre }}</h2>
+              <div>ID : {{ selComm.id }}</div>
+              <div>Content : {{ selComm.content }}</div>
             </div>
+            <Button @click="sourceIsSelected=false"> Close </Button>
+
           </SplitterPanel>
         </Splitter>
         <h2>Traduction(s)</h2>
@@ -55,6 +59,16 @@ const emit = defineEmits(["comIsSelected"]);
 const markdownToHtml = computed(() => {
   return marked(props.source.data.content);
 });
+
+// function togleCommentPanel(com) {
+//   emit("ComSelected", com);
+//   if (selectedCom.value == com) {
+//     selectedCom.value = "";
+//   } else {
+//     selectedCom.value = com;
+//   }
+// }
+
 
 const callback1 = (com) => {
   if (com == selComm.value) {
@@ -87,7 +101,7 @@ p {
   font-size: 18px;
 }
 .layout-comment-sidebar {
-  min-width: 40%;
+  min-width: 50%;
 }
 .stick {
   position: sticky;
