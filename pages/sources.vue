@@ -12,12 +12,11 @@
       v-if="isNavSourceVisible == false"
       @openNavSource="() => (isNavSourceVisible = true)"
     />
-    <!-- <MainSource
+    <MainSource
       class=""
       :source="sourceSelection"
       @com-is-selected="(e) => navSourceVisibility(e)"
-    /> -->
-    <MainSourceEditorJS />
+    />
   </div>
 </template>
 
