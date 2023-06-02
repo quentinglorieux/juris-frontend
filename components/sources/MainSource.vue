@@ -68,12 +68,16 @@ const callback1 = (com) => {
 
 
 watch(() => props.source, (first, second) => {
-  if (first.data.titre!=second.data.titre){
+  if (second.data){
+    if (first.data.titre!=second.data.titre){
     selComm.value = "";
     sourceIsSelected.value = false;
     emit("comIsSelected",false);
         }
 
+
+  }
+  
     });
 
 </script>

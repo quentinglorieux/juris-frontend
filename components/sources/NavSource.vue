@@ -24,17 +24,18 @@
       @rowSelect="onRowSelect"
     >
       <template #header>
-        <div class="flex justify-content-between">
+        <div class="flex justify-content-between"  >
           <Button
             type="button"
             icon="pi pi-filter-slash"
             label="Clear"
+            
             class="p-button-outlined"
             @click="clearFilter1()"
           />
-          <span class="p-input-icon-left">
+          <span  class="p-input-icon-left">
             <i class="pi pi-search" />
-            <InputText v-model="filter1['global'].value" placeholder="Source Search" />
+            <InputText  v-model="filter1['global'].value" placeholder="Source Search" />
           </span>
         </div>
       </template>
@@ -82,7 +83,7 @@ const initFilters1 = () => {
   };
 };
 const sourceIsSelected = ref(false);
-const emit = defineEmits(["sourceSelected"]);
+const emit = defineEmits(["sourceSelected","closeNavSource"]);
 const onRowSelect = (node) => {
   emit("sourceSelected", node);
   sourceIsSelected.value = !sourceIsSelected.value;
@@ -99,8 +100,8 @@ Button {
 }
 .nav-source {
   height: calc(100vh - 5rem);
-  min-width: 350px;
-  width: 350px;
+  // min-width: 350px;
+  // width: 350px;
 }
 .p-button {
   margin-right: 0.5rem;
