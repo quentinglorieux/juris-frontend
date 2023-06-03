@@ -1,13 +1,14 @@
 <template>
-  <div class="nav-source pl-2">
+
+  <div v-if="visibility" class="nav-source pl-2" style="width: 350px">
     <div class="flex justify-center items-center py-2">
-      <button class="layout-topbar-button" @click="$emit('closeNavSource')">
+      <button class="layout-topbar-button" @click="togleVisibility()">
         <i class="pi pi-times"></i>
       </button>
       <i class="pi pi-fw pi-file"></i>
       <div class="text-xl font-semibold">SOURCES</div>
     </div>
-    
+
     <DataTable
       :value="listItems"
       v-model:filters="filter1"
@@ -24,18 +25,17 @@
       @rowSelect="onRowSelect"
     >
       <template #header>
-        <div class="flex justify-content-between"  >
+        <div class="flex justify-content-between">
           <Button
             type="button"
             icon="pi pi-filter-slash"
             label="Clear"
-            
             class="p-button-outlined"
             @click="clearFilter1()"
           />
-          <span  class="p-input-icon-left">
+          <span class="p-input-icon-left">
             <i class="pi pi-search" />
-            <InputText  v-model="filter1['global'].value" placeholder="Source Search" />
+            <InputText v-model="filter1['global'].value" placeholder="Source Search" />
           </span>
         </div>
       </template>
@@ -43,11 +43,25 @@
       <Column field="meta" header="Meta" :sortable="true"></Column>
     </DataTable>
   </div>
+  <div v-if="!visibility" class="">
+    <button class="layout-topbar-button" @click="togleVisibility()">
+      <i class="pi pi-bars"></i>
+    </button>
+  </div>
 </template>
 
 <script setup>
 import { Directus } from "@directus/sdk";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
+
+const props = defineProps(['visible'])
+const visibility=ref(props.visible);
+function togleVisibility(){
+  visibility.value=!visibility.value
+}
+
+
+
 const config = useRuntimeConfig();
 const directus = new Directus(config.public.API_BASE_URL);
 
@@ -55,7 +69,7 @@ const listItems = ref([]);
 async function retrieveSources() {
   const publicData = await directus.items("sources").readByQuery({
     fields: [
-      "titre,type,meta,content,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre",
+      "titre,type,meta,content,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre, EditorJS",
     ],
   });
   var L = publicData.data;
@@ -83,11 +97,14 @@ const initFilters1 = () => {
   };
 };
 const sourceIsSelected = ref(false);
-const emit = defineEmits(["sourceSelected","closeNavSource"]);
+const emit = defineEmits(["sourceSelected", "closeNavSource"]);
 const onRowSelect = (node) => {
   emit("sourceSelected", node);
   sourceIsSelected.value = !sourceIsSelected.value;
 };
+
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -132,5 +149,14 @@ Button {
     font-size: 1rem;
     display: none;
   }
+}
+
+.slayout-navbar {
+  transform: translateX(-100%);
+  transition-duration: 200ms;
+}
+.slayin-navbar {
+  transform: translateX(0%);
+  transition-duration: 500ms;
 }
 </style>

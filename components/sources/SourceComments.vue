@@ -7,7 +7,10 @@
             com.titre
           }}
         </ul>
-        <Button v-if="selectedCom == com" @click="togleCommentPanel(com)"> Close </Button>
+
+        <Button v-if="comSelected == com.id" @click="togleCommentPanel(com)">
+          Close
+        </Button>
         <Button v-else @click="togleCommentPanel(com)"> Read </Button>
       </div>
     </li>
@@ -15,19 +18,19 @@
 </template>
 
 <script setup>
-const props = defineProps(["source"]);
+const props = defineProps(["source", "comSelected"]);
 const emit = defineEmits(["ComSelected"]);
-const selectedCom = ref("");
+
+const comSelected=ref('');
+
 function togleCommentPanel(com) {
   emit("ComSelected", com);
-  if (selectedCom.value == com) {
-    selectedCom.value = "";
+  if (comSelected == com.id) {
+    comSelected = "";
   } else {
-    selectedCom.value = com;
+    comSelected = com.id;
   }
 }
-
-
 </script>
 
 <style scoped>

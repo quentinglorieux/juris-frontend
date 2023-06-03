@@ -1,40 +1,44 @@
 <template>
   <div class="flex">
-   <div :style=" isNavSourceVisible ?  'width:350px' : 'width:0px' ">
-    <NavSource 
-      v-if="isNavSourceVisible"
-      class=""
+    <NavSource
       @closeNavSource="() => (isNavSourceVisible = false)"
       @sourceSelected="(e) => (sourceSelection = e)"
+      v-model:visible="isNavSourceVisible"
     />
-  </div>
-    <NavSourceMinified
-      v-if="isNavSourceVisible == false"
-      @openNavSource="() => (isNavSourceVisible = true)"
-    />
-    <!-- <MainSource
+
+    <MainSource
       class=""
       :source="sourceSelection"
       @com-is-selected="(e) => navSourceVisibility(e)"
-    /> -->
-    <MainSourceEditorJS />
+    />
   </div>
 </template>
 
 <script setup>
 const sourceSelection = ref("");
 const isNavSourceVisible = ref(true);
-
-const width=ref('0');
-
+const props = defineProps(["visible", "other"]);
 
 function navSourceVisibility(e) {
+  console.log(e)
   if (e == "") {
     isNavSourceVisible.value = true;
   } else {
     isNavSourceVisible.value = false;
   }
 }
+
+function test(e) {
+  isNavSourceVisible = !isNavSourceVisible;
+}
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.slayout-navbar {
+  transform: translateX(-100px);
+}
+.slayin-navbar {
+  transform: translateX(0%);
+  transition-duration: 200ms;
+}
+</style>
