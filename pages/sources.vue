@@ -5,7 +5,6 @@
       @sourceSelected="(e) => (sourceSelection = e)"
       v-model:visible="isNavSourceVisible"
     />
-
     <MainSource
       class=""
       :source="sourceSelection"

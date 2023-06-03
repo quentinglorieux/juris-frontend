@@ -9,8 +9,11 @@
       </div>
 
       <div class="">
-        <Splitter class="mb-5" style="background-color: rgb(226 232 240); border: none">
-          <SplitterPanel :size="75" class="">
+        <Splitter
+          class="mb-5"
+          style="background-color: rgb(226 232 240); border: none"
+        >
+          <SplitterPanel :size="50" class="">
             <div class="section" id="main-source"></div>
 
             <div>
@@ -37,10 +40,12 @@
             <h2>Thèmes</h2>
             <SourceThemes :source="source" />
           </SplitterPanel>
-          <SplitterPanel :size="25" v-if="sourceIsSelected">
+          <SplitterPanel :size="50" v-if="sourceIsSelected">
             <div>
               {{ comActiv }}
             </div>
+            <Button @click="sourceIsSelected=false"> Close </Button>
+
           </SplitterPanel>
         </Splitter>
         <h2>Traduction(s)</h2>
@@ -122,7 +127,7 @@ p {
   font-size: 18px;
 }
 .layout-comment-sidebar {
-  min-width: 40%;
+  min-width: 50%;
 }
 .stick {
   position: sticky;
