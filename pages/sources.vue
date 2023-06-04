@@ -1,28 +1,21 @@
 <template>
   <div class="flex">
-   <div :style=" isNavSourceVisible ?  'width:350px' : 'width:0px' ">
-    <NavSource 
-      v-if="isNavSourceVisible"
-      class=""
-      @closeNavSource="() => (isNavSourceVisible = false)"
+    <NavSource
       @sourceSelected="(e) => (sourceSelection = e)"
-    />
-  </div>
-    <NavSourceMinified
-      v-if="isNavSourceVisible == false"
-      @openNavSource="() => (isNavSourceVisible = true)"
-    />
+      :visible=navStore.navVisibility ></NavSource>
     <MainSource
       class=""
       :source="sourceSelection"
-      @com-is-selected="(e) => navSourceVisibility(e)"
+      
     />
   </div>
 </template>
 
 <script setup>
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 const sourceSelection = ref("");
-const isNavSourceVisible = ref(true);
+const props = defineProps(["visible", "other"]);
 
 // DataFetching of Sources
 import { useGlobalStore } from "~/stores/global";
@@ -47,13 +40,14 @@ onMounted(() => {
 
 
 
-function navSourceVisibility(e) {
-  if (e == "") {
-    isNavSourceVisible.value = true;
-  } else {
-    isNavSourceVisible.value = false;
-  }
-}
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.slayout-navbar {
+  transform: translateX(-100px);
+}
+.slayin-navbar {
+  transform: translateX(0%);
+  transition-duration: 200ms;
+}
+</style>
