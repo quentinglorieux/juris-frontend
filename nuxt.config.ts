@@ -1,12 +1,11 @@
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    '@pinia/nuxt'],
   ssr: false,
   runtimeConfig: {
-    // The private keys which are only available within server-side
     apiSecret: '123',
-    // Keys within public, will be also exposed to the client-side
     public: {
-      // API_BASE_URL: process.env.API_BASE_URL
       API_BASE_URL: 'https://jurisdirectus.rubidiumweb.eu'
     }
   },

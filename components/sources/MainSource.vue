@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-const route = useRoute();
+// import { marked } from "marked";
 
 const comActiv = ref();
 const sourceIsSelected = ref(false);
@@ -67,7 +67,7 @@ const emit = defineEmits(["comIsSelected"]);
 import edjsHTML from "editorjs-html";
 const edjsParser = edjsHTML();
 const editorJScontent = computed(() => {
-  return edjsParser.parse(props.source.data.EditorJS);
+  // return edjsParser.parse(props.source.data.EditorJS);
 });
 
 onUpdated(() => {
@@ -87,6 +87,7 @@ onUpdated(() => {
       }
     });
   }
+  return props.source.data.EditorJS
 });
 
 
