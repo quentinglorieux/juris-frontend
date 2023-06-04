@@ -67,7 +67,7 @@ const emit = defineEmits(["comIsSelected"]);
 import edjsHTML from "editorjs-html";
 const edjsParser = edjsHTML();
 const editorJScontent = computed(() => {
-  // return edjsParser.parse(props.source.data.EditorJS);
+  return edjsParser.parse(props.source.data.EditorJS);
 });
 
 onUpdated(() => {
