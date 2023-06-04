@@ -1,39 +1,53 @@
 <template>
   <div class="flex">
-   <div :style=" isNavSourceVisible ?  'width:350px' : 'width:0px' ">
-    <NavSource 
-      v-if="isNavSourceVisible"
-      class=""
-      @closeNavSource="() => (isNavSourceVisible = false)"
+    <NavSource
       @sourceSelected="(e) => (sourceSelection = e)"
-    />
-  </div>
-    <NavSourceMinified
-      v-if="isNavSourceVisible == false"
-      @openNavSource="() => (isNavSourceVisible = true)"
-    />
+      :visible=navStore.navVisibility ></NavSource>
     <MainSource
       class=""
       :source="sourceSelection"
-      @com-is-selected="(e) => navSourceVisibility(e)"
+      
     />
   </div>
 </template>
 
 <script setup>
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 const sourceSelection = ref("");
-const isNavSourceVisible = ref(true);
+const props = defineProps(["visible", "other"]);
 
-const width=ref('0');
-
-
-function navSourceVisibility(e) {
-  if (e == "") {
-    isNavSourceVisible.value = true;
-  } else {
-    isNavSourceVisible.value = false;
-  }
+// DataFetching of Sources
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+const { $directus } = useNuxtApp();
+async function retrieveData() {
+  const { data: publicData } = await useAsyncData(() => {
+    return $directus.items("sources").readByQuery({
+      fields: [
+      "titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre",
+    ],
+    });
+  });
+  store.sources = publicData.value.data; //Storage of Sources data
 }
+
+onMounted(() => {
+  if (!store.sources[0]) {
+    retrieveData();
+  }
+});
+
+
+
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.slayout-navbar {
+  transform: translateX(-100px);
+}
+.slayin-navbar {
+  transform: translateX(0%);
+  transition-duration: 200ms;
+}
+</style>

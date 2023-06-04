@@ -1,19 +1,23 @@
 <script setup>
-import { Directus } from "@directus/sdk";
-const config = useRuntimeConfig();
-const directus = new Directus(config.public.API_BASE_URL);
-
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+const { $directus } = useNuxtApp();
 const listItems = ref([]);
+
 async function retrieveAuthors() {
-  const publicData = await directus.items("directus_users").readByQuery({
-    fields: ["first_name,last_name,role"],
-    filter: {
-      role: {
-        _starts_with: "aeeefb57-7b36",
+  const { data: publicData } = await useAsyncData(() => {
+    return $directus.items("directus_users").readByQuery({
+      fields: ["first_name,last_name,role"],
+      filter: {
+        role: {
+          _starts_with: "aeeefb57-7b36",
+        },
       },
-    },
+    });
   });
-  var L = publicData.data;
+  store.authors = publicData.value.data;
+
+  var L = publicData.value.data;
   listItems.value = L;
   for (let author of listItems.value) {
     model.value[1].items[3].items.push({
@@ -45,7 +49,9 @@ const model = ref([
 ]);
 // add authors
 onMounted(() => {
-  retrieveAuthors();
+  if (!store.authors[0]) {
+    retrieveAuthors();
+  }
 });
 </script>
 
