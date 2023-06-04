@@ -6,6 +6,8 @@
 </template>
 
 <script setup>
+const themeSelection = ref("");
+
 // DataFetching of Themes
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
@@ -26,10 +28,8 @@ onMounted(() => {
     retrieveData();
   }
 });
-</script>
 
-<script setup>
-const themeSelection = ref("");
+
 
 
 

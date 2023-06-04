@@ -1,11 +1,8 @@
 <template>
   <div class="flex">
- 
- 
     <NavSource
-      
       @sourceSelected="(e) => (sourceSelection = e)"
-      :visible=store.navVisibility ></NavSource>
+      :visible=navStore.navVisibility ></NavSource>
     <MainSource
       class=""
       :source="sourceSelection"
@@ -15,8 +12,8 @@
 </template>
 
 <script setup>
-import { useCounterStore } from "@/store/counter";
-const store = useCounterStore();
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 const sourceSelection = ref("");
 const props = defineProps(["visible", "other"]);
 

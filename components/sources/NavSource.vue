@@ -51,32 +51,20 @@
 </template>
 
 <script setup>
-// import { Directus } from "@directus/sdk";
+
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 
 const props = defineProps(['visible'])
-import { useCounterStore } from "@/store/counter";
-const store = useCounterStore();
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 
 function toggleNav(){
-  store.toggleNav()
+  navStore.toggleNav()
 }
 
 
-const config = useRuntimeConfig();
-const directus = new Directus(config.public.API_BASE_URL);
 
-// const listItems = ref([]);
-// async function retrieveSources() {
-//   const publicData = await directus.items("sources").readByQuery({
-//     fields: [
-//       "titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre",
-//     ],
-//   });
-//   var L = publicData.data;
-//   listItems.value = L;
-// }
-// retrieveSources();
+
 
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();

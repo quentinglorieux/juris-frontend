@@ -7,10 +7,9 @@
             com.titre
           }}
         </ul>
-        
-        <NuxtLink :to="{name:'auteur-id',params:{ id:com.auteur_id.last_name} }"> By {{com.auteur_id.first_name}} {{com.auteur_id.last_name}} </NuxtLink>
+
         <Button v-if="comSelected == com.id" @click="togleCommentPanel(com)">
-           Close
+          Close
         </Button>
         <Button v-else @click="togleCommentPanel(com)"> Read </Button>
       </div>
@@ -21,18 +20,17 @@
 <script setup>
 const props = defineProps(["source", "comSelected"]);
 const emit = defineEmits(["ComSelected"]);
-import { useCounterStore } from "@/store/counter";
-const store = useCounterStore();
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 
 function togleCommentPanel(com) {
   emit("ComSelected", com);
-  if (store.comID==com.id) {
-    store.comID = "";
-    
+  if (navStore.comID == com.id) {
+    navStore.comID = "";
   } else {
-    console.log("sfddfs")
-    store.comID=com.id
-    store.closeNav()
+    console.log("sfddfs");
+    navStore.comID = com.id;
+    navStore.closeNav();
   }
 }
 </script>
@@ -46,7 +44,7 @@ Button {
   border-radius: 3px;
   z-index: 0;
 }
-a{
-  margin-right:10px;
+a {
+  margin-right: 10px;
 }
 </style>

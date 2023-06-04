@@ -4,33 +4,34 @@
       <h1>Sélectionnez un Theme</h1>
     </div>
     <div v-if="theme">
-    {{ theme }}
+
 
       <h1>Titre : {{ theme.data.titre }}</h1>
 
       <div v-html="theme.data.introduction"></div>
 
       <div class="section" id="keywords"></div>
-            <h2>Sources</h2>
-            <ul>
-            <li v-for="source in theme.data.sources">  <NuxtLink :to="{ name: 'sources2'}" @click="updateRoute(source.id)"> {{source.titre}}</NuxtLink></li>
-            </ul>
+      <h2>Sources</h2>
+      <ul>
+        <li v-for="source in theme.data.sources">
+          <NuxtLink :to="{ name: 'sources' }" @click="updateRoute(source.id)">
+            {{ source.titre }}</NuxtLink
+          >
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useCounterStore } from '@/store/counter'
-const store = useCounterStore()
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 
-function updateRoute(id){
-  store.source=id;
+function updateRoute(id) {
+  store.source = id;
 }
 
 const props = defineProps(["theme"]);
-
-
-
 
 import { Directus } from "@directus/sdk";
 const config = useRuntimeConfig();
