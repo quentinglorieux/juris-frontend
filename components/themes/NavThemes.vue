@@ -1,12 +1,12 @@
 <template>
 
-  <div v-if="visible" class="nav-source pl-2" style="width: 350px">
+  <div v-if="visibility" class="nav-source pl-2" style="width: 350px">
     <div class="flex justify-center items-center py-2">
-      <button class="layout-topbar-button" @click="toggleNav()">
+      <button class="layout-topbar-button" @click="togleVisibility()">
         <i class="pi pi-times"></i>
       </button>
       <i class="pi pi-fw pi-file"></i>
-      <div class="text-xl font-semibold">SOURCES</div>
+      <div class="text-xl font-semibold">THEMES</div>
     </div>
 
     <DataTable
@@ -25,7 +25,7 @@
       @rowSelect="onRowSelect"
     >
       <template #header>
-        <div class="flex justify-content-between">
+        <div class="flex" style="justify-content:space-between">
           <Button
             type="button"
             icon="pi pi-filter-slash"
@@ -35,7 +35,7 @@
           />
           <span class="p-input-icon-left">
             <i class="pi pi-search" />
-            <InputText v-model="filter1['global'].value" placeholder="Source Search" />
+            <InputText v-model="filter1['global'].value" placeholder="Theme Search" />
           </span>
         </div>
       </template>
@@ -43,8 +43,8 @@
       <Column field="meta" header="Meta" :sortable="true"></Column>
     </DataTable>
   </div>
-  <div v-if="!visible" class="">
-    <button class="layout-topbar-button" @click="toggleNav()">
+  <div v-if="!visibility" class="">
+    <button class="layout-topbar-button" @click="togleVisibility()">
       <i class="pi pi-bars"></i>
     </button>
   </div>
@@ -54,13 +54,12 @@
 import { Directus } from "@directus/sdk";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 
-const props = defineProps(['visible'])
-import { useCounterStore } from "@/store/counter";
-const store = useCounterStore();
 
-function toggleNav(){
-  store.toggleNav()
+const visibility=ref(true);
+function togleVisibility(){
+  visibility.value=!visibility.value
 }
+
 
 
 const config = useRuntimeConfig();
@@ -68,9 +67,9 @@ const directus = new Directus(config.public.API_BASE_URL);
 
 const listItems = ref([]);
 async function retrieveSources() {
-  const publicData = await directus.items("sources").readByQuery({
+  const publicData = await directus.items("themes").readByQuery({
     fields: [
-      "titre,type,meta,content,commentaires.id,commentaires.titre,commentaires.content,commentaires.auteur_id.last_name,commentaires.auteur_id.first_name,commentaires.keywords_id.keywords_id.titre,theme_id.titre, EditorJS",
+      "titre,introduction, sources.id,sources.titre",
     ],
   });
   var L = publicData.data;
@@ -98,9 +97,10 @@ const initFilters1 = () => {
   };
 };
 const sourceIsSelected = ref(false);
-const emit = defineEmits(["sourceSelected", "closeNavSource"]);
+const emit = defineEmits(["themeSelected", "closeNavSource"]);
 const onRowSelect = (node) => {
-  emit("sourceSelected", node);
+  emit("themeSelected", node);
+  console.log(node)
   sourceIsSelected.value = !sourceIsSelected.value;
 };
 

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-column bg-slate-200 p-3 w-full">
     <div v-if="!source">
-      <h1>Sélectionnez une Source2</h1>
+      <h1>Sélectionnez une Source</h1>
     </div>
     <div v-if="source">
       <div class="stick">
@@ -55,17 +55,41 @@
 </template>
 
 <script setup>
-import edjsHTML from "editorjs-html";
+const route = useRoute();
+
 const comActiv = ref();
 const sourceIsSelected = ref(false);
 const props = defineProps(["source"]);
 
 const emit = defineEmits(["comIsSelected"]);
 
+
+import edjsHTML from "editorjs-html";
 const edjsParser = edjsHTML();
 const editorJScontent = computed(() => {
   return edjsParser.parse(props.source.data.EditorJS);
 });
+
+onUpdated(() => {
+  const comments = document.getElementsByTagName("mark");
+  for (const el of comments) {
+    el.addEventListener("click", () => {
+      const comments2 = document.getElementsByTagName("mark");
+      for (const el2 of comments2) {
+        var comId = el2.getAttribute("data-linkedcomment");
+        if (el.getAttribute("data-linkedcomment") == el2.getAttribute("data-linkedcomment")) {
+          el2.setAttribute("style", "background-color:rgb(240, 220, 210);");
+          comActiv.value=comId
+          retrieveComments(comId);
+        } else {
+          el2.setAttribute("style", "background-color:rgb(255, 248, 225);");
+        }
+      }
+    });
+  }
+});
+
+
 
 const openWindowForComment = (com) => {
   if (com == comActiv.value) {
@@ -89,24 +113,8 @@ async function retrieveComments(id) {
   emit("comIsSelected", true);
 }
 
-onUpdated(() => {
-  const comments = document.getElementsByTagName("mark");
-  for (const el of comments) {
-    el.addEventListener("click", () => {
-      const comments2 = document.getElementsByTagName("mark");
-      for (const el2 of comments2) {
-        var comId = el2.getAttribute("data-linkedcomment");
-        if (el.getAttribute("data-linkedcomment") == el2.getAttribute("data-linkedcomment")) {
-          el2.setAttribute("style", "background-color:rgb(240, 220, 210);");
-          comActiv.value=comId
-          retrieveComments(comId);
-        } else {
-          el2.setAttribute("style", "background-color:rgb(255, 248, 225);");
-        }
-      }
-    });
-  }
-});
+
+
 
 watch(
   () => props.source,
