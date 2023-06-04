@@ -24,7 +24,27 @@
 const sourceSelection = ref("");
 const isNavSourceVisible = ref(true);
 
-const width=ref('0');
+// DataFetching of Sources
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+const { $directus } = useNuxtApp();
+async function retrieveData() {
+  const { data: publicData } = await useAsyncData(() => {
+    return $directus.items("sources").readByQuery({
+      fields: [
+      "titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre",
+    ],
+    });
+  });
+  store.sources = publicData.value.data; //Storage of Sources data
+}
+
+onMounted(() => {
+  if (!store.sources[0]) {
+    retrieveData();
+  }
+});
+
 
 
 function navSourceVisibility(e) {

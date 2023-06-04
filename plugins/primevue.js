@@ -1,8 +1,7 @@
 
-import { defineNuxtPlugin } from "#app";
+// import { defineNuxtPlugin } from "#app";
 import PrimeVue from "primevue/config";
 import {PrimeIcons} from 'primevue/api';
-
 import Button from "primevue/button";
 import Card from "primevue/card";
 import Sidebar from 'primevue/sidebar';
@@ -18,6 +17,8 @@ import Splitter from 'primevue/splitter';
 import SplitterPanel from 'primevue/splitterpanel';
 import Menu from 'primevue/menu';
 import Menubar from 'primevue/menubar';
+
+
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(PrimeVue, {ripple: true});
 

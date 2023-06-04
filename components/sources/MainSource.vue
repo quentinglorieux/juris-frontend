@@ -50,14 +50,15 @@
 </template>
 
 <script setup>
-import { marked } from "marked";
+// import { marked } from "marked";
 
 const selComm = ref();
 const sourceIsSelected = ref(false);
 const props = defineProps(["source"]);
 const emit = defineEmits(["comIsSelected"]);
 const markdownToHtml = computed(() => {
-  return marked(props.source.data.content);
+  // return marked(props.source.data.content);
+  return props.source.data.EditorJS
 });
 
 // function togleCommentPanel(com) {

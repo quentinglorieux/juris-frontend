@@ -5,14 +5,15 @@
         <h1>Sélectionnez un Mot-clé </h1>
      </div>   
     <div v-if="kw"> 
-    <div  class="">
-      <h1>Titre : {{ kw.titre }}</h1>
-      <h2>Introduction : {{ kw.introduction }}</h2>
+    <div  class="ml-2">
+      <h1>{{ kw.titre }}</h1>
+      <h2>Introduction : </h2>
+      <h5> {{ kw.introduction }}</h5>
         <li v-for="com in kw.commentaires">
         <div> 
-        <ul class="mr-3 text-lg">
-          {{ com.commentaires_id.titre}} <span v-if="com.commentaires_id.auteur_id"> by  {{ com.commentaires_id.auteur_id.first_name}} {{ com.commentaires_id.auteur_id.last_name}} </span>
-          <Button class="mt-2 mx-2" @click="onCommentButtonClick(com)"> Read </Button>
+        <ul class="mr-3">
+          {{ com.commentaires_id.titre}} <span v-if="com.commentaires_id.auteur_id"> by  <span class="font-semibold"> {{ com.commentaires_id.auteur_id.first_name}} {{ com.commentaires_id.auteur_id.last_name}} </span></span>
+          <Button class="mt-1 mx-1" @click="onCommentButtonClick(com)"> Lire </Button>
 
         </ul>
       </div>
@@ -33,7 +34,6 @@
       <h3>{{ selectedCom.titre }} </h3>
       {{ selectedCom.id }}
       {{ selectedCom.content }}
-      <!-- {{ selectedCom.keywords_id.keywords_id.titre }} -->
     </Sidebar>
 
 
@@ -47,7 +47,6 @@ const visible = ref(false);
 const onCommentButtonClick = (com) => {
   visible.value = !visible.value;
   selectedCom.value = com.commentaires_id;
-  console.log(com)
 };
 
 
@@ -62,10 +61,10 @@ p {
 }
 
 Button {
-    background-color:  #0288D1;
-    font-size: 0.85rem ;
-    font-weight: 600;
-    padding: 0.25rem 0.4rem;
+    background-color:  #0289d1f9;
+    font-size: 0.8rem ;
+    font-weight: 500;
+    padding: 0.2rem 0.3rem;
     border-radius: 3px;
     margin-left: 2px;
     margin-top: 2px;

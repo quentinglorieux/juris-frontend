@@ -1,11 +1,11 @@
 <script setup>
-import { useRouter } from 'vue-router';
+// import { useRouter } from 'vue-router';
 
 const { layoutConfig, onMenuToggle, contextPath } = useLayout();
 
 const outsideClickListener = ref(null);
 const topbarMenuActive = ref(false);
-const router = useRouter();
+// const router = useRouter();
 
 onMounted(() => {
     bindOutsideClickListener();
@@ -19,7 +19,7 @@ onBeforeUnmount(() => {
 //     return `${contextPath}layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
 // });
 
-const logoUrl = "@/assets/logo.png"
+// const logoUrl = "@/assets/logo.png"
 
 const onTopBarMenuButton = () => {
     topbarMenuActive.value = !topbarMenuActive.value;

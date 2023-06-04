@@ -1,46 +1,31 @@
 <template>
-  <div class="flex"> 
-  <NavKeywords class="" @kwSelected = "(e) => kwSelection = e"/> 
-  <MainKeywords class="" :kw = kwSelection.data />
+  <div class="flex">
+    <NavKeywords class="" @kwSelected="(e) => (kwSelection = e)" />
+    <MainKeywords class="" :kw="kwSelection.data" />
   </div>
 </template>
 
 <script setup>
-const kwSelection = ref('')
-</script>
+const kwSelection = ref("");
 
-
-<!-- <template>
-<li v-for="kw in listItems">
-      <div class="flex">
-        <ul class="mr-3 text-lg">
-          {{
-            kw.titre
-          }}
-          ({{  kw.commentaires.length }})
-        </ul>
-    </div>
-    </li>
-    
-    </template>
-
-<script setup>
-import { Directus } from "@directus/sdk";
-const config = useRuntimeConfig();
-const directus = new Directus(config.public.API_BASE_URL);
-
-const listItems = ref([]);
+// DataFetching of Keywords
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+const { $directus } = useNuxtApp();
 async function retrieveKeywords() {
-  const publicData = await directus.items("keywords").readByQuery({
-    fields: [
-      "titre,meta,introduction,commentaires.id,commentaires.titre,commentaires.content",
-    ]
+  const { data: publicData } = await useAsyncData(() => {
+    return $directus.items("keywords").readByQuery({
+      fields: [
+        "titre,meta,introduction,commentaires.commentaires_id.titre,commentaires.commentaires_id.id,commentaires.commentaires_id.auteur_id.first_name,commentaires.commentaires_id.auteur_id.last_name",
+      ],
+    });
   });
-  var L = publicData.data;
-  listItems.value = L;
+  store.keywords = publicData.value.data; //Storage of Keywords data
 }
-retrieveKeywords();
 
-
-
-</script> -->
+onMounted(() => {
+  if (!store.keywords[0]) {
+    retrieveKeywords();
+  }
+});
+</script>

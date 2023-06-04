@@ -1,8 +1,8 @@
 <template>
   <div class="nav-source pl-2">
     <div class="flex justify-center items-center py-2">
-      <i class="pi pi-fw pi-file"></i>
-      <div class="text-xl font-semibold">KEYWORDS</div>
+      <i class="pi pi-fw pi-tags"></i>
+      <div class="pl-2 text-xl font-semibold">MOTS CLÉS</div>
     </div>
     <DataTable
       :value="listItems"
@@ -16,15 +16,15 @@
       :scrollable="true"
       scrollHeight="flex"
       :resizableColumns="true"
-      columnResizeMode="fit"
-      @rowSelect="onRowSelect"
+      columnResizeMode="expand"
+      @rowSelect="onRowSelect" 
     >
       <template #header>
         <div class="flex justify-content-between">
           <Button
             type="button"
             icon="pi pi-filter-slash"
-            label="Clear"
+            label="Effacer"
             class="p-button-outlined"
             @click="clearFilter1()"
           />
@@ -32,36 +32,27 @@
             <i class="pi pi-search" />
             <InputText
               v-model="filter1['global'].value"
-              placeholder="Keyword Search"
+              placeholder="Recherche"
             />
           </span>
         </div>
       </template>
 
-      <Column field="titre" header="Titre" :sortable="true"></Column>
-      <Column field="commentaires.length" header="# Commentaires" :sortable="true"></Column>
+      <Column field="titre" header="Mots-clés" :sortable="true"></Column>
+      <Column
+        field="commentaires.length"
+        header="# Commentaires"
+        :sortable="true"
+      ></Column>
     </DataTable>
   </div>
 </template>
 
 <script setup>
 import { FilterMatchMode, FilterOperator } from "primevue/api";
-import { Directus } from "@directus/sdk";
-
-const config = useRuntimeConfig();
-const directus = new Directus(config.public.API_BASE_URL);
-
-const listItems = ref([]);
-async function retrieveKeywords() {
-  const publicData = await directus.items("keywords").readByQuery({
-    fields: [
-      "titre,meta,introduction,commentaires.commentaires_id.titre,commentaires.commentaires_id.id,commentaires.commentaires_id.auteur_id.first_name,commentaires.commentaires_id.auteur_id.last_name",
-    ]
-  });
-  var L = publicData.data;
-  listItems.value = L;
-}
-retrieveKeywords();
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+const listItems = computed(() => store.keywords);
 
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },

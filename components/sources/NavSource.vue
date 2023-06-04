@@ -7,7 +7,6 @@
       <i class="pi pi-fw pi-file"></i>
       <div class="text-xl font-semibold">SOURCES</div>
     </div>
-    
     <DataTable
       :value="listItems"
       v-model:filters="filter1"
@@ -46,22 +45,27 @@
 </template>
 
 <script setup>
-import { Directus } from "@directus/sdk";
+// import { Directus } from "@directus/sdk";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
-const config = useRuntimeConfig();
-const directus = new Directus(config.public.API_BASE_URL);
+// const config = useRuntimeConfig();
+// const directus = new Directus(config.public.API_BASE_URL);
 
-const listItems = ref([]);
-async function retrieveSources() {
-  const publicData = await directus.items("sources").readByQuery({
-    fields: [
-      "titre,type,meta,content,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre",
-    ],
-  });
-  var L = publicData.data;
-  listItems.value = L;
-}
-retrieveSources();
+// const listItems = ref([]);
+// async function retrieveSources() {
+//   const publicData = await directus.items("sources").readByQuery({
+//     fields: [
+//       "titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre",
+//     ],
+//   });
+//   var L = publicData.data;
+//   listItems.value = L;
+// }
+// retrieveSources();
+
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+const listItems = computed(() => store.sources);
+
 
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
