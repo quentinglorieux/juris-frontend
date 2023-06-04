@@ -7,7 +7,10 @@
             com.titre
           }}
         </ul>
-        <Button v-if="selectedCom == com" @click="togleCommentPanel(com)"> Close </Button>
+
+        <Button v-if="comSelected == com.id" @click="togleCommentPanel(com)">
+          Close
+        </Button>
         <Button v-else @click="togleCommentPanel(com)"> Read </Button>
       </div>
     </li>
@@ -15,20 +18,21 @@
 </template>
 
 <script setup>
-const props = defineProps(["source"]);
+const props = defineProps(["source", "comSelected"]);
 const emit = defineEmits(["ComSelected"]);
-const selectedCom = ref("");
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 
 function togleCommentPanel(com) {
   emit("ComSelected", com);
-  if (selectedCom.value == com) {
-    selectedCom.value = "";
+  if (navStore.comID == com.id) {
+    navStore.comID = "";
   } else {
-    selectedCom.value = com;
+    console.log("sfddfs");
+    navStore.comID = com.id;
+    navStore.closeNav();
   }
 }
-
-
 </script>
 
 <style scoped>
@@ -39,5 +43,8 @@ Button {
   padding: 0.25rem 0.4rem;
   border-radius: 3px;
   z-index: 0;
+}
+a {
+  margin-right: 10px;
 }
 </style>

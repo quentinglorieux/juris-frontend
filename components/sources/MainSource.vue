@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-column bg-slate-200 p-3 w-full">
     <div v-if="!source">
-      <h1>Sélectionnez une Source2</h1>
+      <h1>Sélectionnez une Source</h1>
     </div>
     <div v-if="source">
       <div class="stick">
@@ -15,10 +15,13 @@
         >
           <SplitterPanel :size="50" class="">
             <div class="section" id="main-source"></div>
-            <div class="">
+
+            <div>
               <h1>Titre : {{ source.data.titre }}</h1>
               <p v-if="source.data">Type : {{ source.data.type }}</p>
-              <div v-html="markdownToHtml"></div>
+            </div>
+            <div v-for="block in editorJScontent">
+              <div v-html="block"></div>
             </div>
             <div class="section" id="keywords"></div>
             <h2>Mots Clés</h2>
@@ -27,7 +30,11 @@
             <div class="section" id="comments"></div>
 
             <h2>Commentaires</h2>
-            <SourceComments :source="source" @ComSelected="callback1" />
+            <SourceComments
+              :source="source"
+              :comSelected="comActiv"
+              @ComSelected="openWindowForComment"
+            />
 
             <div class="section" id="themes"></div>
             <h2>Thèmes</h2>
@@ -35,9 +42,7 @@
           </SplitterPanel>
           <SplitterPanel :size="50" v-if="sourceIsSelected">
             <div>
-              <h2>Titre : {{ selComm.titre }}</h2>
-              <div>ID : {{ selComm.id }}</div>
-              <div>Content : {{ selComm.content }}</div>
+              {{ comActiv }}
             </div>
             <Button @click="sourceIsSelected=false"> Close </Button>
 
@@ -52,43 +57,72 @@
 <script setup>
 // import { marked } from "marked";
 
-const selComm = ref();
+const comActiv = ref();
 const sourceIsSelected = ref(false);
 const props = defineProps(["source"]);
+
 const emit = defineEmits(["comIsSelected"]);
-const markdownToHtml = computed(() => {
-  // return marked(props.source.data.content);
+
+
+import edjsHTML from "editorjs-html";
+const edjsParser = edjsHTML();
+const editorJScontent = computed(() => {
+  // return edjsParser.parse(props.source.data.EditorJS);
+});
+
+onUpdated(() => {
+  const comments = document.getElementsByTagName("mark");
+  for (const el of comments) {
+    el.addEventListener("click", () => {
+      const comments2 = document.getElementsByTagName("mark");
+      for (const el2 of comments2) {
+        var comId = el2.getAttribute("data-linkedcomment");
+        if (el.getAttribute("data-linkedcomment") == el2.getAttribute("data-linkedcomment")) {
+          el2.setAttribute("style", "background-color:rgb(240, 220, 210);");
+          comActiv.value=comId
+          retrieveComments(comId);
+        } else {
+          el2.setAttribute("style", "background-color:rgb(255, 248, 225);");
+        }
+      }
+    });
+  }
   return props.source.data.EditorJS
 });
 
-// function togleCommentPanel(com) {
-//   emit("ComSelected", com);
-//   if (selectedCom.value == com) {
-//     selectedCom.value = "";
-//   } else {
-//     selectedCom.value = com;
-//   }
-// }
 
 
-const callback1 = (com) => {
-  if (com == selComm.value) {
-    selComm.value = "";
+const openWindowForComment = (com) => {
+  if (com == comActiv.value) {
+    comActiv.value = "";
     sourceIsSelected.value = false;
     emit("comIsSelected", false);
   } else {
-    selComm.value = com;
+    comActiv.value = com.id;
     sourceIsSelected.value = true;
     emit("comIsSelected", true);
   }
 };
+
+import { Directus } from "@directus/sdk";
+const config = useRuntimeConfig();
+const directus = new Directus(config.public.API_BASE_URL);
+async function retrieveComments(id) {
+  const publicData = await directus.items("commentaires").readOne(id);
+  comActiv.value = id;
+  openWindowForComment(publicData);
+  emit("comIsSelected", true);
+}
+
+
+
 
 watch(
   () => props.source,
   (first, second) => {
     if (second.data) {
       if (first.data.titre != second.data.titre) {
-        selComm.value = "";
+        comActiv.value = "";
         sourceIsSelected.value = false;
         emit("comIsSelected", false);
       }
