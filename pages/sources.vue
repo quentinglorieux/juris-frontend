@@ -1,35 +1,28 @@
 <template>
   <div class="flex">
+ 
+ 
     <NavSource
-      @closeNavSource="() => (isNavSourceVisible = false)"
+      
       @sourceSelected="(e) => (sourceSelection = e)"
-      v-model:visible="isNavSourceVisible"
-    />
+      :visible=store.navVisibility ></NavSource>
     <MainSource
       class=""
       :source="sourceSelection"
-      @com-is-selected="(e) => navSourceVisibility(e)"
+      
     />
   </div>
 </template>
 
 <script setup>
+import { useCounterStore } from "@/store/counter";
+const store = useCounterStore();
 const sourceSelection = ref("");
-const isNavSourceVisible = ref(true);
 const props = defineProps(["visible", "other"]);
 
-function navSourceVisibility(e) {
-  console.log(e)
-  if (e == "") {
-    isNavSourceVisible.value = true;
-  } else {
-    isNavSourceVisible.value = false;
-  }
-}
 
-function test(e) {
-  isNavSourceVisible = !isNavSourceVisible;
-}
+
+
 </script>
 
 <style scoped lang="scss">
