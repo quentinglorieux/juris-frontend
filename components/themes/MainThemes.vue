@@ -14,7 +14,7 @@
       <h2>Sources</h2>
       <ul>
         <li v-for="source in theme.data.sources">
-          <NuxtLink :to="{ name: 'sources' }" @click="updateRoute(source.id)">
+          <NuxtLink class='hover:bg-sky-200' :to="{ name: 'sources' }" @click="updateRoute(source.id)">
             {{ source.titre }}</NuxtLink
           >
         </li>
@@ -28,7 +28,7 @@ import { useNavStore } from "@/stores/navigation";
 const navStore = useNavStore();
 
 function updateRoute(id) {
-  store.source = id;
+  navStore.selectedSource = id;
 }
 
 const props = defineProps(["theme"]);
