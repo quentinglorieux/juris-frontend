@@ -17,6 +17,12 @@ import Splitter from 'primevue/splitter';
 import SplitterPanel from 'primevue/splitterpanel';
 import Menu from 'primevue/menu';
 import Menubar from 'primevue/menubar';
+import ScrollPanel from 'primevue/scrollpanel';
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
+import ScrollTop from 'primevue/scrolltop';
+
+import Fieldset from 'primevue/fieldset';
 
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -38,5 +44,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('SplitterPanel', SplitterPanel);
     nuxtApp.vueApp.component('Menu', Menu);
     nuxtApp.vueApp.component('Menubar', Menubar);
+    nuxtApp.vueApp.component('ScrollPanel', ScrollPanel);
+    nuxtApp.vueApp.component('TabView', TabView);
+    nuxtApp.vueApp.component('TabPanel', TabPanel);
+    nuxtApp.vueApp.component('ScrollTop', ScrollTop);
+    nuxtApp.vueApp.component('Fieldset', Fieldset);
 });
 

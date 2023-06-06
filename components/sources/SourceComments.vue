@@ -2,9 +2,11 @@
   <div class="pl-4">
     <li v-for="com in source.data.commentaires">
       <div class="flex">
+
         <ul class="mr-3 text-lg">
           {{
             com.titre
+            
           }}
         </ul>
 

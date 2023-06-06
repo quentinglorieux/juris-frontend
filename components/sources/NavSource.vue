@@ -1,6 +1,5 @@
 <template>
-
-  <div v-if="visible" class="nav-source pl-2" style="width: 350px">
+  <div v-if="visible" class="nav-source pl-2" >
     <div class="flex justify-center items-center py-2">
       <button class="layout-topbar-button" @click="toggleNav()">
         <i class="pi pi-times"></i>
@@ -8,7 +7,6 @@
       <i class="pi pi-fw pi-file"></i>
       <div class="text-xl font-semibold">SOURCES</div>
     </div>
-    
     <DataTable
       :value="listItems"
       v-model:filters="filter1"
@@ -35,12 +33,14 @@
           />
           <span class="p-input-icon-left">
             <i class="pi pi-search" />
-            <InputText v-model="filter1['global'].value" placeholder="Source Search" />
+            <InputText
+              v-model="filter1['global'].value"
+              placeholder="Source Search"
+            />
           </span>
         </div>
       </template>
       <Column field="titre" header="Titre" :sortable="true"></Column>
-      <Column field="meta" header="Meta" :sortable="true"></Column>
     </DataTable>
   </div>
   <div v-if="!visible" class="">
@@ -51,25 +51,19 @@
 </template>
 
 <script setup>
-
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 
-const props = defineProps(['visible'])
+const props = defineProps(["visible"]);
 import { useNavStore } from "@/stores/navigation";
 const navStore = useNavStore();
 
-function toggleNav(){
-  navStore.toggleNav()
+function toggleNav() {
+  navStore.toggleNav();
 }
-
-
-
-
 
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
 const listItems = computed(() => store.sources);
-
 
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -91,14 +85,16 @@ const initFilters1 = () => {
   };
 };
 const sourceIsSelected = ref(false);
-const emit = defineEmits(["sourceSelected", "closeNavSource"]);
+// const emit = defineEmits(["sourceSelected", "closeNavSource"]);
+// const onRowSelect = (node) => {
+// emit("sourceSelected", node);
+// sourceIsSelected.value = !sourceIsSelected.value;
+// console.log(listItems.value[node.index].titre);
+// }
 const onRowSelect = (node) => {
-  emit("sourceSelected", node);
   sourceIsSelected.value = !sourceIsSelected.value;
+  navStore.selectedSourceID = node.data.id;
 };
-
-
-
 </script>
 
 <style lang="scss" scoped>

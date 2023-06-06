@@ -2,6 +2,7 @@
   <h3>{{ selectedCom.titre }}</h3>
   {{ selectedCom.id }}
   {{ selectedCom.content }}
+
   <!-- {{ selectedCom.keywords_id.keywords_id.titre }} -->
 </template>
 

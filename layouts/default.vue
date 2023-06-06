@@ -59,16 +59,18 @@ const isOutsideClicked = (event) => {
 
 <template>
   <div class="layout-wrapper" :class="containerClass">
-    <app-topbar></app-topbar>
-    <div class="layout-sidebar">
+    <app-topbar-menu></app-topbar-menu>
+  
+   <!-- <div class="layout-sidebar">
       <app-sidebar></app-sidebar>
-    </div>
-    <div class="layout-main-container">
+    </div> -->
+    
+<!--<div class="layout-main-container">-->
       <div class="layout-main">
         <NuxtPage/>
       </div>
       <app-footer></app-footer>
-    </div>
+   <!-- </div> -->
     <div class="layout-mask"></div>
     
   </div>
