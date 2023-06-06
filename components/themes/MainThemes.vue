@@ -4,8 +4,6 @@
       <h1>Sélectionnez un Theme</h1>
     </div>
     <div v-if="theme">
-
-
       <h1>Titre : {{ theme.data.titre }}</h1>
 
       <div v-html="theme.data.introduction"></div>
@@ -14,7 +12,11 @@
       <h2>Sources</h2>
       <ul>
         <li v-for="source in theme.data.sources">
-          <NuxtLink class='hover:bg-sky-200' :to="{ name: 'sources' }" @click="updateRoute(source.id)">
+          <NuxtLink
+            class="hover:bg-sky-200"
+            :to="{ name: 'sources' }"
+            @click="updateRoute(source.id)"
+          >
             {{ source.titre }}</NuxtLink
           >
         </li>
@@ -26,12 +28,29 @@
 <script setup>
 import { useNavStore } from "@/stores/navigation";
 const navStore = useNavStore();
+const oldID = ref();
 
 function updateRoute(id) {
-  navStore.selectedSource = id;
+  navStore.selectedSourceID = id;
 }
 
-const props = defineProps(["theme"]);
+const props = defineProps([ "themeID"]);
+const theme=ref();
+// DataFetching of the selected Themes
+const { $directus } = useNuxtApp();
+async function retrieveThemeData(id) {
+  console.log(id)
+  theme.value = await useAsyncData(() => {
+    return $directus.items("themes").readOne(id, {
+      fields: [
+        "id,titre,introduction,sources.id,sources.titre"
+      ],
+    });
+  });
+  console.log(theme.value.data)
+  // store.sources[store.sources.findIndex((x) => x.id === id)] =
+    // source.value.data;
+}
 
 import { Directus } from "@directus/sdk";
 const config = useRuntimeConfig();
@@ -43,7 +62,16 @@ async function retrieveComments(id) {
   emit("comIsSelected", true);
 }
 
+
+
+
+  
 onUpdated(() => {
+  if (navStore.selectedThemeID != oldID.value) {
+    retrieveThemeData(navStore.selectedThemeID);
+  }
+  oldID.value = navStore.selectedThemeID;
+
   const comments = document.getElementsByTagName("mark");
   for (const el of comments) {
     el.addEventListener("click", () => {
@@ -51,7 +79,8 @@ onUpdated(() => {
       for (const el2 of comments2) {
         var comId = el2.getAttribute("data-linkedcomment");
         if (
-          el.getAttribute("data-linkedcomment") == el2.getAttribute("data-linkedcomment")
+          el.getAttribute("data-linkedcomment") ==
+          el2.getAttribute("data-linkedcomment")
         ) {
           el2.setAttribute("style", "background-color:rgb(240, 220, 210);");
           comActiv.value = comId;

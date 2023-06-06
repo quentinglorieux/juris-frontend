@@ -1,7 +1,8 @@
 <template>
   <div class="flex">
-    <NavThemes  @themeSelected="(e) => (themeSelection = e)" />
-    <MainThemes :theme="themeSelection"/>
+    <!-- <NavThemes  @themeSelected="(e) => (themeSelection = e)" /> -->
+    <MainThemes :themeID="navStore.selectedThemeID"/>
+    <!-- :theme="themeSelection"  -->
   </div>
 </template>
 
@@ -9,14 +10,18 @@
 const themeSelection = ref("");
 
 // DataFetching of Themes
+import { useNavStore } from "~/stores/navigation";
 import { useGlobalStore } from "~/stores/global";
+const navStore = useNavStore();
 const store = useGlobalStore();
+
+
 const { $directus } = useNuxtApp();
-async function retrieveData() {
+async function retrieveFullThemesData() {
   const { data: publicData } = await useAsyncData(() => {
     return $directus.items("themes").readByQuery({
       fields: [
-        "titre,introduction,sources.id,sources.titre",
+        "id,titre,introduction,sources.id,sources.titre",
       ],
     });
   });
@@ -24,9 +29,8 @@ async function retrieveData() {
 }
 
 onMounted(() => {
-  if (!store.themes[0]) {
-    retrieveData();
-  }
+    retrieveFullThemesData();
+
 });
 
 
