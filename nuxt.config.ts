@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/tailwindcss",
     '@pinia/nuxt'],
-  ssr: true,
+  ssr: false,
   runtimeConfig: {
     apiSecret: '123',
     public: {
