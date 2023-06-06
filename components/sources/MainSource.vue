@@ -116,7 +116,7 @@ async function retrieveSourceData(id) {
   source.value = await useAsyncData(() => {
     return $directus.items("sources").readOne(id, {
       fields: [
-        "id,titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre",
+        "id,titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre,theme_id.id",
       ],
     });
   });
