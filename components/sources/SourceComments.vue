@@ -1,19 +1,16 @@
 <template>
-  <div class="pl-4">
+  <div >
     <li v-for="com in source.data.commentaires">
       <div class="flex">
-
-        <ul class="mr-3 text-lg">
-          {{
-            com.titre
-            
-          }}
+        <Button icon="pi pi-eye" text rounded  @click="togleCommentPanel(com)"/>
+        <ul class="mr-3 text-lg" >
+          {{com.titre}}
         </ul>
 
-        <Button v-if="comSelected == com.id" @click="togleCommentPanel(com)">
+        <!--<Button v-if="comSelected == com.id" @click="togleCommentPanel(com)">
           Close
-        </Button>
-        <Button v-else @click="togleCommentPanel(com)"> Read </Button>
+        </Button>-->
+
       </div>
     </li>
   </div>

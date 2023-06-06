@@ -4,36 +4,31 @@
       <h1>Sélectionnez une Source</h1>
     </div>
     <div v-if="source">
-
-
-
-
-        <Splitter
-          class=""
-          style=""
-        >
-        
-          <SplitterPanel :size="40"  style="display:flex; flex-direction: column; justify-content:space-between;height: 86vh;" class="p-3">
-
-           <ScrollPanel>
+      <Splitter>
+        <SplitterPanel :size="40">
+          <ScrollPanel>
             <div id="main-source"></div>
             <div class="p-3" v-for="block in editorJScontent">
               <div v-html="block"></div>
-            </div>            
-              <ScrollTop target="parent" :threshold="100" class="custom-scrolltop" icon="pi pi-arrow-up" />
-            </ScrollPanel>
-
-          </SplitterPanel >
-
-          <SplitterPanel :size="60" style="display:flex; flex-direction: column; height:86vh" class="p-3">
-                        <div>
-              <h1>{{ source.data.titre }}</h1>
-           <h3 v-if="source.data"> [ {{ source.data.type }} ]</h3>
             </div>
-            <div class="split-menu">
-              <div>
-              <TabView >
-                <TabPanel header="Commentaires" >
+            <ScrollTop
+              target="parent"
+              :threshold="100"
+              class="custom-scrolltop"
+              icon="pi pi-arrow-up"
+            />
+          </ScrollPanel>
+        </SplitterPanel>
+
+        <SplitterPanel :size="60">
+          <div>
+            <h1>{{ source.data.titre }}</h1>
+            <h3 v-if="source.data">[ {{ source.data.type }} ]</h3>
+          </div>
+          <div class="split-menu">
+            <div>
+              <TabView>
+                <TabPanel header="Commentaires">
                   <SourceComments
                     :source="source"
                     :comSelected="comActiv"
@@ -52,18 +47,23 @@
               </TabView>
             </div>
 
-            <div class="source-commentaire" v-if="sourceIsSelected" >
-              <div style="display:flex; justify-content:space-between">
-                <div >
-                  <h2>commentaire actif {{comActiv}}</h2>
+            <div class="source-commentaire" v-if="sourceIsSelected">
+              <div style="display: flex; justify-content: space-between">
+                <div>
+                  <h2>commentaire actif {{ comActiv }}</h2>
                 </div>
                 <div>
-                <Button  icon="pi pi-times" text rounded @click="sourceIsSelected = false"> </Button>
+                  <Button
+                    icon="pi pi-times"
+                    text
+                    rounded
+                    @click="sourceIsSelected = false"
+                  >
+                  </Button>
                 </div>
               </div>
 
-              <ScrollPanel  style="height:80%;">
-                
+              <ScrollPanel style="height: 80%">
                 <p class="p-3">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Integer in rutrum magna. Curabitur quis fermentum eros, id
@@ -171,16 +171,19 @@
                   aliquam, ante lectus tincidunt nunc, vitae auctor ligula lorem
                   ac elit. Etiam et gravida dui.
                 </p>
-                 <ScrollTop target="parent" :threshold="100" class="custom-scrolltop" icon="pi pi-arrow-up" />
+                <ScrollTop
+                  target="parent"
+                  :threshold="100"
+                  class="custom-scrolltop"
+                  icon="pi pi-arrow-up"
+                />
               </ScrollPanel>
             </div>
-            </div>
-          </SplitterPanel>
-        </Splitter>
-      </div>
+          </div>
+        </SplitterPanel>
+      </Splitter>
     </div>
-
-
+  </div>
 </template>
 
 <script setup>
@@ -250,7 +253,6 @@ async function retrieveComments(id) {
   openWindowForComment(data.value);
 }
 
-
 const openWindowForComment = (com) => {
   if (com == comActiv.value) {
     comActiv.value = "";
@@ -260,7 +262,7 @@ const openWindowForComment = (com) => {
     comActiv.value = com.id;
     sourceIsSelected.value = true;
     emit("comIsSelected", true);
-    navStore.comVisibility = true
+    navStore.comVisibility = true;
   }
 };
 
@@ -279,7 +281,6 @@ watch(
 </script>
 
 <style scoped>
-
 .stick {
   position: sticky;
   top: 5rem;

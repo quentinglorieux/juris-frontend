@@ -1,11 +1,15 @@
 <template>
   <div v-if="visible" class="nav-source pl-2" >
-    <div class="flex justify-center items-center py-2">
-      <button class="layout-topbar-button" @click="toggleNav()">
-        <i class="pi pi-times"></i>
+    <div class="flex items-center  py-2" style="justify-content:space-between; width:100%">
+
+      
+      <div class="text-xl font-semibold"><i class="pi pi-fw pi-file"></i> SOURCES</div>
+
+      <div>
+            <button class="layout-topbar-button" @click="toggleNav()">
+        <i class="pi pi pi-angle-double-left"></i>
       </button>
-      <i class="pi pi-fw pi-file"></i>
-      <div class="text-xl font-semibold">SOURCES</div>
+      </div>
     </div>
     <DataTable
       :value="listItems"
@@ -45,7 +49,7 @@
   </div>
   <div v-if="!visible" class="">
     <button class="layout-topbar-button" @click="toggleNav()">
-      <i class="pi pi-bars"></i>
+      <i class="pi pi pi-angle-double-right"></i>
     </button>
   </div>
 </template>

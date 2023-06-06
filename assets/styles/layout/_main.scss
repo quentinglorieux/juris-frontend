@@ -6,6 +6,14 @@
   box-shadow: none !important;
 }
 
+ul{
+  list-style-type: none;
+}
+
+li{
+  list-style-type: none;
+}
+
 html {
   height: 100%;
   font-size: $scale;
@@ -66,17 +74,26 @@ a {
 
 
 .p-splitter {
-    height: 80vh;
+    height: 86vh;
     border: none;
     background-color: var(--surface-ground);
+
+}
+
+.p-splitter-panel{
+    display: flex;
+ flex-direction: column;
+justify-content: space-between;
+ height: 86vh;
+ padding: 1rem;
   }
 
 .p-splitter h1{
  
     color: var(--surface-ground);
     background-color: var(--text-color);
-    margin: -1rem;
-    padding: 1rem;
+    margin: -0.5rem;
+    padding: 0.5rem;
 
 }
 
@@ -87,6 +104,8 @@ a {
 .p-splitter-gutter-handle {
   width: 6px;
 }
+
+
 
 /*ooooooooooooooooooooooooo*/
 
@@ -109,10 +128,14 @@ a {
 
 /*Tabs primevue*/
 
+.p-tabview {
+  background-color: var(--surface-ground);
+}
 
 .p-tabview .p-tabview-panels {
   background-color: var(--surface-ground);
 }
+
 
 /* not selected */
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
