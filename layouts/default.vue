@@ -64,7 +64,7 @@ const isOutsideClicked = (event) => {
       <app-sidebar></app-sidebar>
     </div>
     <div class="layout-main-container">
-      <div class="layout-main">
+      <div class="layout-main px-2">
         <NuxtPage/>
       </div>
       <app-footer></app-footer>

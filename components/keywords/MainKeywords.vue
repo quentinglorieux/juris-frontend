@@ -12,7 +12,7 @@
         <li v-for="com in kw.commentaires">
         <div> 
         <ul class="mr-3">
-          {{ com.commentaires_id.titre}} <span v-if="com.commentaires_id.auteur_id"> by  <span class="font-semibold"> {{ com.commentaires_id.auteur_id.first_name}} {{ com.commentaires_id.auteur_id.last_name}} </span></span>
+          {{ com.commentaires_id.titre}} <span v-if="com.commentaires_id.auteur_id"> by  <span class="font-semibold hover:bg-sky-200"> <NuxtLink :to="`/auteur-${com.commentaires_id.auteur_id.last_name}`" >{{ com.commentaires_id.auteur_id.first_name}} {{ com.commentaires_id.auteur_id.last_name}} </NuxtLink></span></span>
           <Button class="mt-1 mx-1" @click="onCommentButtonClick(com)"> Lire </Button>
 
         </ul>
@@ -29,10 +29,11 @@
       v-model:visible="visible"
       position="right"
       :transitionOptions="'.3s cubic-bezier(0, 0, 0.2, 1)'"
-      class="layout-comment-sidebar"
+      class="layout-comment-sidebar bg-gray-100 min-w-fit"
     >
       <h3>{{ selectedCom.titre }} </h3>
-      {{ selectedCom.id }}
+      {{ selectedCom.id }} 
+      {{ selectedCom.id }} 
       {{ selectedCom.content }}
     </Sidebar>
 
@@ -57,7 +58,11 @@ p {
   font-size: 18px;
 }
 .layout-comment-sidebar {
-    min-width: 40%;
+    width: 50%;
+    
+}
+.p-sidebar{
+  width: 40rem;
 }
 
 Button {

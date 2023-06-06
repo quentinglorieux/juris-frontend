@@ -4,9 +4,9 @@
       <h1>Sélectionnez une Source</h1>
     </div>
     <div v-if="source">
-      <div class="stick">
+      <!-- <div class="stick">
         <SourceNavBar />
-      </div>
+      </div> -->
 
       <div class="">
         <Splitter
@@ -23,22 +23,33 @@
             <div v-for="block in editorJScontent">
               <div v-html="block"></div>
             </div>
-            <div class="section" id="keywords"></div>
-            <h2>Mots Clés</h2>
-            <SourceKeywords :source="source" />
+<div class="pt-3 pr-2"> 
+            <TabView>
+              <TabPanel header="Commentaires">
+                <div class="section" id="comments"></div>
+                <SourceComments
+                  :source="source"
+                  :comSelected="comActiv"
+                  @ComSelected="openWindowForComment"
+                />
+              </TabPanel>
 
-            <div class="section" id="comments"></div>
+              <TabPanel header="Mots-Clés">
+                <div class="section" id="keywords"></div>
+                <SourceKeywords :source="source" />
+              </TabPanel>
 
-            <h2>Commentaires</h2>
-            <SourceComments
-              :source="source"
-              :comSelected="comActiv"
-              @ComSelected="openWindowForComment"
-            />
+              <TabPanel header="Thèmes">
+                <div class="section" id="themes"></div>
+                <SourceThemes :source="source" />
+              </TabPanel>
 
-            <div class="section" id="themes"></div>
-            <h2>Thèmes</h2>
-            <SourceThemes :source="source" />
+              <TabPanel header="Traduction(s)">
+                <h2>Traduction(s)</h2>
+              </TabPanel>
+              
+            </TabView>
+          </div>
           </SplitterPanel>
           <SplitterPanel :size="50" v-if="navStore.comVisibility">
             <div>
@@ -47,7 +58,7 @@
             <Button @click="navStore.comVisibility = false"> Close </Button>
           </SplitterPanel>
         </Splitter>
-        <h2>Traduction(s)</h2>
+     
       </div>
     </div>
   </div>
@@ -120,7 +131,6 @@ async function retrieveComments(id) {
   openWindowForComment(data.value);
 }
 
-
 const openWindowForComment = (com) => {
   if (com == comActiv.value) {
     comActiv.value = "";
@@ -130,7 +140,7 @@ const openWindowForComment = (com) => {
     comActiv.value = com.id;
     sourceIsSelected.value = true;
     emit("comIsSelected", true);
-    navStore.comVisibility = true
+    navStore.comVisibility = true;
   }
 };
 

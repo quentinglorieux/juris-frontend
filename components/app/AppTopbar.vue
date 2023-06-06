@@ -5,12 +5,12 @@
       <span>JURIS project</span>
     </router-link>
 
-    <!-- <button
+    <button
       class="p-link layout-menu-button layout-topbar-button"
       @click="onMenuToggle()"
     >
       <i class="pi pi-bars"></i>
-    </button> -->
+    </button>
 
     <!-- <button
       class="p-link layout-topbar-menu-button layout-topbar-button"
@@ -47,13 +47,14 @@ const store = useGlobalStore();
 
 const { $directus } = useNuxtApp();
 
-// const { layoutConfig, onMenuToggle, contextPath } = useLayout();
+const { layoutConfig, onMenuToggle, contextPath } = useLayout();
 
 const outsideClickListener = ref(null);
 const topbarMenuActive = ref(false);
 
 onMounted(() => {
   bindOutsideClickListener();
+  onMenuToggle();
 });
 
 onBeforeUnmount(() => {
