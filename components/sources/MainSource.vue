@@ -8,9 +8,9 @@
         <SourceNavBar />
       </div> -->
 
-      <div class="">
+      <div >
         <Splitter
-          class="mb-5"
+          class="mb-5 min-h-screen"
           style="background-color: rgb(226 232 240); border: none"
         >
           <SplitterPanel :size="50" class="">
@@ -52,7 +52,12 @@
           </SplitterPanel>
           <SplitterPanel :size="50" v-if="navStore.comVisibility">
             <div>
+            
+              <h3> {{ commentData.titre }}</h3>
+              <div> {{ commentData.content }}</div>
+              Commentaire : 
               {{ comActiv }}
+
             </div>
             <Button @click="navStore.comVisibility = false"> Close </Button>
           </SplitterPanel>
@@ -123,6 +128,7 @@ async function retrieveSourceData(id) {
   store.sources[store.sources.findIndex((x) => x.id === id)] = source.value.data;
 }
 
+const commentData = ref();
 async function retrieveComments(id) {
   const { data } = await useAsyncData(() => {
     return $directus.items("commentaires").readOne(id);
@@ -130,6 +136,7 @@ async function retrieveComments(id) {
   comActiv.value = id;
   emit("comIsSelected", true);
   openWindowForComment(data.value);
+  commentData.value = data.value
 }
 
 const openWindowForComment = (com) => {

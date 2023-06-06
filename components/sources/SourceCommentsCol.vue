@@ -1,5 +1,6 @@
 <template>
-  <h3>{{ selectedCom.titre }}</h3>
+  A
+  <h3>{{ selectedCom }}</h3>
   {{ selectedCom.id }}
   {{ selectedCom.content }}
   <!-- {{ selectedCom.keywords_id.keywords_id.titre }} -->

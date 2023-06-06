@@ -3,15 +3,14 @@
     <li v-for="com in source.data.commentaires">
       <div class="flex">
         <ul class="mr-3 text-lg">
-          {{
-            com.titre
-          }}
+          {{ com.titre }}
+
         </ul>
 
         <Button v-if="comSelected == com.id & navStore.comVisibility " @click="togleCommentPanel(com)">
-          Close
+          Fermer
         </Button>
-        <Button v-else @click="togleCommentPanel(com)"> Read </Button>
+        <Button v-else @click="togleCommentPanel(com)"> Lire </Button>
       </div>
     </li>
   </div>
