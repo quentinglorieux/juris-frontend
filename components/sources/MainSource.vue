@@ -23,33 +23,32 @@
             <div v-for="block in editorJScontent">
               <div v-html="block"></div>
             </div>
-<div class="pt-3 pr-2"> 
-            <TabView>
-              <TabPanel header="Commentaires">
-                <div class="section" id="comments"></div>
-                <SourceComments
-                  :source="source"
-                  :comSelected="comActiv"
-                  @ComSelected="openWindowForComment"
-                />
-              </TabPanel>
+            <div class="pt-3 pr-2">
+              <TabView>
+                <TabPanel header="Commentaires">
+                  <div class="section" id="comments"></div>
+                  <SourceComments
+                    :source="source"
+                    :comSelected="comActiv"
+                    @ComSelected="openWindowForComment"
+                  />
+                </TabPanel>
 
-              <TabPanel header="Mots-Clés">
-                <div class="section" id="keywords"></div>
-                <SourceKeywords :source="source" />
-              </TabPanel>
+                <TabPanel header="Mots-Clés">
+                  <div class="section" id="keywords"></div>
+                  <SourceKeywords :source="source" />
+                </TabPanel>
 
-              <TabPanel header="Thèmes">
-                <div class="section" id="themes"></div>
-                <SourceThemes :source="source" />
-              </TabPanel>
+                <TabPanel header="Thèmes">
+                  <div class="section" id="themes"></div>
+                  <SourceThemes :source="source" />
+                </TabPanel>
 
-              <TabPanel header="Traduction(s)">
-                <h2>Traduction(s)</h2>
-              </TabPanel>
-              
-            </TabView>
-          </div>
+                <TabPanel header="Traduction(s)">
+                  <h2>Traduction(s)</h2>
+                </TabPanel>
+              </TabView>
+            </div>
           </SplitterPanel>
           <SplitterPanel :size="50" v-if="navStore.comVisibility">
             <div>
@@ -58,7 +57,6 @@
             <Button @click="navStore.comVisibility = false"> Close </Button>
           </SplitterPanel>
         </Splitter>
-     
       </div>
     </div>
   </div>
@@ -84,6 +82,10 @@ const editorJScontent = computed(() => {
   return edjsParser.parse(source.value.data.EditorJS);
 });
 
+onMounted(()=>{
+  if (store.sources[0]) {retrieveSourceData(navStore.selectedSourceID)};
+})
+
 onUpdated(() => {
   if (navStore.selectedSourceID != oldID.value) {
     retrieveSourceData(navStore.selectedSourceID);
@@ -108,7 +110,7 @@ onUpdated(() => {
   }
 });
 
-// DataFetching of the selected Sources
+// DataFetching of the selected Source(id)
 const { $directus } = useNuxtApp();
 async function retrieveSourceData(id) {
   source.value = await useAsyncData(() => {
@@ -118,8 +120,7 @@ async function retrieveSourceData(id) {
       ],
     });
   });
-  store.sources[store.sources.findIndex((x) => x.id === id)] =
-    source.value.data;
+  store.sources[store.sources.findIndex((x) => x.id === id)] = source.value.data;
 }
 
 async function retrieveComments(id) {

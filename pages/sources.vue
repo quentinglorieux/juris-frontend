@@ -3,8 +3,8 @@
     <NavSource 
      :visible="navStore.navVisibility"> 
     </NavSource>
+    <!-- <MainSource></MainSource> -->
     <MainSource 
-      class="" 
       :sourceID="navStore.selectedSourceID"> 
   </MainSource>
   </div>

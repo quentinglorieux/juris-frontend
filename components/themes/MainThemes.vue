@@ -34,38 +34,22 @@ function updateRoute(id) {
   navStore.selectedSourceID = id;
 }
 
-const props = defineProps([ "themeID"]);
-const theme=ref();
+const theme = ref();
 // DataFetching of the selected Themes
 const { $directus } = useNuxtApp();
 async function retrieveThemeData(id) {
-  console.log(id)
   theme.value = await useAsyncData(() => {
     return $directus.items("themes").readOne(id, {
-      fields: [
-        "id,titre,introduction,sources.id,sources.titre"
-      ],
+      fields: ["id,titre,introduction,sources.id,sources.titre"],
     });
   });
-  console.log(theme.value.data)
-  // store.sources[store.sources.findIndex((x) => x.id === id)] =
-    // source.value.data;
 }
 
-import { Directus } from "@directus/sdk";
-const config = useRuntimeConfig();
-const directus = new Directus(config.public.API_BASE_URL);
-async function retrieveComments(id) {
-  const publicData = await directus.items("commentaires").readOne(id);
-  comActiv.value = id;
-  openWindowForComment(publicData);
-  emit("comIsSelected", true);
+if (navStore.selectedThemeID){
+retrieveThemeData(navStore.selectedThemeID);
+oldID.value = navStore.selectedThemeID;
 }
 
-
-
-
-  
 onUpdated(() => {
   if (navStore.selectedThemeID != oldID.value) {
     retrieveThemeData(navStore.selectedThemeID);
@@ -93,18 +77,7 @@ onUpdated(() => {
   }
 });
 
-watch(
-  () => props.source,
-  (first, second) => {
-    if (second.data) {
-      if (first.data.titre != second.data.titre) {
-        comActiv.value = "";
-        sourceIsSelected.value = false;
-        emit("comIsSelected", false);
-      }
-    }
-  }
-);
+
 </script>
 
 <style scoped>
