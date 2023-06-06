@@ -40,11 +40,11 @@
             <h2>Thèmes</h2>
             <SourceThemes :source="source" />
           </SplitterPanel>
-          <SplitterPanel :size="50" v-if="sourceIsSelected">
+          <SplitterPanel :size="50" v-if="navStore.comVisibility">
             <div>
               {{ comActiv }}
             </div>
-            <Button @click="sourceIsSelected = false"> Close </Button>
+            <Button @click="navStore.comVisibility = false"> Close </Button>
           </SplitterPanel>
         </Splitter>
         <h2>Traduction(s)</h2>
@@ -83,7 +83,6 @@ onUpdated(() => {
   const comments = document.getElementsByTagName("mark");
   for (const el of comments) {
     el.addEventListener("click", () => {
-      // const comments2 = document.getElementsByTagName("mark");
       for (const el2 of comments) {
         var comId = el2.getAttribute("data-linkedcomment");
         if (el.getAttribute("data-linkedcomment") == comId) {
@@ -96,8 +95,6 @@ onUpdated(() => {
       retrieveComments(comActiv.value);
     });
   }
-  // return props.source.data.EditorJS
-  // return source.value
 });
 
 // DataFetching of the selected Sources
@@ -123,16 +120,6 @@ async function retrieveComments(id) {
   openWindowForComment(data.value);
 }
 
-// import { Directus } from "@directus/sdk";
-// const config = useRuntimeConfig();
-// const directus = new Directus(config.public.API_BASE_URL);
-// async function retrieveComments(id) {
-//   const publicData = await directus.items("commentaires").readOne(id);
-//   comActiv.value = id;
-//   openWindowForComment(publicData);
-//   emit("comIsSelected", true);
-//   console.log(publicData)
-// }
 
 const openWindowForComment = (com) => {
   if (com == comActiv.value) {
@@ -143,6 +130,7 @@ const openWindowForComment = (com) => {
     comActiv.value = com.id;
     sourceIsSelected.value = true;
     emit("comIsSelected", true);
+    navStore.comVisibility = true
   }
 };
 

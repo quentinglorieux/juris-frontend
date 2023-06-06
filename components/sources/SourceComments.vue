@@ -8,7 +8,7 @@
           }}
         </ul>
 
-        <Button v-if="comSelected == com.id" @click="togleCommentPanel(com)">
+        <Button v-if="comSelected == com.id & navStore.comVisibility " @click="togleCommentPanel(com)">
           Close
         </Button>
         <Button v-else @click="togleCommentPanel(com)"> Read </Button>
@@ -27,10 +27,11 @@ function togleCommentPanel(com) {
   emit("ComSelected", com);
   if (navStore.comID == com.id) {
     navStore.comID = "";
+    navStore.comVisibility = false
   } else {
-    console.log("sfddfs");
     navStore.comID = com.id;
-    navStore.closeNav();
+    navStore.comVisibility = true
+    // navStore.closeNav();
   }
 }
 </script>

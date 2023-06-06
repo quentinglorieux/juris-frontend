@@ -4,6 +4,7 @@ export const useNavStore = defineStore("navigation", () => {
   const sourceID = ref("");
   const comID = ref("");
   const navVisibility = ref(true);
+  const comVisibility = ref(false)
   const selectedSourceID = ref("");
 
   function closeNav() {
@@ -15,5 +16,5 @@ export const useNavStore = defineStore("navigation", () => {
   function toggleNav() {
     navVisibility.value = !navVisibility.value;
   }
-  return { sourceID, comID, navVisibility, selectedSourceID, toggleNav, openNav, closeNav };
+  return { sourceID, comID, navVisibility, comVisibility, selectedSourceID, toggleNav, openNav, closeNav };
 });
