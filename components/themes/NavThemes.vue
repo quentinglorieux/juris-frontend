@@ -8,7 +8,6 @@
       <i class="pi pi-fw pi-file"></i>
       <div class="text-xl font-semibold">THEMES</div>
     </div>
-
     <DataTable
       :value="listItems"
       v-model:filters="filter1"
@@ -50,8 +49,12 @@
   </div>
 </template>
 
+
+
 <script setup>
-import { Directus } from "@directus/sdk";
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+const listItems = computed(() => store.themes);
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 
 
@@ -60,22 +63,20 @@ function togleVisibility(){
   visibility.value=!visibility.value
 }
 
+// const config = useRuntimeConfig();
+// const directus = new Directus(config.public.API_BASE_URL);
 
-
-const config = useRuntimeConfig();
-const directus = new Directus(config.public.API_BASE_URL);
-
-const listItems = ref([]);
-async function retrieveSources() {
-  const publicData = await directus.items("themes").readByQuery({
-    fields: [
-      "titre,introduction, sources.id,sources.titre",
-    ],
-  });
-  var L = publicData.data;
-  listItems.value = L;
-}
-retrieveSources();
+// const listItems = ref([]);
+// async function retrieveSources() {
+//   const publicData = await directus.items("themes").readByQuery({
+//     fields: [
+//       "titre,introduction, sources.id,sources.titre",
+//     ],
+//   });
+//   var L = publicData.data;
+//   listItems.value = L;
+// }
+// retrieveSources();
 
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -100,7 +101,7 @@ const sourceIsSelected = ref(false);
 const emit = defineEmits(["themeSelected", "closeNavSource"]);
 const onRowSelect = (node) => {
   emit("themeSelected", node);
-  console.log(node)
+  // console.log(node)
   sourceIsSelected.value = !sourceIsSelected.value;
 };
 

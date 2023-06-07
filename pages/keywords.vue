@@ -2,6 +2,8 @@
   <div class="flex">
     <NavKeywords class="" @kwSelected="(e) => (kwSelection = e)" />
     <MainKeywords class="" :kw="kwSelection.data" />
+    <!-- <MainKeywords class="" :kw="navStore.selectedKeywordID" />  -->
+    
   </div>
 </template>
 
@@ -11,6 +13,9 @@ const kwSelection = ref("");
 // DataFetching of Keywords
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
+import { useNavStore } from "~/stores/navigation";
+const navStore = useNavStore();
+
 const { $directus } = useNuxtApp();
 async function retrieveKeywords() {
   const { data: publicData } = await useAsyncData(() => {

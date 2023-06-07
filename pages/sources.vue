@@ -1,40 +1,34 @@
 <template>
   <div class="flex">
-    <NavSource
-      @sourceSelected="
-        (e) => {
-          sourceSelection = e;
-          sourceID = e.data.id;
-        }
-      "
-      :visible="navStore.navVisibility"
-    ></NavSource>
-    <MainSource class="" :source="sourceSelection" :sourceID="sourceID" />
+    <NavSource 
+     :visible="navStore.navVisibility"> 
+    </NavSource>
+    <!-- <MainSource></MainSource> -->
+    <MainSource 
+      :sourceID="navStore.selectedSourceID"> 
+  </MainSource>
   </div>
 </template>
 
 <script setup>
 import { useNavStore } from "@/stores/navigation";
+import { useGlobalStore } from "~/stores/global";
+
 const navStore = useNavStore();
-const sourceSelection = ref("");
-const sourceID = ref();
-const props = defineProps(["visible", "other"]);
+const store = useGlobalStore();
 
 // DataFetching of Sources
-import { useGlobalStore } from "~/stores/global";
-const store = useGlobalStore();
 const { $directus } = useNuxtApp();
 async function retrieveData() {
   const { data: publicData } = await useAsyncData(() => {
     return $directus.items("sources").readByQuery({
-      fields: [
-        "titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre",
-      ],
+      fields: ["id,titre"],
     });
   });
   store.sources = publicData.value.data; //Storage of Sources data
 }
 
+// retrieve initial source data (id and title only)
 onMounted(() => {
   if (!store.sources[0]) {
     retrieveData();

@@ -17,6 +17,8 @@ import Splitter from 'primevue/splitter';
 import SplitterPanel from 'primevue/splitterpanel';
 import Menu from 'primevue/menu';
 import Menubar from 'primevue/menubar';
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
 
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -33,6 +35,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('Column', Column);
     nuxtApp.vueApp.component('InputText', InputText);
     nuxtApp.vueApp.component('Dropdown', Dropdown);
+    nuxtApp.vueApp.component('TabView', TabView);
+    nuxtApp.vueApp.component('TabPanel', TabPanel);
 
     nuxtApp.vueApp.component('Splitter', Splitter);
     nuxtApp.vueApp.component('SplitterPanel', SplitterPanel);

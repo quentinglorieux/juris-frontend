@@ -3,15 +3,14 @@
     <li v-for="com in source.data.commentaires">
       <div class="flex">
         <ul class="mr-3 text-lg">
-          {{
-            com.titre
-          }}
+          {{ com.titre }}
+
         </ul>
 
-        <Button v-if="comSelected == com.id" @click="togleCommentPanel(com)">
-          Close
+        <Button v-if="comSelected == com.id & navStore.comVisibility " @click="togleCommentPanel(com)">
+          Fermer
         </Button>
-        <Button v-else @click="togleCommentPanel(com)"> Read </Button>
+        <Button v-else @click="togleCommentPanel(com)"> Lire </Button>
       </div>
     </li>
   </div>
@@ -27,10 +26,11 @@ function togleCommentPanel(com) {
   emit("ComSelected", com);
   if (navStore.comID == com.id) {
     navStore.comID = "";
+    navStore.comVisibility = false
   } else {
-    
     navStore.comID = com.id;
-    navStore.closeNav();
+    navStore.comVisibility = true
+    // navStore.closeNav();
   }
 }
 </script>

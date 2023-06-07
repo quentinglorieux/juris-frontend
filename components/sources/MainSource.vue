@@ -4,13 +4,13 @@
       <h1>Sélectionnez une Source</h1>
     </div>
     <div v-if="source">
-      <div class="stick">
+      <!-- <div class="stick">
         <SourceNavBar />
-      </div>
+      </div> -->
 
-      <div class="">
+      <div >
         <Splitter
-          class="mb-5"
+          class="mb-5 min-h-screen"
           style="background-color: rgb(226 232 240); border: none"
         >
           <SplitterPanel :size="50" class="">
@@ -23,74 +23,121 @@
             <div v-for="block in editorJScontent">
               <div v-html="block"></div>
             </div>
-            <div class="section" id="keywords"></div>
-            <h2>Mots Clés</h2>
-            <SourceKeywords :source="source" />
+            <div class="pt-3 pr-2">
+              <TabView>
+                <TabPanel header="Commentaires">
+                  <div class="section" id="comments"></div>
+                  <SourceComments
+                    :source="source"
+                    :comSelected="comActiv"
+                    @ComSelected="openWindowForComment"
+                  />
+                </TabPanel>
 
-            <div class="section" id="comments"></div>
+                <TabPanel header="Mots-Clés">
+                  <div class="section" id="keywords"></div>
+                  <SourceKeywords :source="source" />
+                </TabPanel>
 
-            <h2>Commentaires</h2>
-            <SourceComments
-              :source="source"
-              :comSelected="comActiv"
-              @ComSelected="openWindowForComment"
-            />
+                <TabPanel header="Thèmes">
+                  <div class="section" id="themes"></div>
+                  <SourceThemes :source="source" />
+                </TabPanel>
 
-            <div class="section" id="themes"></div>
-            <h2>Thèmes</h2>
-            <SourceThemes :source="source" />
-          </SplitterPanel>
-          <SplitterPanel :size="50" v-if="sourceIsSelected">
-            <div>
-              {{ comActiv }}
+                <TabPanel header="Traduction(s)">
+                  <h2>Traduction(s)</h2>
+                </TabPanel>
+              </TabView>
             </div>
-            <Button @click="sourceIsSelected=false"> Close </Button>
+          </SplitterPanel>
+          <SplitterPanel :size="50" v-if="navStore.comVisibility">
+            <div>
+            
+              <h3> {{ commentData.titre }}</h3>
+              <div> {{ commentData.content }}</div>
+              Commentaire : 
+              {{ comActiv }}
 
+            </div>
+            <Button @click="navStore.comVisibility = false"> Close </Button>
           </SplitterPanel>
         </Splitter>
-        <h2>Traduction(s)</h2>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-// import { marked } from "marked";
+import { useNavStore } from "@/stores/navigation";
+import { useGlobalStore } from "~/stores/global";
+const navStore = useNavStore();
+const store = useGlobalStore();
 
 const comActiv = ref();
 const sourceIsSelected = ref(false);
-const props = defineProps(["source"]);
+const props = defineProps(["sourceID"]);
+const source = ref();
+const oldID = ref();
 
 const emit = defineEmits(["comIsSelected"]);
-
 
 import edjsHTML from "editorjs-html";
 const edjsParser = edjsHTML();
 const editorJScontent = computed(() => {
-  return edjsParser.parse(props.source.data.EditorJS);
+  return edjsParser.parse(source.value.data.EditorJS);
 });
 
+onMounted(()=>{
+  if (store.sources[0]) {retrieveSourceData(navStore.selectedSourceID)};
+})
+
 onUpdated(() => {
+  if (navStore.selectedSourceID != oldID.value) {
+    retrieveSourceData(navStore.selectedSourceID);
+  }
+  // console.log(store.sources[store.sources.findIndex(x => x.id === navStore.selectedSourceID )].type)
+  oldID.value = navStore.selectedSourceID;
+
   const comments = document.getElementsByTagName("mark");
   for (const el of comments) {
     el.addEventListener("click", () => {
-      const comments2 = document.getElementsByTagName("mark");
-      for (const el2 of comments2) {
+      for (const el2 of comments) {
         var comId = el2.getAttribute("data-linkedcomment");
-        if (el.getAttribute("data-linkedcomment") == el2.getAttribute("data-linkedcomment")) {
+        if (el.getAttribute("data-linkedcomment") == comId) {
           el2.setAttribute("style", "background-color:rgb(240, 220, 210);");
-          comActiv.value=comId
-          retrieveComments(comId);
+          comActiv.value = comId;
         } else {
-          el2.setAttribute("style", "background-color:rgb(255, 248, 225);");
+          el2.setAttribute("style", "background-color:#ceffd5;");
         }
       }
+      retrieveComments(comActiv.value);
     });
   }
-  return props.source.data.EditorJS
 });
 
+// DataFetching of the selected Source(id)
+const { $directus } = useNuxtApp();
+async function retrieveSourceData(id) {
+  source.value = await useAsyncData(() => {
+    return $directus.items("sources").readOne(id, {
+      fields: [
+        "id,titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre,theme_id.id",
+      ],
+    });
+  });
+  store.sources[store.sources.findIndex((x) => x.id === id)] = source.value.data;
+}
 
+const commentData = ref();
+async function retrieveComments(id) {
+  const { data } = await useAsyncData(() => {
+    return $directus.items("commentaires").readOne(id);
+  });
+  comActiv.value = id;
+  emit("comIsSelected", true);
+  openWindowForComment(data.value);
+  commentData.value = data.value
+}
 
 const openWindowForComment = (com) => {
   if (com == comActiv.value) {
@@ -101,24 +148,12 @@ const openWindowForComment = (com) => {
     comActiv.value = com.id;
     sourceIsSelected.value = true;
     emit("comIsSelected", true);
+    navStore.comVisibility = true;
   }
 };
 
-import { Directus } from "@directus/sdk";
-const config = useRuntimeConfig();
-const directus = new Directus(config.public.API_BASE_URL);
-async function retrieveComments(id) {
-  const publicData = await directus.items("commentaires").readOne(id);
-  comActiv.value = id;
-  openWindowForComment(publicData);
-  emit("comIsSelected", true);
-}
-
-
-
-
 watch(
-  () => props.source,
+  () => source,
   (first, second) => {
     if (second.data) {
       if (first.data.titre != second.data.titre) {
