@@ -19,7 +19,7 @@ const onConfigButtonClick = () => {
     v-model:visible="visible"
     position="right"
     :transitionOptions="'.3s cubic-bezier(0, 0, 0.2, 1)'"
-    class="layout-config-sidebar w-20rem"
+    class="layout-config-sidebar"
   >
     Menu de droite
   </Sidebar>

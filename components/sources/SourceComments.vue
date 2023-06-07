@@ -1,7 +1,7 @@
 <template>
   <div >
     <li v-for="com in source.data.commentaires">
-      <div class="flex" style="align-items:center">
+      <div class="flex" style="align-items:start">
         <Button icon="pi pi-eye" text rounded  @click="togleCommentPanel(com)"/>
         <ul class="mr-3 text-lg" >
           {{com.titre}}
