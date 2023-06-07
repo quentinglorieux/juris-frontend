@@ -28,7 +28,7 @@ function togleCommentPanel(com) {
   if (navStore.comID == com.id) {
     navStore.comID = "";
   } else {
-    console.log("sfddfs");
+    
     navStore.comID = com.id;
     navStore.closeNav();
   }
