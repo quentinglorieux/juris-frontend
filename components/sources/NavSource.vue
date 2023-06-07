@@ -102,6 +102,7 @@ const onRowSelect = (node) => {
 </script>
 
 <style lang="scss" scoped>
+
 Button {
   /* background-color: #0288d1; */
   font-size: 0.85rem;

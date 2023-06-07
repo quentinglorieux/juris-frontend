@@ -1,7 +1,7 @@
 <template>
   <div >
     <li v-for="com in source.data.commentaires">
-      <div class="flex">
+      <div class="flex" style="align-items:center">
         <Button icon="pi pi-eye" text rounded  @click="togleCommentPanel(com)"/>
         <ul class="mr-3 text-lg" >
           {{com.titre}}
@@ -34,16 +34,4 @@ function togleCommentPanel(com) {
 }
 </script>
 
-<style scoped>
-Button {
-  background-color: #0288d1;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.25rem 0.4rem;
-  border-radius: 3px;
-  z-index: 0;
-}
-a {
-  margin-right: 10px;
-}
-</style>
+
