@@ -38,11 +38,7 @@ a {
   min-height: 100vh;
 }
 
-.split-menu {
-  position: relative;
-  background-color: var(--surface-ground);
-  height: 100%;
-}
+
 
 
 .titre-page {
@@ -69,6 +65,18 @@ a {
   margin: 0;
 }
 
+.close-button{
+  position:absolute; 
+  z-index:20; 
+  right:0;
+}
+
+.split-menu {
+  position: relative;
+  background-color: var(--surface-ground);
+  height: 100%;
+}
+
 /*ooooooooooooooooooooooooo*/
 
 /*Affichage des commentaires*/
@@ -76,16 +84,19 @@ a {
 .source-commentaire {
   position: absolute;
   z-index: 10;
-  top: 0;
+  top:0;
   left: 0;
   background-color: var(--surface-ground);
   overflow: hidden;
-  overflow-y: auto;
+ //overflow-y: auto;
   color: var(--text-color);
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  //flex-direction: column;
+  //justify-content: space-between;
+ // height: 100%;
+  width: 100%;
   height: 100%;
+
 }
 
 .source-commentaire .header-tab{
@@ -112,24 +123,25 @@ a {
 
 /*Splitter primevue*/
 
+
+
 .p-splitter {
-  height: 86vh;
   border: none;
-  background-color: var(--surface-ground);
+  background-color: var(--surface-grou);
+  height: 86vb;
 }
 
 .p-splitter-panel {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 86vh;
+  //justify-content: space-between;
 
 }
 
 .p-splitter h1 {
   color: var(--surface-ground);
   background-color: var(--text-color);
-  margin: -0.5rem;
+  //margin: -0.5rem;
   padding: 0.5rem;
 }
 
@@ -158,11 +170,22 @@ a {
 
 .p-tabview {
   background-color: var(--surface-ground);
+ height: 100%;
 }
 
 .p-tabview .p-tabview-panels {
   background-color: var(--surface-ground);
+  height: 100%;
 }
+
+
+
+.p-tabview-panel{
+  height: 100%;
+}
+
+
+
 
 .p-tabview .p-tabview-nav {
   background-color: var(--surface-ground);
