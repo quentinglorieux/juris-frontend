@@ -21,9 +21,9 @@
         </SplitterPanel>
 
         <SplitterPanel :size="60">
-          <div>
-            <h1>{{ source.data.titre }}</h1>
-            <h3 v-if="source.data">[ {{ source.data.type }} ]</h3>
+          <div class="titre-page">
+            <h1 >{{ source.data.titre }}</h1>
+            <h3 v-if="source.data">[{{ source.data.type }}]</h3>
           </div>
           <div class="split-menu">
             <div>
@@ -47,23 +47,25 @@
               </TabView>
             </div>
 
-            <div class="source-commentaire" v-if="sourceIsSelected">
-              <div style="display: flex; justify-content: space-between">
+            <div class="source-commentaire" v-if="navStore.comVisibility">
+
+              <div class="header-tab">
+                
                 <div>
-                  <h2>commentaire actif {{ comActiv }}</h2>
+                  <h3>Commentaire actif {{ comActiv }}</h3>
                 </div>
                 <div>
                   <Button
                     icon="pi pi-times"
                     text
                     rounded
-                    @click="sourceIsSelected = false"
+                    @click="navStore.comVisibility = false"
                   >
                   </Button>
                 </div>
               </div>
 
-              <ScrollPanel style="height: 80%">
+              <ScrollPanel style="height: 90%">
                 <p class="p-3">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Integer in rutrum magna. Curabitur quis fermentum eros, id
@@ -219,10 +221,10 @@ onUpdated(() => {
       for (const el2 of comments) {
         var comId = el2.getAttribute("data-linkedcomment");
         if (el.getAttribute("data-linkedcomment") == comId) {
-          el2.setAttribute("style", "background-color:rgb(240, 220, 210);");
+          el2.setAttribute("style", "background-color:var(--surface-a);");
           comActiv.value = comId;
         } else {
-          el2.setAttribute("style", "background-color:#ceffd5;");
+          el2.setAttribute("style", "background-color:var(--surface-b);");
         }
       }
       retrieveComments(comActiv.value);
@@ -284,9 +286,5 @@ watch(
 .stick {
   position: sticky;
   top: 5rem;
-}
-.section {
-  position: relative;
-  top: -8rem;
 }
 </style>
