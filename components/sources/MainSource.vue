@@ -69,8 +69,6 @@ import { useGlobalStore } from "~/stores/global";
 const navStore = useNavStore();
 const store = useGlobalStore();
 
-const comActiv = ref();
-//const sourceIsSelected = ref(false);
 const props = defineProps(["sourceID"]);
 const source = ref();
 const oldID = ref();
@@ -92,19 +90,19 @@ onUpdated(() => {
     navStore.comVisibility=false;
     retrieveSourceData(navStore.selectedSourceID);
   }
-  
+
   oldID.value = navStore.selectedSourceID;
+
   const comments = document.getElementsByTagName("mark");
   for (const el of comments) {
     el.addEventListener("click", () => {
       for (const el2 of comments) {
         var comId = el2.getAttribute("data-linkedcomment");
         if (el.getAttribute("data-linkedcomment") == comId) {
-          comActiv.value = comId;
           navStore.comID = comId;
         } 
       }
-      retrieveComments(comActiv.value);
+      retrieveComments(navStore.comID);
     });
   }
   
