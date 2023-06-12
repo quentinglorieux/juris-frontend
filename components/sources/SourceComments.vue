@@ -7,10 +7,10 @@
 
         </ul>
 
-        <Button v-if="comSelected == com.id & navStore.comVisibility " @click="togleCommentPanel(com)">
+        <Button v-if="store.commentaires.id == com.id & navStore.comVisibility " @click="CloseCommentPanel(com)">
           Fermer
         </Button>
-        <Button v-else @click="togleCommentPanel(com)"> Lire </Button>
+        <Button v-else @click="retrieveComments(com)"> Lire </Button>
       </div>
     </li>
   </div>
@@ -20,19 +20,29 @@
 const props = defineProps(["source", "comSelected"]);
 const emit = defineEmits(["ComSelected"]);
 import { useNavStore } from "@/stores/navigation";
+import { useGlobalStore } from "~/stores/global";
 const navStore = useNavStore();
+const store = useGlobalStore();
 
-function togleCommentPanel(com) {
-  emit("ComSelected", com);
-  if (navStore.comID == com.id) {
-    navStore.comID = "";
-    navStore.comVisibility = false
-  } else {
-    navStore.comID = com.id;
-    navStore.comVisibility = true
-    // navStore.closeNav();
-  }
+function CloseCommentPanel(com){
+  navStore.comVisibility = false;
+  // navStore.comID ='';
+  store.commentaires={}
 }
+
+const { $directus } = useNuxtApp();
+async function retrieveComments(com) {
+  const id=com.id
+  const { data } = await useAsyncData(() => {
+    return $directus.items("commentaires").readOne(id);
+  });
+
+  store.commentaires=data.value;
+  navStore.comVisibility=true;
+  navStore.navVisibility=false;
+  navStore.comID = com.id;
+}
+
 </script>
 
 <style scoped>

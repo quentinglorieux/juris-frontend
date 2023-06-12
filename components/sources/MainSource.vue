@@ -4,9 +4,6 @@
       <h1>Sélectionnez une Source</h1>
     </div>
     <div v-if="source">
-      <!-- <div class="stick">
-        <SourceNavBar />
-      </div> -->
 
       <div >
         <Splitter
@@ -30,7 +27,6 @@
                   <SourceComments
                     :source="source"
                     :comSelected="comActiv"
-                    @ComSelected="openWindowForComment"
                   />
                 </TabPanel>
 
@@ -53,13 +49,13 @@
           <SplitterPanel :size="50" v-if="navStore.comVisibility">
             <div>
             
-              <h3> {{ commentData.titre }}</h3>
-              <div> {{ commentData.content }}</div>
+              <h3> {{ store.commentaires.titre }}</h3>
+              <div> {{ store.commentaires.content }}</div>
               Commentaire : 
-              {{ comActiv }}
+              {{ store.commentaires.id }}
 
             </div>
-            <Button @click="navStore.comVisibility = false"> Close </Button>
+            <Button @click="()=>{navStore.comVisibility = false; store.commentaires={}}"> Close </Button>
           </SplitterPanel>
         </Splitter>
       </div>
@@ -74,12 +70,12 @@ const navStore = useNavStore();
 const store = useGlobalStore();
 
 const comActiv = ref();
-const sourceIsSelected = ref(false);
+//const sourceIsSelected = ref(false);
 const props = defineProps(["sourceID"]);
 const source = ref();
 const oldID = ref();
 
-const emit = defineEmits(["comIsSelected"]);
+
 
 import edjsHTML from "editorjs-html";
 const edjsParser = edjsHTML();
@@ -93,31 +89,33 @@ onMounted(()=>{
 
 onUpdated(() => {
   if (navStore.selectedSourceID != oldID.value) {
+    navStore.comVisibility=false;
     retrieveSourceData(navStore.selectedSourceID);
   }
-  // console.log(store.sources[store.sources.findIndex(x => x.id === navStore.selectedSourceID )].type)
+  
   oldID.value = navStore.selectedSourceID;
-
   const comments = document.getElementsByTagName("mark");
   for (const el of comments) {
     el.addEventListener("click", () => {
       for (const el2 of comments) {
         var comId = el2.getAttribute("data-linkedcomment");
         if (el.getAttribute("data-linkedcomment") == comId) {
-          el2.setAttribute("style", "background-color:rgb(240, 220, 210);");
           comActiv.value = comId;
-        } else {
-          el2.setAttribute("style", "background-color:#ceffd5;");
-        }
+          navStore.comID = comId;
+        } 
       }
       retrieveComments(comActiv.value);
     });
   }
+  
+
+
 });
 
 // DataFetching of the selected Source(id)
 const { $directus } = useNuxtApp();
 async function retrieveSourceData(id) {
+
   source.value = await useAsyncData(() => {
     return $directus.items("sources").readOne(id, {
       fields: [
@@ -125,45 +123,35 @@ async function retrieveSourceData(id) {
       ],
     });
   });
+  
   store.sources[store.sources.findIndex((x) => x.id === id)] = source.value.data;
+
 }
 
-const commentData = ref();
+
 async function retrieveComments(id) {
   const { data } = await useAsyncData(() => {
     return $directus.items("commentaires").readOne(id);
   });
-  comActiv.value = id;
-  emit("comIsSelected", true);
-  openWindowForComment(data.value);
-  commentData.value = data.value
+
+  store.commentaires=data.value;
+  navStore.comVisibility=true;
+  navStore.navVisibility=false;
 }
 
-const openWindowForComment = (com) => {
-  if (com == comActiv.value) {
-    comActiv.value = "";
-    sourceIsSelected.value = false;
-    emit("comIsSelected", false);
-  } else {
-    comActiv.value = com.id;
-    sourceIsSelected.value = true;
-    emit("comIsSelected", true);
-    navStore.comVisibility = true;
-  }
-};
-
-watch(
-  () => source,
-  (first, second) => {
-    if (second.data) {
-      if (first.data.titre != second.data.titre) {
-        comActiv.value = "";
-        sourceIsSelected.value = false;
-        emit("comIsSelected", false);
+store.$subscribe((mutation, state) => {
+  const comments = document.getElementsByTagName("mark");
+  for (const el of comments) {
+    if (el.getAttribute("data-linkedcomment") == store.commentaires.id) {
+         el.setAttribute("style", "background-color:rgb(240, 220, 210);");
+        } else {
+         el.setAttribute("style", "background-color:#ceffd5;");
+        }
       }
-    }
-  }
-);
+})
+
+
+
 </script>
 
 <style scoped>

@@ -8,6 +8,7 @@
       <div class="text-xl font-semibold">SOURCES</div>
     </div>
     <DataTable
+
       :value="listItems"
       v-model:filters="filter1"
       filterDisplay="menu"
@@ -63,8 +64,9 @@ function toggleNav() {
 
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
-const listItems = computed(() => store.sources);
+const listItems = computed(() => store.sources)
 
+console.log(store.sources)
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   titre: {
