@@ -85,6 +85,7 @@ async function retrieveAuthors() {
   });
   store.authors = publicData.value.data;
 
+
   for (let author of store.authors) {
     // items.value[1].items[3].items.push({
     items.value[4].items.push({
