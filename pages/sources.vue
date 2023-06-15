@@ -1,12 +1,13 @@
 <template>
   <div class="flex">
-    <NavSource 
-     :visible="navStore.navVisibility"> 
+    <NavSource
+      v-if="store.sources"
+      :visible="navStore.navVisibility"
+      :listItems="store.sources"
+    >
     </NavSource>
-    <!-- <MainSource></MainSource> -->
-    <MainSource 
-      :sourceID="navStore.selectedSourceID"> 
-  </MainSource>
+
+    <MainSource :sourceID="navStore.selectedSourceID"> </MainSource>
   </div>
 </template>
 
@@ -16,6 +17,8 @@ import { useGlobalStore } from "~/stores/global";
 
 const navStore = useNavStore();
 const store = useGlobalStore();
+
+// var listItems= computed(() => store.sources);
 
 // DataFetching of Sources
 const { $directus } = useNuxtApp();
@@ -29,7 +32,7 @@ async function retrieveData() {
 }
 
 // retrieve initial source data (id and title only)
-onMounted(() => {
+onBeforeMount(() => {
   if (!store.sources[0]) {
     retrieveData();
   }

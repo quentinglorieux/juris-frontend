@@ -7,8 +7,9 @@
       <i class="pi pi-fw pi-file"></i>
       <div class="text-xl font-semibold">SOURCES</div>
     </div>
-    <DataTable
 
+    <DataTable
+    
       :value="listItems"
       v-model:filters="filter1"
       filterDisplay="menu"
@@ -54,7 +55,7 @@
 <script setup>
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 
-const props = defineProps(["visible"]);
+const props = defineProps(["visible",'listItems']);
 import { useNavStore } from "@/stores/navigation";
 const navStore = useNavStore();
 
@@ -64,9 +65,15 @@ function toggleNav() {
 
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
-const listItems = computed(() => store.sources)
 
-console.log(store.sources)
+
+
+
+
+
+
+
+
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   titre: {

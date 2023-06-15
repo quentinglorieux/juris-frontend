@@ -4,6 +4,7 @@
       <i class="pi pi-fw pi-tags"></i>
       <div class="pl-2 text-xl font-semibold">MOTS CLÉS</div>
     </div>
+    
     <DataTable
       :value="listItems"
       v-model:filters="filter1"
@@ -52,6 +53,8 @@
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 const listItems = computed(() => store.keywords);
 
 const filter1 = ref({
@@ -74,9 +77,11 @@ const initFilters1 = () => {
   };
 };
 
-const emit = defineEmits(["kwSelected"]);
-const onRowSelect = (row) => {
-  emit("kwSelected", row);
+const onRowSelect = (node) => {
+  
+  
+  navStore.selectedKeywordID = node.data.id;
+  
 };
 </script>
 

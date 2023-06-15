@@ -26,7 +26,7 @@
                   <div class="section" id="comments"></div>
                   <SourceComments
                     :source="source"
-                    :comSelected="comActiv"
+                    :comSelected="store.commentaires"
                   />
                 </TabPanel>
 
@@ -117,7 +117,7 @@ async function retrieveSourceData(id) {
   source.value = await useAsyncData(() => {
     return $directus.items("sources").readOne(id, {
       fields: [
-        "id,titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre,theme_id.id",
+        "id,titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,commentaires.keywords_id.keywords_id.id,theme_id.titre,theme_id.id",
       ],
     });
   });
