@@ -26,7 +26,7 @@
                   <div class="section" id="comments"></div>
                   <SourceComments
                     :source="source"
-                    :comSelected="comActiv"
+                    :comSelected="store.commentaires"
                   />
                 </TabPanel>
 
@@ -69,8 +69,6 @@ import { useGlobalStore } from "~/stores/global";
 const navStore = useNavStore();
 const store = useGlobalStore();
 
-const comActiv = ref();
-//const sourceIsSelected = ref(false);
 const props = defineProps(["sourceID"]);
 const source = ref();
 const oldID = ref();
@@ -92,19 +90,19 @@ onUpdated(() => {
     navStore.comVisibility=false;
     retrieveSourceData(navStore.selectedSourceID);
   }
-  
+
   oldID.value = navStore.selectedSourceID;
+
   const comments = document.getElementsByTagName("mark");
   for (const el of comments) {
     el.addEventListener("click", () => {
       for (const el2 of comments) {
         var comId = el2.getAttribute("data-linkedcomment");
         if (el.getAttribute("data-linkedcomment") == comId) {
-          comActiv.value = comId;
           navStore.comID = comId;
         } 
       }
-      retrieveComments(comActiv.value);
+      retrieveComments(navStore.comID);
     });
   }
   
@@ -119,7 +117,7 @@ async function retrieveSourceData(id) {
   source.value = await useAsyncData(() => {
     return $directus.items("sources").readOne(id, {
       fields: [
-        "id,titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,theme_id.titre,theme_id.id",
+        "id,titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,commentaires.keywords_id.keywords_id.id,theme_id.titre,theme_id.id",
       ],
     });
   });

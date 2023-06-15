@@ -5,12 +5,12 @@
       <span>JURIS project</span>
     </router-link>
 
-    <button
+    <!-- <button
       class="p-link layout-menu-button layout-topbar-button"
       @click="onMenuToggle()"
     >
       <i class="pi pi-bars"></i>
-    </button>
+    </button> -->
 
     <!-- <button
       class="p-link layout-topbar-menu-button layout-topbar-button"
@@ -24,7 +24,6 @@
       :class="topbarMenuClasses"
       :model="items"
     />
-
 
     <div class="layout-topbar-menu" :class="topbarMenuClasses">
       <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
@@ -65,12 +64,11 @@ const items = ref([
   { label: "Accueil", icon: "pi pi-fw pi-home", to: "/" },
   { label: "Sources", icon: "pi pi-fw pi-th-large", to: "/sources" },
   { label: "Mots Clés", icon: "pi pi-fw pi-tags", to: "/keywords" },
-//   { label: "Thèmes", icon: "pi pi-fw pi-list", to: "/themes" },
+  //   { label: "Thèmes", icon: "pi pi-fw pi-list", to: "/themes" },
   { label: "Thèmes", icon: "pi pi-fw pi-list", items: [] },
   { label: "Auteurs", icon: "pi pi-fw pi-users", items: [] }, // change the item.value[5] if remove Alt
   { label: "Map", icon: "pi pi-fw pi-share-alt", to: "/map" },
 ]);
-
 
 async function retrieveAuthors() {
   const { data: publicData } = await useAsyncData(() => {
@@ -83,8 +81,8 @@ async function retrieveAuthors() {
       },
     });
   });
-  store.authors = publicData.value.data;
 
+  store.authors = publicData.value.data;
 
   for (let author of store.authors) {
     // items.value[1].items[3].items.push({
@@ -102,6 +100,7 @@ async function retrieveThemes() {
       fields: ["id,titre"],
     });
   });
+
   store.themes = publicData.value.data;
 
   for (let theme of store.themes) {
@@ -109,10 +108,10 @@ async function retrieveThemes() {
     items.value[3].items.push({
       label: theme.titre,
       icon: "pi pi-fw pi-book",
-      to: "/themes" ,
+      to: "/themes",
       command: () => {
-        navStore.selectedThemeID = theme.id
-                }
+        navStore.selectedThemeID = theme.id;
+      },
     });
   }
 }
@@ -232,9 +231,9 @@ const isOutsideClicked = (event) => {
       display: none;
     }
   }
-.p-submenu-list{
+  .p-submenu-list {
     background-color: red;
-}
+  }
   .layout-menu-button {
     margin-left: 2rem;
   }
@@ -284,8 +283,8 @@ const isOutsideClicked = (event) => {
       position: absolute;
       flex-direction: column;
       background-color: var(--surface-overlay);
-      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02),
-        0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05),
+        0px 1px 4px rgba(0, 0, 0, 0.08);
       border-radius: 12px;
       padding: 1rem;
       right: 2rem;
