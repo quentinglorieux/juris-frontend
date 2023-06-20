@@ -1,12 +1,15 @@
 <template>
+  <div v-if="visible" class="nav-source pl-2" >
+    <div class="flex items-center  py-2" style="justify-content:space-between; width:100%">
 
-  <div v-if="visibility" class="nav-source pl-2" style="width: 350px">
-    <div class="flex justify-center items-center py-2">
-      <button class="layout-topbar-button" @click="togleVisibility()">
-        <i class="pi pi-times"></i>
+      
+      <div class="text-xl font-semibold"><i class="pi pi-fw pi-file"></i> SOURCES</div>
+
+      <div>
+            <button class="layout-topbar-button" @click="toggleNav()">
+        <i class="pi pi pi-angle-double-left"></i>
       </button>
-      <i class="pi pi-fw pi-file"></i>
-      <div class="text-xl font-semibold">THEMES</div>
+      </div>
     </div>
     <DataTable
       :value="listItems"
@@ -24,7 +27,7 @@
       @rowSelect="onRowSelect"
     >
       <template #header>
-        <div class="flex" style="justify-content:space-between">
+        <div class="flex justify-content-between">
           <Button
             type="button"
             icon="pi pi-filter-slash"
@@ -34,49 +37,39 @@
           />
           <span class="p-input-icon-left">
             <i class="pi pi-search" />
-            <InputText v-model="filter1['global'].value" placeholder="Theme Search" />
+            <InputText
+              v-model="filter1['global'].value"
+              placeholder="Source Search"
+            />
           </span>
         </div>
       </template>
       <Column field="titre" header="Titre" :sortable="true"></Column>
-      <Column field="meta" header="Meta" :sortable="true"></Column>
     </DataTable>
   </div>
-  <div v-if="!visibility" class="">
-    <button class="layout-topbar-button" @click="togleVisibility()">
-      <i class="pi pi-bars"></i>
+  <div v-if="!visible" class="">
+    <button class="layout-topbar-button" @click="toggleNav()">
+      <i class="pi pi pi-angle-double-right"></i>
     </button>
   </div>
 </template>
 
-
-
 <script setup>
-import { useGlobalStore } from "~/stores/global";
-const store = useGlobalStore();
-const listItems = computed(() => store.themes);
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 
+const props = defineProps(["visible",'listItems']);
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 
-const visibility=ref(true);
-function togleVisibility(){
-  visibility.value=!visibility.value
+function toggleNav() {
+  navStore.toggleNav();
 }
 
-// const config = useRuntimeConfig();
-// const directus = new Directus(config.public.API_BASE_URL);
-
-// const listItems = ref([]);
-// async function retrieveSources() {
-//   const publicData = await directus.items("themes").readByQuery({
-//     fields: [
-//       "titre,introduction, sources.id,sources.titre",
-//     ],
-//   });
-//   var L = publicData.data;
-//   listItems.value = L;
-// }
-// retrieveSources();
+function toggleNav() {
+  navStore.toggleNav();
+}
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
 
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -98,18 +91,20 @@ const initFilters1 = () => {
   };
 };
 const sourceIsSelected = ref(false);
-const emit = defineEmits(["themeSelected", "closeNavSource"]);
+// const emit = defineEmits(["sourceSelected", "closeNavSource"]);
+// const onRowSelect = (node) => {
+// emit("sourceSelected", node);
+// sourceIsSelected.value = !sourceIsSelected.value;
+// console.log(listItems.value[node.index].titre);
+// }
 const onRowSelect = (node) => {
-  emit("themeSelected", node);
-  // console.log(node)
   sourceIsSelected.value = !sourceIsSelected.value;
+  navStore.selectedSourceID = node.data.id;
 };
-
-
-
 </script>
 
 <style lang="scss" scoped>
+
 Button {
   /* background-color: #0288d1; */
   font-size: 0.85rem;
