@@ -39,6 +39,37 @@ a {
 }
 
 
+.home-titre{
+  display: flex;
+  justify-content: center;
+  color: var(--surface-ground);
+  background-color: var(--text-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 3em;
+}
+
+.home-chapeau{
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 70%;
+  padding: 1em;
+}
+
+.p-dataview{
+  max-width: 80%;
+  margin: auto;
+}
+
+.p-grid{
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+}
 
 
 .titre-page {
@@ -205,4 +236,27 @@ a {
 /* selected */
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   background-color: var(--surface-ground);
+}
+
+.p-tabview-nav{
+  display: flex;
+  white-space:nowrap;
+
+}
+
+.p-tabview-header
+{
+  max-width: 400px;
+  text-overflow: ellipsis;
+  
+}
+
+.p-tabview-header-p-highlight a{
+  max-width: 400px;
+  text-overflow: ellipsis;
+
+}
+
+.p-tabview-header-p-highlight a:hover{
+  overflow: visible;
 }

@@ -1,12 +1,12 @@
 .layout-topbar {
-    position: fixed;
+//    position: fixed;
     height: 5rem;
-    z-index: 997;
-    left: 0;
-    top: 0;
+  z-index: 997;
+ //   left: 0;
+ //   top: 0;
     width: 100%;
     padding: 0 2rem;
-    background-color: var(--surface-card);
+   // background-color: var(--surface-card);
     transition: left $transitionDuration;
     display: flex;
     align-items: center;
@@ -149,5 +149,9 @@
     }
 }
 
+.p-menubar{
+    border: none;
+    color: var(--text-color);
+}
 
 

@@ -21,8 +21,10 @@ import ScrollPanel from 'primevue/scrollpanel';
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import ScrollTop from 'primevue/scrolltop';
-
 import Fieldset from 'primevue/fieldset';
+import DataView from 'primevue/dataview';
+import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions' 
+
 
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -39,7 +41,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('Column', Column);
     nuxtApp.vueApp.component('InputText', InputText);
     nuxtApp.vueApp.component('Dropdown', Dropdown);
-
     nuxtApp.vueApp.component('Splitter', Splitter);
     nuxtApp.vueApp.component('SplitterPanel', SplitterPanel);
     nuxtApp.vueApp.component('Menu', Menu);
@@ -49,5 +50,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('TabPanel', TabPanel);
     nuxtApp.vueApp.component('ScrollTop', ScrollTop);
     nuxtApp.vueApp.component('Fieldset', Fieldset);
+    nuxtApp.vueApp.component('DataView', DataView);
+    nuxtApp.vueApp.component('DataViewLayoutOptions', DataViewLayoutOptions);
 });
 
