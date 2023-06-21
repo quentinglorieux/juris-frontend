@@ -1,26 +1,43 @@
 <template>
-  <div class="flex flex-column bg-slate-200 p-3 w-full">
+  <div class="flex flex-column p-3 w-full">
     <div v-if="!theme">
       <h1>Sélectionnez un Theme</h1>
     </div>
     <div v-if="theme">
-      <h1>Titre : {{ theme.data.titre }}</h1>
-
-      <div v-html="theme.data.introduction"></div>
-
-      <div class="section" id="keywords"></div>
-      <h2>Sources</h2>
-      <ul>
-        <li v-for="source in theme.data.sources">
-          <NuxtLink
-            class="hover:bg-sky-200"
-            :to="{ name: 'sources' }"
-            @click="updateRoute(source.id)"
-          >
-            {{ source.titre }}</NuxtLink
-          >
-        </li>
-      </ul>
+      <div class="titre-page">
+        <h1>Thème : {{ theme.data.titre }}</h1>
+      </div>
+      <Splitter style="height: 55vh" layout="vertical">
+              <div class="titre-page">
+        <h1>Thème : {{ theme.data.titre }}</h1>
+      </div>
+        <SplitterPanel style="height:40vh">
+          <ScrollPanel  style="height:100%">
+          <div v-html="theme.data.introduction"></div>
+          </ScrollPanel>
+        </SplitterPanel>
+        <SplitterPanel>
+          <div class="theme-content">
+          <div style="width:50%;">
+            <h2>Mots Clefs</h2>
+          </div>
+          <div style="width:50%">
+          <h2>Sources</h2>
+          <ul>
+            <li v-for="source in theme.data.sources">
+              <NuxtLink
+                class="hover:bg-sky-200"
+                :to="{ name: 'sources' }"
+                @click="updateRoute(source.id)"
+              >
+                {{ source.titre }}</NuxtLink
+              >
+            </li>
+          </ul>
+          </div>
+          </div>
+        </SplitterPanel>
+      </Splitter>
     </div>
   </div>
 </template>
@@ -45,9 +62,9 @@ async function retrieveThemeData(id) {
   });
 }
 
-if (navStore.selectedThemeID){
-retrieveThemeData(navStore.selectedThemeID);
-oldID.value = navStore.selectedThemeID;
+if (navStore.selectedThemeID) {
+  retrieveThemeData(navStore.selectedThemeID);
+  oldID.value = navStore.selectedThemeID;
 }
 
 onUpdated(() => {
@@ -76,23 +93,4 @@ onUpdated(() => {
     });
   }
 });
-
-
 </script>
-
-<style scoped>
-p {
-  font-size: 18px;
-}
-.layout-comment-sidebar {
-  min-width: 50%;
-}
-.stick {
-  position: sticky;
-  top: 5rem;
-}
-.section {
-  position: relative;
-  top: -8rem;
-}
-</style>

@@ -1,15 +1,17 @@
 <template>
   <div class="flex">
-    <NavKeywords />
+    <NavKeywords
+      v-if="store.sources"
+      :visible="navStore.navVisibility"
+      :listItems="store.sources"
+    >
+    </NavKeywords>
     <MainKeywords  :sourceID="navStore.selectedKeywordID" />
-    <!-- <MainKeywords class="" :kw="navStore.selectedKeywordID" />  -->
-    
+    <!-- <MainKeywords class="" :kw="navStore.selectedKeywordID" />  --> 
   </div>
 </template>
 
 <script setup>
-
-
 // DataFetching of Keywords
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();

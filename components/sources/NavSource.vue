@@ -1,14 +1,11 @@
 <template>
-  <div v-if="visible" class="nav-source pl-2" >
-    <div class="flex items-center  py-2" style="justify-content:space-between; width:100%">
-
-      
-      <div class="text-xl font-semibold"><i class="pi pi-fw pi-file"></i> SOURCES</div>
-
+  <div v-if="visible" class="nav-component">
+    <div class="nav-title">
+      <div><i class="pi pi-fw pi-th-large"></i> SOURCES</div>
       <div>
-            <button class="layout-topbar-button" @click="toggleNav()">
-        <i class="pi pi pi-angle-double-left"></i>
-      </button>
+        <button class="layout-topbar-button" @click="toggleNav()">
+          <i class="pi pi pi-angle-double-left"></i>
+        </button>
       </div>
     </div>
     <DataTable
@@ -31,7 +28,7 @@
           <Button
             type="button"
             icon="pi pi-filter-slash"
-            label="Clear"
+            label="Effacer"
             class="p-button-outlined"
             @click="clearFilter1()"
           />
@@ -39,7 +36,7 @@
             <i class="pi pi-search" />
             <InputText
               v-model="filter1['global'].value"
-              placeholder="Source Search"
+              placeholder="Recherche"
             />
           </span>
         </div>
@@ -56,19 +53,15 @@
 
 <script setup>
 import { FilterMatchMode, FilterOperator } from "primevue/api";
-
 const props = defineProps(["visible"]);
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
 import { useNavStore } from "@/stores/navigation";
 const navStore = useNavStore();
-
+const listItems = computed(() => store.sources);
 function toggleNav() {
   navStore.toggleNav();
 }
-
-import { useGlobalStore } from "~/stores/global";
-const store = useGlobalStore();
-const listItems = computed(() => store.sources);
-
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   titre: {
@@ -101,57 +94,3 @@ const onRowSelect = (node) => {
 };
 </script>
 
-<style lang="scss" scoped>
-
-Button {
-  /* background-color: #0288d1; */
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.25rem 0.4rem;
-  border-radius: 3px;
-}
-.nav-source {
-  height: calc(100vh - 5rem);
-  // min-width: 350px;
-  // width: 350px;
-}
-.p-button {
-  margin-right: 0.5rem;
-}
-
-.layout-topbar-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  color: var(--text-color-secondary);
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    color: var(--text-color);
-    background-color: var(--surface-hover);
-  }
-
-  i {
-    font-size: 1.5rem;
-  }
-
-  span {
-    font-size: 1rem;
-    display: none;
-  }
-}
-
-.slayout-navbar {
-  transform: translateX(-100%);
-  transition-duration: 200ms;
-}
-.slayin-navbar {
-  transform: translateX(0%);
-  transition-duration: 500ms;
-}
-</style>

@@ -1,12 +1,12 @@
 <template>
-
-  <div v-if="visibility" class="nav-source pl-2" style="width: 350px">
-    <div class="flex justify-center items-center py-2">
-      <button class="layout-topbar-button" @click="togleVisibility()">
-        <i class="pi pi-times"></i>
-      </button>
-      <i class="pi pi-fw pi-file"></i>
-      <div class="text-xl font-semibold">THEMES</div>
+<div v-if="visible" class="nav-component">
+    <div class="nav-title">
+      <div><i class="pi pi-fw pi-list"></i> THEMES</div>
+      <div>
+        <button class="layout-topbar-button" @click="toggleNav()">
+          <i class="pi pi pi-angle-double-left"></i>
+        </button>
+      </div>
     </div>
     <DataTable
       :value="listItems"
@@ -42,9 +42,9 @@
       <Column field="meta" header="Meta" :sortable="true"></Column>
     </DataTable>
   </div>
-  <div v-if="!visibility" class="">
-    <button class="layout-topbar-button" @click="togleVisibility()">
-      <i class="pi pi-bars"></i>
+  <div v-if="!visible" class="">
+    <button class="layout-topbar-button" @click="toggleNav()">
+      <i class="pi pi pi-angle-double-right"></i>
     </button>
   </div>
 </template>
@@ -52,31 +52,16 @@
 
 
 <script setup>
+import { FilterMatchMode, FilterOperator } from "primevue/api";
+const props = defineProps(["visible"]);
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 const listItems = computed(() => store.themes);
-import { FilterMatchMode, FilterOperator } from "primevue/api";
-
-
-const visibility=ref(true);
-function togleVisibility(){
-  visibility.value=!visibility.value
+function toggleNav() {
+  navStore.toggleNav();
 }
-
-// const config = useRuntimeConfig();
-// const directus = new Directus(config.public.API_BASE_URL);
-
-// const listItems = ref([]);
-// async function retrieveSources() {
-//   const publicData = await directus.items("themes").readByQuery({
-//     fields: [
-//       "titre,introduction, sources.id,sources.titre",
-//     ],
-//   });
-//   var L = publicData.data;
-//   listItems.value = L;
-// }
-// retrieveSources();
 
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -97,7 +82,12 @@ const initFilters1 = () => {
     },
   };
 };
-const sourceIsSelected = ref(false);
+const onRowSelect = (node) => {
+  navStore.selectedThemeID = node.data.id;
+};
+
+
+/*const sourceIsSelected = ref(false);
 const emit = defineEmits(["themeSelected", "closeNavSource"]);
 const onRowSelect = (node) => {
   emit("themeSelected", node);
@@ -106,59 +96,30 @@ const onRowSelect = (node) => {
 };
 
 
+/*import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+const listItems = computed(() => store.themes);
+import { FilterMatchMode, FilterOperator } from "primevue/api";
+
+
+const visibility=ref(true);
+function togleVisibility(){
+  visibility.value=!visibility.value
+}*/
+
+// const config = useRuntimeConfig();
+// const directus = new Directus(config.public.API_BASE_URL);
+
+// const listItems = ref([]);
+// async function retrieveSources() {
+//   const publicData = await directus.items("themes").readByQuery({
+//     fields: [
+//       "titre,introduction, sources.id,sources.titre",
+//     ],
+//   });
+//   var L = publicData.data;
+//   listItems.value = L;
+// }
+// retrieveSources();
 
 </script>
-
-<style lang="scss" scoped>
-Button {
-  /* background-color: #0288d1; */
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.25rem 0.4rem;
-  border-radius: 3px;
-}
-.nav-source {
-  height: calc(100vh - 5rem);
-  // min-width: 350px;
-  // width: 350px;
-}
-.p-button {
-  margin-right: 0.5rem;
-}
-
-.layout-topbar-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  color: var(--text-color-secondary);
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    color: var(--text-color);
-    background-color: var(--surface-hover);
-  }
-
-  i {
-    font-size: 1.5rem;
-  }
-
-  span {
-    font-size: 1rem;
-    display: none;
-  }
-}
-
-.slayout-navbar {
-  transform: translateX(-100%);
-  transition-duration: 200ms;
-}
-.slayin-navbar {
-  transform: translateX(0%);
-  transition-duration: 500ms;
-}
-</style>

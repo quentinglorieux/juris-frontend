@@ -39,12 +39,3 @@ onBeforeMount(() => {
 });
 </script>
 
-<style scoped lang="scss">
-.slayout-navbar {
-  transform: translateX(-100px);
-}
-.slayin-navbar {
-  transform: translateX(0%);
-  transition-duration: 200ms;
-}
-</style>

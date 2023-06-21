@@ -76,10 +76,11 @@
                   </template>
                   <ScrollPanel
                     style="margin: -1rem; height: 100%; background-color: white"
-                  >
-                    <p class="p-3">
-                      {{ store.commentaires.content }}
-                    </p>
+                  >          
+                    <div class="p-3">
+                      <div v-html="store.commentaires.content"></div>
+                     
+                    </div>
                     <ScrollTop
                       target="parent"
                       :threshold="100"

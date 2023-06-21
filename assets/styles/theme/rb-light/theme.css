@@ -2,7 +2,7 @@
   --surface-a:#ba9baa;
   --surface-b:#dadddf;
   --surface-c:#d7bbc8;
-  --surface-d:#dee2e6;
+  --surface-d:#10263d;
   --surface-e:#ffffff;
   --surface-f:#ffffff;
   --text-color:rgb(5, 23, 42);
@@ -1538,8 +1538,8 @@ p-password.p-password-clearable.p-password-mask .p-password-clear-icon {
   background: var(--primary-color);
 }
 .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
-  border-color: #3d8c40;
-  background: #3d8c40;
+  border-color: #var(--surface-d);
+  background: #var(--surface-d);
   color: #ffffff;
 }
 
@@ -1557,7 +1557,7 @@ p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
   background: var(--primary-color);
 }
 .p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
-  background: #3d8c40;
+  background: #var(--surface-d);
 }
 
 .p-radiobutton-label {
@@ -1620,8 +1620,8 @@ p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
   color: #ffffff;
 }
 .p-selectbutton .p-button.p-highlight:hover {
-  background: #449e48;
-  border-color: #449e48;
+  background: #var(--surface-d);
+  border-color: #var(--surface-d);
   color: #ffffff;
 }
 .p-selectbutton .p-button.p-highlight:hover .p-button-icon-left,
@@ -1714,8 +1714,8 @@ p-selectbutton.ng-dirty.ng-invalid > .p-selectbutton > .p-button {
   color: #ffffff;
 }
 .p-togglebutton.p-button.p-highlight:hover {
-  background: #449e48;
-  border-color: #449e48;
+  background: #var(--surface-d);
+  border-color: #var(--surface-d);
   color: #ffffff;
 }
 .p-togglebutton.p-button.p-highlight:hover .p-button-icon-left,
@@ -1860,14 +1860,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-radius: 3px;
 }
 .p-button:enabled:hover {
-  background: #449e48;
+  background: #var(--surface-d);
   color: #ffffff;
-  border-color: #449e48;
+  border-color: #var(--surface-d);
 }
 .p-button:enabled:active {
-  background: #3d8c40;
+  background: #var(--surface-d);
   color: #ffffff;
-  border-color: #3d8c40;
+  border-color: #var(--surface-d);
 }
 .p-button.p-button-outlined {
   background-color: transparent;
@@ -2294,13 +2294,13 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-button.p-button-link {
-  color: #3d8c40;
+  color: #var(--surface-d);
   background: transparent;
   border: transparent;
 }
 .p-button.p-button-link:enabled:hover {
   background: transparent;
-  color: #3d8c40;
+  color: #var(--surface-d);
   border-color: transparent;
 }
 .p-button.p-button-link:enabled:hover .p-button-label {
@@ -2313,7 +2313,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-button.p-button-link:enabled:active {
   background: transparent;
-  color: #3d8c40;
+  color: #var(--surface-d);
   border-color: transparent;
 }
 
@@ -3083,8 +3083,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-right: 1px solid #dee2e6;
 }
 .fc.fc-unthemed .fc-view-container .fc-event {
-  background: #449e48;
-  border: 1px solid #449e48;
+  background: #var(--surface-d);
+  border: 1px solid #var(--surface-d);
   color: #ffffff;
 }
 .fc.fc-unthemed .fc-view-container .fc-divider {
@@ -3102,14 +3102,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   align-items: center;
 }
 .fc.fc-unthemed .fc-toolbar .fc-button:enabled:hover {
-  background: #449e48;
+  background: #var(--surface-d);
   color: #ffffff;
-  border-color: #449e48;
+  border-color: #var(--surface-d);
 }
 .fc.fc-unthemed .fc-toolbar .fc-button:enabled:active {
-  background: #3d8c40;
+  background: #var(--surface-d);
   color: #ffffff;
-  border-color: #3d8c40;
+  border-color: #var(--surface-d);
 }
 .fc.fc-unthemed .fc-toolbar .fc-button:enabled:active:focus {
   outline: 0 none;
@@ -3154,8 +3154,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #ffffff;
 }
 .fc.fc-unthemed .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover, .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active:hover, .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active:hover {
-  background: #449e48;
-  border-color: #449e48;
+  background: #var(--surface-d);
+  border-color: #var(--surface-d);
   color: #ffffff;
 }
 .fc.fc-unthemed .fc-toolbar .fc-button.fc-dayGridMonth-button:focus, .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridWeek-button:focus, .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridDay-button:focus {
@@ -3238,15 +3238,15 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-block-event {
   color: #ffffff;
-  background: #449e48;
-  border-color: #449e48;
+  background: #var(--surface-d);
+  border-color: #var(--surface-d);
 }
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-block-event .fc-event-main {
   color: #ffffff;
 }
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-dot-event .fc-daygrid-event-dot {
-  background: #449e48;
-  border-color: #449e48;
+  background: #var(--surface-d);
+  border-color: #var(--surface-d);
 }
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-dot-event:hover {
   background: #e9ecef;
@@ -3264,14 +3264,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-radius: 3px;
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button:enabled:hover {
-  background: #449e48;
+  background: #var(--surface-d);
   color: #ffffff;
-  border-color: #449e48;
+  border-color: #var(--surface-d);
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button:enabled:active {
-  background: #3d8c40;
+  background: #var(--surface-d);
   color: #ffffff;
-  border-color: #3d8c40;
+  border-color: #var(--surface-d);
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button:enabled:active:focus {
   outline: 0 none;
@@ -3322,8 +3322,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #ffffff;
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover, .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active:hover, .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active:hover {
-  background: #449e48;
-  border-color: #449e48;
+  background: #var(--surface-d);
+  border-color: #var(--surface-d);
   color: #ffffff;
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button:not(:disabled):focus, .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button:not(:disabled):focus, .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button:not(:disabled):focus {
@@ -4464,7 +4464,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   right: -1rem;
 }
 .p-overlaypanel .p-overlaypanel-close:enabled:hover {
-  background: #449e48;
+  background: #var(--surface-d);
   color: #ffffff;
 }
 .p-overlaypanel:after {
@@ -4578,14 +4578,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-fileupload-choose:not(.p-disabled):hover {
-  background: #449e48;
+  background: #var(--surface-d);
   color: #ffffff;
-  border-color: #449e48;
+  border-color: #var(--surface-d);
 }
 .p-fileupload-choose:not(.p-disabled):active {
-  background: #3d8c40;
+  background: #var(--surface-d);
   color: #ffffff;
-  border-color: #3d8c40;
+  border-color: #var(--surface-d);
 }
 
 .p-breadcrumb {
