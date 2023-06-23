@@ -1,13 +1,12 @@
 <template>
   <div class="flex flex-column bg-slate-200 p-3 w-full">
-  <!-- {{ navStore.selectedKeywordID }} -->
+    <!-- {{ navStore.selectedKeywordID }} -->
     <div v-if="!kw">
       <h1>Sélectionnez un Mot-clé</h1>
     </div>
     <div v-else class="ml-2">
       <h1>{{ kw.titre }}</h1>
-    
-      
+
       <li v-for="com in kw.commentaires">
         <div>
           <ul class="mr-3">
@@ -23,7 +22,9 @@
                 </NuxtLink></span
               ></span
             >
-            <Button class="mt-1 mx-1" @click="onCommentButtonClick(com)"> Lire </Button>
+            <Button class="mt-1 mx-1" @click="retrieveComments(com.commentaires_id.id)">
+              Lire
+            </Button>
           </ul>
         </div>
       </li>
@@ -31,15 +32,17 @@
   </div>
 
   <Sidebar
+  @click="visible=false"
     v-model:visible="visible"
     position="right"
     :transitionOptions="'.3s cubic-bezier(0, 0, 0.2, 1)'"
     class="layout-comment-sidebar bg-gray-100 min-w-fit"
   >
-    <h3>{{ selectedCom.titre }}</h3>
-    {{ selectedCom.id }}
-    {{ selectedCom.id }}
-    {{ selectedCom.content }}
+  <h5>Mot-clé : {{ kw.titre }}</h5>
+    <h3>{{ store.commentaires.titre }}</h3>
+    
+
+    {{ store.commentaires.content }}
   </Sidebar>
 </template>
 
@@ -49,24 +52,28 @@ import { useGlobalStore } from "~/stores/global";
 const navStore = useNavStore();
 const store = useGlobalStore();
 const props = defineProps(["sourceID"]);
-const selectedCom = ref("");
+
 const visible = ref(false);
-const onCommentButtonClick = (com) => {
-  visible.value = !visible.value;
-  selectedCom.value = com.commentaires_id;
-};
+const { $directus } = useNuxtApp();
+async function retrieveComments(id) {
+  const { data } = await useAsyncData(() => {
+    return $directus.items("commentaires").readOne(id);
+  });
+  store.commentaires = data.value;
+  visible.value = true;
+}
+
 const kw = ref(false);
 onUpdated(() => {
-    kw.value = store.keywords.find((element) => element.id == navStore.selectedKeywordID);
-});
-onMounted(()=>{
-  try {
   kw.value = store.keywords.find((element) => element.id == navStore.selectedKeywordID);
+});
+onMounted(() => {
+  try {
+    kw.value = store.keywords.find((element) => element.id == navStore.selectedKeywordID);
+  } catch (error) {
+    console.log(error);
   }
-  catch(error){
-    console.log(error)
-  }
-})
+});
 </script>
 
 <style scoped>
