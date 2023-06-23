@@ -7,19 +7,16 @@
 
 <script setup>
 const items = ref([
-    {
-        label: 'Source',
-        to:{hash: '#main-source'},
-       
+        {
+        label: 'Commentaires',
+        to:{hash: '#keywords'}
     },
+
     {
         label: 'Mots clés',
         to:{hash: '#keywords'}
     },
-    {
-        label: 'Commentaires',
-        to:{hash: '#comments'}
-    },
+
     {
         label: 'Themes',
         to:{hash: '#themes'}

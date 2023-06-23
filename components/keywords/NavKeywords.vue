@@ -1,8 +1,12 @@
 <template>
-  <div class="nav-source pl-2">
-    <div class="flex justify-center items-center py-2">
-      <i class="pi pi-fw pi-tags"></i>
-      <div class="pl-2 text-xl font-semibold">MOTS CLÉS</div>
+  <div v-if="visible" class="nav-component">
+    <div class="nav-title">
+      <div><i class="pi pi-fw pi-tags"></i> MOTS CLÉS</div>
+      <div>
+        <button class="layout-topbar-button" @click="toggleNav()">
+          <i class="pi pi pi-angle-double-left"></i>
+        </button>
+      </div>
     </div>
     
     <DataTable
@@ -18,7 +22,7 @@
       scrollHeight="flex"
       :resizableColumns="true"
       columnResizeMode="expand"
-      @rowSelect="onRowSelect" 
+      @rowSelect="onRowSelect"
     >
       <template #header>
         <div class="flex justify-content-between">
@@ -38,25 +42,33 @@
           </span>
         </div>
       </template>
-
       <Column field="titre" header="Mots-clés" :sortable="true"></Column>
       <Column
+        style="text-align: right"
         field="commentaires.length"
-        header="# Commentaires"
+        header="Nombre"
         :sortable="true"
       ></Column>
     </DataTable>
+  </div>
+  <div v-if="!visible" class="">
+    <button class="layout-topbar-button" @click="toggleNav()">
+      <i class="pi pi pi-angle-double-right"></i>
+    </button>
   </div>
 </template>
 
 <script setup>
 import { FilterMatchMode, FilterOperator } from "primevue/api";
+const props = defineProps(["visible"]);
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
 import { useNavStore } from "@/stores/navigation";
 const navStore = useNavStore();
 const listItems = computed(() => store.keywords);
-
+function toggleNav() {
+  navStore.toggleNav();
+}
 const filter1 = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   titre: {
@@ -76,29 +88,7 @@ const initFilters1 = () => {
     },
   };
 };
-
 const onRowSelect = (node) => {
-  
-  
   navStore.selectedKeywordID = node.data.id;
-  
 };
 </script>
-
-<style scoped>
-Button {
-  background-color: #0288d1;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.25rem 0.4rem;
-  border-radius: 3px;
-}
-.nav-source {
-  height: calc(100vh - 5rem);
-  min-width: 350px;
-  width: 350px;
-}
-.p-button {
-  margin-right: 0.5rem;
-}
-</style>

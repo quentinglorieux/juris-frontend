@@ -1,32 +1,51 @@
 <template>
-  <div class="flex flex-column bg-slate-200 p-3 w-full">
-  <!-- {{ navStore.selectedKeywordID }} -->
+  <div class="flex flex-column p-1 w-full">
+    <!-- {{ navStore.selectedKeywordID }} -->
     <div v-if="!kw">
       <h1>Sélectionnez un Mot-clé</h1>
     </div>
-    <div v-else class="ml-2">
-      <h1>{{ kw.titre }}</h1>
-    
-      
-      <li v-for="com in kw.commentaires">
-        <div>
-          <ul class="mr-3">
-            {{
+    <div v-else>
+      <div class="titre-page">
+      <h1>{{kw.titre}}</h1>
+      </div>
+          
+      <div class="flex flex-column p-1 w-full" style="text-align:left;">
+        <table ><!--à modifier en DataTable afin d'avoir le trie-->
+          <tr>
+            <th style="width:20%"> Source</th>
+            <th style="width:50%">Titre du commentaire</th>
+            <th style="width:20%">Auteur</th>
+            <th style="width:10%">   </th>
+          </tr>
+          <tr v-for="com in kw.commentaires">
+            <td> {{
+              com.commentaires_id.source
+            }} </td>
+            <td> {{
               com.commentaires_id.titre
-            }}
-            <span v-if="com.commentaires_id.auteur_id">
-              by
+            }}</td>
+            <td>
+              <span v-if="com.commentaires_id.auteur_id">
+              
               <span class="font-semibold hover:bg-sky-200">
-                <NuxtLink :to="`/auteur-${com.commentaires_id.auteur_id.last_name}`"
+                <NuxtLink
+                  :to="`/auteur-${com.commentaires_id.auteur_id.last_name}`"
                   >{{ com.commentaires_id.auteur_id.first_name }}
                   {{ com.commentaires_id.auteur_id.last_name }}
                 </NuxtLink></span
               ></span
             >
-            <Button class="mt-1 mx-1" @click="onCommentButtonClick(com)"> Lire </Button>
-          </ul>
-        </div>
-      </li>
+            </td>
+            <td>
+              <Button class="mt-1 mx-1" @click="onCommentButtonClick(com)">
+              Lire
+            </Button>
+            </td>
+          </tr>
+        </table>
+    
+      
+      </div>
     </div>
   </div>
 
@@ -57,36 +76,19 @@ const onCommentButtonClick = (com) => {
 };
 const kw = ref(false);
 onUpdated(() => {
-    kw.value = store.keywords.find((element) => element.id == navStore.selectedKeywordID);
+  kw.value = store.keywords.find(
+    (element) => element.id == navStore.selectedKeywordID
+  );
 });
-onMounted(()=>{
+onMounted(() => {
   try {
-  kw.value = store.keywords.find((element) => element.id == navStore.selectedKeywordID);
+    kw.value = store.keywords.find(
+      (element) => element.id == navStore.selectedKeywordID
+    );
+  } catch (error) {
+    console.log(error);
   }
-  catch(error){
-    console.log(error)
-  }
-})
+});
 </script>
 
-<style scoped>
-p {
-  font-size: 18px;
-}
-.layout-comment-sidebar {
-  width: 50%;
-}
-.p-sidebar {
-  width: 40rem;
-}
 
-Button {
-  background-color: #0289d1f9;
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 0.2rem 0.3rem;
-  border-radius: 3px;
-  margin-left: 2px;
-  margin-top: 2px;
-}
-</style>

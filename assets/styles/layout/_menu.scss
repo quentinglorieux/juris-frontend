@@ -1,3 +1,4 @@
+
 .layout-sidebar {
     position: fixed;
     width: 200px;
@@ -22,7 +23,7 @@
             font-size: 0.857rem;
             text-transform: uppercase;
             font-weight: 700;
-            color: var(--surface-900);
+            color: var(--surface-hover);
             margin: 0.75rem 0;
         }
 
@@ -150,4 +151,13 @@
 .layout-submenu-enter-active {
     overflow: hidden;
     transition: max-height 1s ease-in-out;
+}
+
+.p-menubar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.p-menubar .p-submenu-list{
+   z-index: 996;
 }

@@ -1,26 +1,32 @@
 <template>
-  <div class="flex flex-column bg-slate-200 p-3 w-full">
+  <div class="flex flex-column p-1 w-full">
     <div v-if="!source">
       <h1>Sélectionnez une Source</h1>
     </div>
     <div v-if="source">
+      <div>
+        <Splitter>
+          <SplitterPanel :size="40" class="">
+            <ScrollPanel>
+              <div class="p-3" v-for="block in editorJScontent">
+                <div v-html="block"></div>
+              </div>
+              <ScrollTop
+                target="parent"
+                :threshold="100"
+                class="custom-scrolltop"
+                icon="pi pi-arrow-up"
+              />
+            </ScrollPanel>
+          </SplitterPanel>
 
-      <div >
-        <Splitter
-          class="mb-5 min-h-screen"
-          style="background-color: rgb(226 232 240); border: none"
-        >
-          <SplitterPanel :size="50" class="">
-            <div class="section" id="main-source"></div>
-
-            <div>
-              <h1>Titre : {{ source.data.titre }}</h1>
-              <p v-if="source.data">Type : {{ source.data.type }}</p>
+          <SplitterPanel :size="60">
+            <div class="titre-page">
+              <h1>{{ source.data.titre }}</h1>
+              <p v-if="source.data">[{{ source.data.type }}]</p>
             </div>
-            <div v-for="block in editorJScontent">
-              <div v-html="block"></div>
-            </div>
-            <div class="pt-3 pr-2">
+            <div class="split-menu">
+              <div>
               <TabView>
                 <TabPanel header="Commentaires">
                   <div class="section" id="comments"></div>
@@ -45,17 +51,57 @@
                 </TabPanel>
               </TabView>
             </div>
-          </SplitterPanel>
-          <SplitterPanel :size="50" v-if="navStore.comVisibility">
-            <div>
-            
-              <h3> {{ store.commentaires.titre }}</h3>
-              <div> {{ store.commentaires.content }}</div>
-              Commentaire : 
-              {{ store.commentaires.id }}
 
+            <div class="source-commentaire" v-if="navStore.comVisibility">
+              <div class="close-button">
+                <Button
+                  icon="pi pi-times"
+                  text
+                  rounded
+                  @click="
+                    () => {
+                      navStore.comVisibility = false;
+                      store.commentaires = {};
+                    }
+                  "
+                >
+                </Button>
+              </div>
+              <TabView>
+                <TabPanel>
+                  <template #header>
+                    <span
+                      >{{ store.commentaires.titre }}</span
+                    >
+                  </template>
+                  <ScrollPanel
+                    style="margin: -1rem; height: 100%; background-color: white"
+                  >          
+                    <div class="p-3">
+                      <div v-html="store.commentaires.content"></div>
+                     
+                    </div>
+                    <ScrollTop
+                      target="parent"
+                      :threshold="100"
+                      class="custom-scrolltop"
+                      icon="pi pi-arrow-up"
+                    />
+                  </ScrollPanel>
+                </TabPanel>
+                <TabPanel>
+                  <template #header>
+                    <span>Mots Clefs</span>
+                  </template>
+                </TabPanel>
+                <TabPanel>
+                  <template #header>
+                    <span>Auteurs</span>
+                  </template>
+                </TabPanel>
+              </TabView>
             </div>
-            <Button @click="()=>{navStore.comVisibility = false; store.commentaires={}}"> Close </Button>
+            </div>
           </SplitterPanel>
         </Splitter>
       </div>
@@ -73,21 +119,21 @@ const props = defineProps(["sourceID"]);
 const source = ref();
 const oldID = ref();
 
-
-
 import edjsHTML from "editorjs-html";
 const edjsParser = edjsHTML();
 const editorJScontent = computed(() => {
   return edjsParser.parse(source.value.data.EditorJS);
 });
 
-onMounted(()=>{
-  if (store.sources[0]) {retrieveSourceData(navStore.selectedSourceID)};
-})
+onMounted(() => {
+  if (store.sources[0]) {
+    retrieveSourceData(navStore.selectedSourceID);
+  }
+});
 
 onUpdated(() => {
   if (navStore.selectedSourceID != oldID.value) {
-    navStore.comVisibility=false;
+    navStore.comVisibility = false;
     retrieveSourceData(navStore.selectedSourceID);
   }
 
@@ -100,20 +146,16 @@ onUpdated(() => {
         var comId = el2.getAttribute("data-linkedcomment");
         if (el.getAttribute("data-linkedcomment") == comId) {
           navStore.comID = comId;
-        } 
+        }
       }
       retrieveComments(navStore.comID);
     });
   }
-  
-
-
 });
 
 // DataFetching of the selected Source(id)
 const { $directus } = useNuxtApp();
 async function retrieveSourceData(id) {
-
   source.value = await useAsyncData(() => {
     return $directus.items("sources").readOne(id, {
       fields: [
@@ -121,50 +163,29 @@ async function retrieveSourceData(id) {
       ],
     });
   });
-  
-  store.sources[store.sources.findIndex((x) => x.id === id)] = source.value.data;
 
+  store.sources[store.sources.findIndex((x) => x.id === id)] =
+    source.value.data;
 }
-
 
 async function retrieveComments(id) {
   const { data } = await useAsyncData(() => {
     return $directus.items("commentaires").readOne(id);
   });
 
-  store.commentaires=data.value;
-  navStore.comVisibility=true;
-  navStore.navVisibility=false;
+  store.commentaires = data.value;
+  navStore.comVisibility = true;
+  navStore.navVisibility = false;
 }
 
 store.$subscribe((mutation, state) => {
   const comments = document.getElementsByTagName("mark");
   for (const el of comments) {
     if (el.getAttribute("data-linkedcomment") == store.commentaires.id) {
-         el.setAttribute("style", "background-color:rgb(240, 220, 210);");
-        } else {
-         el.setAttribute("style", "background-color:#ceffd5;");
-        }
-      }
-})
-
-
-
+      el.setAttribute("style", "background-color:var(--surface-a);");
+    } else {
+      el.setAttribute("style", "background-color:var(--surface-c);");
+    }
+  }
+});
 </script>
-
-<style scoped>
-p {
-  font-size: 18px;
-}
-.layout-comment-sidebar {
-  min-width: 50%;
-}
-.stick {
-  position: sticky;
-  top: 5rem;
-}
-.section {
-  position: relative;
-  top: -8rem;
-}
-</style>

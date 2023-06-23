@@ -51,7 +51,7 @@ const model = ref([
   {
     label: "Entrées",
     items: [
-      { label: "Sources", icon: "pi pi-fw pi-file", to: "/sources" },
+      { label: "Sources", icon: "pi pi-fw pi-th-large", to: "/sources" },
       { label: "Thèmes", icon: "pi pi-fw pi-list", to: "/themes" },
       { label: "Mots Clés", icon: "pi pi-fw pi-tags", to: "/keywords" },
       { label: "Auteurs", icon: "pi pi-fw pi-user", items: [] },

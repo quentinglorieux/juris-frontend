@@ -1,21 +1,20 @@
-const contextPath = import.meta.env.BASE_URL;
-
-export default class ProductService {
-    getProductsSmall() {
-        return fetch(contextPath + 'demo/data/products-small.json')
-            .then((res) => res.json())
-            .then((d) => d.data);
-    }
-
+export const ProductService = {
+    getProductsData() {
+        return [
+            {
+                label:"Sources",
+                icon: "pi pi-fw pi-th-large",
+                link:"/sources"
+            },
+            {
+                label:"Mots Clés",
+                icon: "pi pi-fw pi-tags",
+            },
+            
+           
+        ];
+    },
     getProducts() {
-        return fetch(contextPath + 'demo/data/products.json')
-            .then((res) => res.json())
-            .then((d) => d.data);
-    }
-
-    getProductsWithOrdersSmall() {
-        return fetch(contextPath + 'demo/data/products-orders-small.json')
-            .then((res) => res.json())
-            .then((d) => d.data);
-    }
-}
+        return Promise.resolve(this.getProductsData());
+    },
+};
