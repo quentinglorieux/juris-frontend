@@ -21,7 +21,6 @@ const props = defineProps(["source", "comSelected"]);
 const emit = defineEmits(["ComSelected"]);
 import { useNavStore } from "@/stores/navigation";
 import { useGlobalStore } from "~/stores/global";
-import { useGlobalStore } from "~/stores/global";
 const navStore = useNavStore();
 const store = useGlobalStore();
 function CloseCommentPanel(com){

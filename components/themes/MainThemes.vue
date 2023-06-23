@@ -61,16 +61,6 @@ async function retrieveThemeData(id) {
     });
   });
 }
-const theme = ref();
-// DataFetching of the selected Themes
-const { $directus } = useNuxtApp();
-async function retrieveThemeData(id) {
-  theme.value = await useAsyncData(() => {
-    return $directus.items("themes").readOne(id, {
-      fields: ["id,titre,introduction,sources.id,sources.titre"],
-    });
-  });
-}
 
 if (navStore.selectedThemeID) {
   retrieveThemeData(navStore.selectedThemeID);
@@ -95,10 +85,7 @@ onUpdated(() => {
       for (const el2 of comments2) {
         var comId = el2.getAttribute("data-linkedcomment");
         if (
-          el.getAttribute("data-linkedcomment") ==
-          el2.getAttribute("data-linkedcomment")
-          el.getAttribute("data-linkedcomment") ==
-          el2.getAttribute("data-linkedcomment")
+          el.getAttribute("data-linkedcomment") ==el2.getAttribute("data-linkedcomment") 
         ) {
           el2.setAttribute("style", "background-color:rgb(240, 220, 210);");
           comActiv.value = comId;
