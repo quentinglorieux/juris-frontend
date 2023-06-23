@@ -73,6 +73,11 @@ onUpdated(() => {
   }
   oldID.value = navStore.selectedThemeID;
 
+  if (navStore.selectedThemeID != oldID.value) {
+    retrieveThemeData(navStore.selectedThemeID);
+  }
+  oldID.value = navStore.selectedThemeID;
+
   const comments = document.getElementsByTagName("mark");
   for (const el of comments) {
     el.addEventListener("click", () => {
@@ -80,8 +85,7 @@ onUpdated(() => {
       for (const el2 of comments2) {
         var comId = el2.getAttribute("data-linkedcomment");
         if (
-          el.getAttribute("data-linkedcomment") ==
-          el2.getAttribute("data-linkedcomment")
+          el.getAttribute("data-linkedcomment") ==el2.getAttribute("data-linkedcomment") 
         ) {
           el2.setAttribute("style", "background-color:rgb(240, 220, 210);");
           comActiv.value = comId;

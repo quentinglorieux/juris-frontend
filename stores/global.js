@@ -6,5 +6,6 @@ export const useGlobalStore = defineStore('global', {
     authors: {},
     keywords: {},
     themes: {},
+    commentaires:{},
   }),
 })

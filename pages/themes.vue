@@ -1,14 +1,7 @@
 <template>
   <div class="flex">
-    <NavThemes
-      v-if="store.sources"
-      :visible="navStore.navVisibility"
-      :listItems="store.sources"
-    >
-    </NavThemes>
-    <!-- <NavThemes  @themeSelected="(e) => (themeSelection = e)" /> -->
-    <MainThemes class="min-h-screen" :themeID="navStore.selectedThemeID"/>
-    <!-- :theme="themeSelection"  -->
+    <NavThemes  @themeSelected="(e) => (themeSelection = e)" />
+    <MainThemes :theme="themeSelection"/>
   </div>
 </template>
 

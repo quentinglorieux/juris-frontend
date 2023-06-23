@@ -41,6 +41,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('Column', Column);
     nuxtApp.vueApp.component('InputText', InputText);
     nuxtApp.vueApp.component('Dropdown', Dropdown);
+    nuxtApp.vueApp.component('TabView', TabView);
+    nuxtApp.vueApp.component('TabPanel', TabPanel);
     nuxtApp.vueApp.component('Splitter', Splitter);
     nuxtApp.vueApp.component('SplitterPanel', SplitterPanel);
     nuxtApp.vueApp.component('Menu', Menu);

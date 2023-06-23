@@ -39,6 +39,7 @@ async function retrieveComments(com) {
   navStore.navVisibility=false;
   navStore.comID = com.id;
 }
+
 </script>
 
 
