@@ -27,80 +27,74 @@
             </div>
             <div class="split-menu">
               <div>
-              <TabView>
-                <TabPanel header="Commentaires">
-                  <div class="section" id="comments"></div>
-                  <SourceComments
-                    :source="source"
-                    :comSelected="store.commentaires"
-                  />
-                </TabPanel>
+                <TabView>
+                  <TabPanel header="Commentaires">
+                    <div class="section" id="comments"></div>
+                    <SourceComments :source="source" :comSelected="store.commentaires" />
+                  </TabPanel>
 
-                <TabPanel header="Mots-Clés">
-                  <div class="section" id="keywords"></div>
-                  <SourceKeywords :source="source" />
-                </TabPanel>
+                  <TabPanel header="Mots-Clés">
+                    <div class="section" id="keywords"></div>
+                    <SourceKeywords :source="source" />
+                  </TabPanel>
 
-                <TabPanel header="Thèmes">
-                  <div class="section" id="themes"></div>
-                  <SourceThemes :source="source" />
-                </TabPanel>
+                  <TabPanel header="Thèmes">
+                    <div class="section" id="themes"></div>
+                    <SourceThemes :source="source" />
+                  </TabPanel>
 
-                <TabPanel header="Traduction(s)">
-                  <h2>Traduction(s)</h2>
-                </TabPanel>
-              </TabView>
-            </div>
-
-            <div class="source-commentaire" v-if="navStore.comVisibility">
-              <div class="close-button">
-                <Button
-                  icon="pi pi-times"
-                  text
-                  rounded
-                  @click="
-                    () => {
-                      navStore.comVisibility = false;
-                      store.commentaires = {};
-                    }
-                  "
-                >
-                </Button>
+                  <TabPanel header="Traduction(s)">
+                    <h2>Traduction(s)</h2>
+                  </TabPanel>
+                </TabView>
               </div>
-              <TabView>
-                <TabPanel>
-                  <template #header>
-                    <span
-                      >{{ store.commentaires.titre }}</span
+
+              <div class="source-commentaire" v-if="navStore.comVisibility">
+                <div class="close-button">
+                  <Button
+                    icon="pi pi-times"
+                    text
+                    rounded
+                    @click="
+                      () => {
+                        navStore.comVisibility = false;
+                        store.commentaires = {};
+                      }
+                    "
+                  >
+                  </Button>
+                </div>
+                <TabView>
+                  <TabPanel>
+                    <template #header>
+                      <span>{{ store.commentaires.titre }}</span>
+                    </template>
+                    <ScrollPanel
+                      style="margin: -1rem; height: 100%; background-color: white"
                     >
-                  </template>
-                  <ScrollPanel
-                    style="margin: -1rem; height: 100%; background-color: white"
-                  >          
-                    <div class="p-3">
-                      <div v-html="store.commentaires.content"></div>
-                     
-                    </div>
-                    <ScrollTop
-                      target="parent"
-                      :threshold="100"
-                      class="custom-scrolltop"
-                      icon="pi pi-arrow-up"
-                    />
-                  </ScrollPanel>
-                </TabPanel>
-                <TabPanel>
-                  <template #header>
-                    <span>Mots Clefs</span>
-                  </template>
-                </TabPanel>
-                <TabPanel>
-                  <template #header>
-                    <span>Auteurs</span>
-                  </template>
-                </TabPanel>
-              </TabView>
-            </div>
+                      <div class="p-3">
+                        <div v-html="store.commentaires.content"></div>
+                      </div>
+                      <ScrollTop
+                        target="parent"
+                        :threshold="100"
+                        class="custom-scrolltop"
+                        icon="pi pi-arrow-up"
+                      />
+                    </ScrollPanel>
+                  </TabPanel>
+                  <TabPanel>
+                    <template #header>
+                      <span>Mots Clefs</span>
+                    </template>
+                  </TabPanel>
+                  <TabPanel>
+                    <template #header>
+                      <span>Auteurs</span>
+                    </template>
+                  </TabPanel>
+                </TabView>
+              </div>
             </div>
           </SplitterPanel>
         </Splitter>
@@ -149,6 +143,7 @@ onUpdated(() => {
         }
       }
       retrieveComments(navStore.comID);
+      
     });
   }
 });
@@ -164,8 +159,7 @@ async function retrieveSourceData(id) {
     });
   });
 
-  store.sources[store.sources.findIndex((x) => x.id === id)] =
-    source.value.data;
+  store.sources[store.sources.findIndex((x) => x.id === id)] = source.value.data;
 }
 
 async function retrieveComments(id) {
