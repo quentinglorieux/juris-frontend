@@ -45,6 +45,12 @@ const navStore = useNavStore();
 const store = useGlobalStore();
 
 const { $directus } = useNuxtApp();
+import { useNavStore } from "~/stores/navigation";
+import { useGlobalStore } from "~/stores/global";
+const navStore = useNavStore();
+const store = useGlobalStore();
+
+const { $directus } = useNuxtApp();
 
 const { layoutConfig, onMenuToggle, contextPath } = useLayout();
 
@@ -58,6 +64,72 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   unbindOutsideClickListener();
+});
+
+const items = ref([
+  { label: "Accueil", icon: "pi pi-fw pi-home", to: "/" },
+  { label: "Sources", icon: "pi pi-fw pi-th-large", to: "/sources" },
+  { label: "Mots Clés", icon: "pi pi-fw pi-tags", to: "/keywords" },
+  //   { label: "Thèmes", icon: "pi pi-fw pi-list", to: "/themes" },
+  { label: "Thèmes", icon: "pi pi-fw pi-list", items: [] },
+  { label: "Auteurs", icon: "pi pi-fw pi-users", items: [] }, // change the item.value[5] if remove Alt
+  { label: "Map", icon: "pi pi-fw pi-share-alt", to: "/map" },
+]);
+
+async function retrieveAuthors() {
+  const { data: publicData } = await useAsyncData(() => {
+    return $directus.items("directus_users").readByQuery({
+      fields: ["first_name,last_name,role"],
+      filter: {
+        role: {
+          _starts_with: "aeeefb57-7b36",
+        },
+      },
+    });
+  });
+
+  store.authors = publicData.value.data;
+
+  for (let author of store.authors) {
+    // items.value[1].items[3].items.push({
+    items.value[4].items.push({
+      label: author.last_name,
+      icon: "pi pi-fw pi-user",
+      to: "/auteur-" + author.last_name,
+    });
+  }
+}
+
+async function retrieveThemes() {
+  const { data: publicData } = await useAsyncData(() => {
+    return $directus.items("themes").readByQuery({
+      fields: ["id,titre"],
+    });
+  });
+
+  store.themes = publicData.value.data;
+
+  for (let theme of store.themes) {
+    // items.value[1].items[3].items.push({
+    items.value[3].items.push({
+      label: theme.titre,
+      icon: "pi pi-fw pi-book",
+      to: "/themes",
+      command: () => {
+        navStore.selectedThemeID = theme.id;
+      },
+    });
+  }
+}
+
+// add authors
+onMounted(() => {
+  if (!store.authors[0]) {
+    retrieveAuthors();
+  }
+  if (!store.themes[0]) {
+    retrieveThemes();
+  }
 });
 
 const items = ref([
