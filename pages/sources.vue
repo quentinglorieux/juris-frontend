@@ -3,7 +3,6 @@
     <NavSource
       v-if="store.sources"
       :visible="navStore.navVisibility"
-      :listItems="store.sources"
     >
     </NavSource>
 

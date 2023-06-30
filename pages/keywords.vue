@@ -3,7 +3,7 @@
     <NavKeywords
       v-if="store.sources"
       :visible="navStore.navVisibility"
-      :listItems="store.sources"
+    
     >
     </NavKeywords>
     <MainKeywords  :sourceID="navStore.selectedKeywordID" />

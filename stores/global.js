@@ -2,9 +2,9 @@ import { defineStore } from 'pinia'
 
 export const useGlobalStore = defineStore('global', {
   state: () => ({
-    sources: {},
+    sources: [],
     authors: {},
-    keywords: {},
+    keywords: [],
     themes: {},
     commentaires:{},
   }),
