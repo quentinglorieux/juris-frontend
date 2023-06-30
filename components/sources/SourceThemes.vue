@@ -21,6 +21,6 @@ for (let theme in props.source.data.theme_id.id)
   console.log(theme)
 }
 
-console.log(props.source.data)
+
 
 </script>

@@ -1,9 +1,10 @@
 <template>
   <div class="flex flex-column p-1 w-full">
+  
     <div v-if="!source">
       <h1>Sélectionnez une Source</h1>
     </div>
-    <div v-if="source">
+    <div v-else>
       <div>
         <Splitter>
           <SplitterPanel :size="40" class="">
@@ -122,16 +123,25 @@ const oldID = ref();
 import edjsHTML from "editorjs-html";
 const edjsParser = edjsHTML();
 const editorJScontent = computed(() => {
-  return edjsParser.parse(source.value.data.EditorJS);
+  if (source.value && source.value.data){
+    return edjsParser.parse(source.value.data.texte);
+  }
+  else{
+    return null
+  }
+  
 });
 
+
 onMounted(() => {
-  if (store.sources[0]) {
+  
+  if (navStore.selectedSourceID) {
     retrieveSourceData(navStore.selectedSourceID);
   }
 });
 
 onUpdated(() => {
+
   if (navStore.selectedSourceID != oldID.value) {
     navStore.comVisibility = false;
     retrieveSourceData(navStore.selectedSourceID);
@@ -159,7 +169,7 @@ async function retrieveSourceData(id) {
   source.value = await useAsyncData(() => {
     return $directus.items("sources").readOne(id, {
       fields: [
-        "id,titre,type,meta,EditorJS,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,commentaires.keywords_id.keywords_id.id,theme_id.titre,theme_id.id",
+        "id,titre,type,meta,texte,commentaires.id,commentaires.titre,commentaires.content,commentaires.keywords_id.keywords_id.titre,commentaires.keywords_id.keywords_id.id,theme_id.titre,theme_id.id",
       ],
     });
   });

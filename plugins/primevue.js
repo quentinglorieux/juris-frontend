@@ -48,8 +48,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('Menu', Menu);
     nuxtApp.vueApp.component('Menubar', Menubar);
     nuxtApp.vueApp.component('ScrollPanel', ScrollPanel);
-    nuxtApp.vueApp.component('TabView', TabView);
-    nuxtApp.vueApp.component('TabPanel', TabPanel);
+    
+    
     nuxtApp.vueApp.component('ScrollTop', ScrollTop);
     nuxtApp.vueApp.component('Fieldset', Fieldset);
     nuxtApp.vueApp.component('DataView', DataView);
