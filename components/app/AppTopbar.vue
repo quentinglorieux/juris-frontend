@@ -19,11 +19,7 @@
       <i class="pi pi-ellipsis-v"></i>
     </button> -->
 
-    <Menubar
-      class="layout-topbar-menu"
-      :class="topbarMenuClasses"
-      :model="items"
-    />
+    <Menubar class="layout-topbar-menu" :class="topbarMenuClasses" :model="items" />
 
     <div class="layout-topbar-menu" :class="topbarMenuClasses">
       <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
@@ -110,6 +106,7 @@ async function retrieveThemes() {
       icon: "pi pi-fw pi-book",
       to: "/themes",
       command: () => {
+        
         navStore.selectedThemeID = theme.id;
       },
     });
