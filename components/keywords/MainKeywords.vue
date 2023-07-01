@@ -8,7 +8,7 @@
       <div class="titre-page">
       <h1>{{kw.titre}}</h1>
       </div>
-          
+
       <div class="flex flex-column p-1 w-full" style="text-align:left;">
         <table ><!--à modifier en DataTable afin d'avoir le trie-->
           <tr>
@@ -18,12 +18,19 @@
             <th style="width:10%">   </th>
           </tr>
           <tr v-for="com in kw.commentaires">
-            <td> {{
-              com.commentaires_id.source
-            }} </td>
-            <td> {{
-              com.commentaires_id.titre
-            }}</td>
+            <td>          
+              <NuxtLink
+              v-if="sourcesRef"
+                class="link"
+                to="/sources"
+                @click="
+                  navStore.selectedSourceID = attachedComments[com.commentaires_id.id][0]
+                "
+              >
+              {{ sourcesRef[attachedComments[com.commentaires_id.id][0]].titre }}
+              </NuxtLink>
+              </td>
+           
             <td>
               <span v-if="com.commentaires_id.auteur_id">
               
@@ -74,6 +81,53 @@ const onCommentButtonClick = (com) => {
   visible.value = !visible.value;
   selectedCom.value = com.commentaires_id;
 };
+
+const sourcesRef=ref()
+
+var attachedComments = ref({})
+
+const { $directus } = useNuxtApp();
+async function retrieveSourceData() {
+  const sourcesFetch= await useAsyncData(() => {
+    return $directus.items("sources").readByQuery({
+      fields: [
+        "id,commentaires.id,titre",
+      ],
+    });
+  });
+
+  const commentairesFetch= await useAsyncData(() => {
+    return $directus.items("commentaires").readByQuery({
+      fields: [
+        "id",
+      ],
+    });
+  });
+  const comments=commentairesFetch.data.value.data;
+  const sources=sourcesFetch.data.value.data;
+  sourcesRef.value=sources
+  var sourcesArray={}
+  sources.forEach(element =>{
+    var commentToSource=[]
+    element.commentaires.forEach( com=>{
+      commentToSource.push(com.id)
+    } )
+    sourcesArray[element.id]=commentToSource
+  })
+
+  attachedComments.value[1]=0
+  comments.forEach(element => {
+    attachedComments.value[element.id]=[]
+    for (const id in sourcesArray){
+      if(sourcesArray[id].includes(element.id)){
+        attachedComments.value[element.id].push(id)
+      }     
+  }
+  });
+  
+}
+
+
 const kw = ref(false);
 onUpdated(() => {
   kw.value = store.keywords.find(
@@ -81,6 +135,8 @@ onUpdated(() => {
   );
 });
 onMounted(() => {
+  
+  retrieveSourceData()
   try {
     kw.value = store.keywords.find(
       (element) => element.id == navStore.selectedKeywordID

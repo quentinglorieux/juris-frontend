@@ -16,10 +16,6 @@ import { useNavStore } from "~/stores/navigation";
 const navStore = useNavStore();
 const props = defineProps(["source"]);
 
-for (let theme in props.source.data.theme_id.id)
-{
-  console.log(theme)
-}
 
 
 
