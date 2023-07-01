@@ -176,6 +176,7 @@ async function retrieveSourceData(id) {
 
   store.sources[store.sources.findIndex((x) => x.id === id)] =
     source.value.data;
+  
 }
 
 async function retrieveComments(id) {
