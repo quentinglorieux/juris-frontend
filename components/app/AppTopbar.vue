@@ -87,8 +87,7 @@ async function retrieveAuthors() {
   for (let author of store.authors) {
     // items.value[1].items[3].items.push({
     items.value[4].items.push({
-      label: author.last_name,
-      icon: "pi pi-fw pi-user",
+      label: author.first_name + ' ' + author.last_name ,
       to: "/auteur-" + author.last_name,
     });
   }
