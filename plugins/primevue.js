@@ -24,6 +24,8 @@ import ScrollTop from 'primevue/scrolltop';
 import Fieldset from 'primevue/fieldset';
 import DataView from 'primevue/dataview';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions' 
+import Panel from 'primevue/panel';
+
 
 
 
@@ -48,6 +50,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('Menu', Menu);
     nuxtApp.vueApp.component('Menubar', Menubar);
     nuxtApp.vueApp.component('ScrollPanel', ScrollPanel);
+    nuxtApp.vueApp.component('Panel', Panel);
+
     
     
     nuxtApp.vueApp.component('ScrollTop', ScrollTop);

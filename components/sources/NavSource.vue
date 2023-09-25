@@ -26,13 +26,13 @@
       >
         <template #header>
           <div class="flex justify-content-between">
-            <Button
+            <!-- <Button
               type="button"
               icon="pi pi-filter-slash"
               label="Effacer"
               class="p-button-outlined"
               @click="clearFilter1()"
-            />
+            /> -->
             <span class="p-input-icon-left">
               <i class="pi pi-search" />
               <InputText v-model="filter1['global'].value" placeholder="Recherche" />
