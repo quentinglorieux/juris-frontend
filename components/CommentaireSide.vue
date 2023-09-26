@@ -1,8 +1,8 @@
 <template>
   <div class="static"> 
-    <Button class="absolute top-8 left-4" @click="exportToPDF('commentaire.pdf', pdfSection , documentOptions, options)" label="Exporter en PDF" icon="pi pi-file-pdf" />
+    <Button class="absolute top-10 left-8" @click="exportToPDF('commentaire.pdf', pdfSection , documentOptions, options)" label="Exporter en PDF" icon="pi pi-file-pdf" />
 
-  <div v-if="fetched_data" class="card2 bg-slate-100 mt-2" ref="pdfSection">
+  <div v-if="fetched_data" class="card2 bg-slate-100 mt-2 p-1" ref="pdfSection">
 
 
     <h1 class="text-center">{{ fetched_data.data.titre }}</h1>
@@ -49,7 +49,7 @@ const options = {
    autoPaging : 'text',
    width : 206,
    windowWidth : 950,
-   margin : 2
+   margin : [4,2,4,2]
 
 }
 

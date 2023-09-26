@@ -6,6 +6,10 @@
     </div>
     <div v-else>
       <div>
+        <div class="titre-page">
+              <h1>{{ source.data.titre }}</h1>
+              <p v-if="source.data">[{{ source.data.type }}]</p>
+            </div>
         <Splitter>
           <SplitterPanel :size="40" class="">
             <ScrollPanel>
@@ -22,10 +26,7 @@
           </SplitterPanel>
 
           <SplitterPanel :size="60">
-            <div class="titre-page">
-              <h1>{{ source.data.titre }}</h1>
-              <p v-if="source.data">[{{ source.data.type }}]</p>
-            </div>
+            
             <div class="split-menu">
               <div>
               <TabView>
@@ -79,7 +80,9 @@
                     style="margin: -1rem; height: 100%; background-color: white"
                   >          
                     <div class="p-3">
-                      <div v-html="store.commentaires.content"></div>
+                      <CommentaireSide :com="store.commentaires.id"></CommentaireSide>
+                      
+                      <!-- <div v-html="store.commentaires.content"></div> -->
                      
                     </div>
                     <ScrollTop
