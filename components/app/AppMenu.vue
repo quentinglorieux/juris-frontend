@@ -22,7 +22,7 @@ const listItems = ref([]);
 async function retrieveAuthors() {
   const { data: publicData } = await useAsyncData(() => {
     return $directus.items("directus_users").readByQuery({
-      fields: ["first_name,last_name,role"],
+      fields: ["first_name,last_name,role,avatar"],
       filter: {
         role: {
           _starts_with: "aeeefb57-7b36",

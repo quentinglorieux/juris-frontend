@@ -57,12 +57,12 @@
             <Column
               sortable
               field="commentaires_id.titre"
-              header="Titre du commentaire"
+              header="Commentaires"
             ></Column>
             <Column
               sortable
               field="commentaires_id.source_id.titre"
-              header="Source"
+              header="Sources"
             ></Column>
             <Column field="commentaires_id.auteur_id" header="Auteur">
               <template #body="slotAuteur">

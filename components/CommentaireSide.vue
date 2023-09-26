@@ -1,9 +1,14 @@
 <template>
-  
-  <div v-if="fetched_data" class="card2 bg-slate-100">
+  <div> 
+    <button @click="exportToPDF('commentaire.pdf', pdfSection , documentOptions, options)">
+      Save to PDF
+    </button>
+
+  <div v-if="fetched_data" class="card2 bg-slate-100" ref="pdfSection">
 
 
     <h1 class="text-center">{{ fetched_data.data.titre }}</h1>
+
 
     <div class="bg-slate-200 p-2">
     <h3>Résumé:</h3>
@@ -21,16 +26,38 @@
     <div v-html="fetched_data.data.citation"></div>
 </div>
 
-    <!-- {{ prop.com.data.content }} -->
-  </div>
+      
 
+
+  </div>
+</div>
 </template>
 
 <script setup>
-const prop = defineProps(["com"]);
-const fetched_data = ref()
 import MarkdownIt from "markdown-it";
+import { exportToPDF } from '#imports'
+const pdfSection = ref<HTMLElement | null>(null)
 
+const prop = defineProps(["com"]);
+
+const documentOptions = {
+ orientation: 'p',
+ unit: 'mm',
+ format: 'a4',
+ putOnlyUsedFonts:true,
+ floatPrecision: 16 // or "smart", default is 16
+}
+
+const options = {
+   callback: function (doc) {
+     doc.save();
+   },
+   x: 10,
+   y: 10,
+   autoPaging : true
+}
+
+const fetched_data = ref()
 const md = new MarkdownIt();
 const parsedMarkdown = ref()
 

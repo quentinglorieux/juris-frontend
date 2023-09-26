@@ -19,13 +19,13 @@
 
     <div>
       <DataView :value="items" :layout="layout">
-        <template #header>
+        <!-- <template #header>
           <div class="flex justify-content-end">
             <DataViewLayoutOptions v-model="layout" />
           </div>
-        </template>
+        </template> -->
 
-        <template #list="slotProps">
+        <!-- <template #list="slotProps">
           <div class="col-12">
             <div
               class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4"
@@ -37,13 +37,13 @@
                   class="flex flex-column align-items-center sm:align-items-start gap-3"
                 >
                   <div class="text-2xl font-bold text-900">
-                    {{ slotProps.data.label }}
-                  </div>
+                    {{ slotProps.data.label }} 
+                  </div> 
                 </div>
               </div>
             </div>
           </div>
-        </template>
+        </template> -->
 
         <template #grid="slotProps">
           <div class="col-12 sm:col-6 lg:col-12 xl:col-2 p-2">
@@ -94,32 +94,31 @@ const items = ref([
   {
     label: "Auteurs",
     icon: "pi pi-fw pi-users",
-    link: "/auteurs",
-    to: [],
+    to: "/auteurs",
   },
 ]);
 
-async function retrieveAuthors() {
-  const { data: publicData } = await useAsyncData(() => {
-    return $directus.items("directus_users").readByQuery({
-      fields: ["first_name,last_name,role"],
-      filter: {
-        role: {
-          _starts_with: "aeeefb57-7b36",
-        },
-      },
-    });
-  });
+// async function retrieveAuthors() {
+//   const { data: publicData } = await useAsyncData(() => {
+//     return $directus.items("directus_users").readByQuery({
+//       fields: ["first_name,last_name,role"],
+//       filter: {
+//         role: {
+//           _starts_with: "aeeefb57-7b36",
+//         },
+//       },
+//     });
+//   });
 
-  store.authors = publicData.value.data;
+//   store.authors = publicData.value.data;
 
-  for (let author of store.authors) {
-    // items.value[1].items[3].items.push({
-    items.value[4].items.push({
-      label: author.last_name,
-      icon: "pi pi-fw pi-user",
-      to: "/auteur-" + author.last_name,
-    });
-  }
-}
+//   for (let author of store.authors) {
+//     // items.value[1].items[3].items.push({
+//     items.value[4].items.push({
+//       label: author.last_name,
+//       icon: "pi pi-fw pi-user",
+//       to: "/auteur-" + author.last_name,
+//     });
+//   }
+// }
 </script>

@@ -25,6 +25,8 @@ import Fieldset from 'primevue/fieldset';
 import DataView from 'primevue/dataview';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions' 
 import Panel from 'primevue/panel';
+import Avatar from 'primevue/avatar';
+
 
 
 
@@ -51,6 +53,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('Menubar', Menubar);
     nuxtApp.vueApp.component('ScrollPanel', ScrollPanel);
     nuxtApp.vueApp.component('Panel', Panel);
+    nuxtApp.vueApp.component('Avatar', Avatar);
 
     
     

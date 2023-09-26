@@ -1,3 +1,3 @@
 <template>
-    <Hello />
+    <HomeComponent />
 </template>

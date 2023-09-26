@@ -73,7 +73,7 @@ const items = ref([
 async function retrieveAuthors() {
   const { data: publicData } = await useAsyncData(() => {
     return $directus.items("directus_users").readByQuery({
-      fields: ["first_name,last_name,role"],
+      fields: ["*"],
       filter: {
         role: {
           _starts_with: "aeeefb57-7b36",
@@ -84,6 +84,7 @@ async function retrieveAuthors() {
 
   store.authors = publicData.value.data;
 
+  items.value[4].items.push({label: ' - Tous les auteurs - ', to:"/auteurs"})
   for (let author of store.authors) {
     // items.value[1].items[3].items.push({
     items.value[4].items.push({
@@ -91,6 +92,7 @@ async function retrieveAuthors() {
       to: "/auteur-" + author.last_name,
     });
   }
+  
 }
 
 async function retrieveThemes() {

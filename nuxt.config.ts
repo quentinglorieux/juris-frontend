@@ -3,10 +3,11 @@ const baseUrl = '/';
 export default defineNuxtConfig({
   modules: [
     "@nuxtjs/tailwindcss",
-    '@pinia/nuxt'],
+    '@pinia/nuxt',
+    '@sidebase/nuxt-pdf'],
   ssr: false,
   runtimeConfig: {
-    apiSecret: '123',
+    apiSecret: '1',
     public: {
       API_BASE_URL: 'https://jurisdirectus.rubidiumweb.eu'
     }
