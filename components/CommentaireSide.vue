@@ -1,10 +1,8 @@
 <template>
-  <div> 
-    <button @click="exportToPDF('commentaire.pdf', pdfSection , documentOptions, options)">
-      Save to PDF
-    </button>
+  <div class="static"> 
+    <Button class="absolute top-8 left-4" @click="exportToPDF('commentaire.pdf', pdfSection , documentOptions, options)" label="Exporter en PDF" icon="pi pi-file-pdf" />
 
-  <div v-if="fetched_data" class="card2 bg-slate-100" ref="pdfSection">
+  <div v-if="fetched_data" class="card2 bg-slate-100 mt-2" ref="pdfSection">
 
 
     <h1 class="text-center">{{ fetched_data.data.titre }}</h1>
