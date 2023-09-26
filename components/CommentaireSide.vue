@@ -45,16 +45,14 @@ const documentOptions = {
  unit: 'mm',
  format: 'a4',
  putOnlyUsedFonts:true,
- floatPrecision: 16 // or "smart", default is 16
 }
 
 const options = {
-   callback: function (doc) {
-     doc.save();
-   },
-   x: 10,
-   y: 10,
-   autoPaging : true
+   autoPaging : 'text',
+   width : 206,
+   windowWidth : 950,
+   margin : 2
+
 }
 
 const fetched_data = ref()
