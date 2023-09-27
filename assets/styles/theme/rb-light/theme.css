@@ -1,7 +1,7 @@
 :root {
-  --surface-a:#ba9baa;
+  --surface-a:#1b8eb786;
   --surface-b:#dadddf;
-  --surface-c:#d7bbc8;
+  --surface-c:#90b9d554;
   --surface-d:#10263d;
   --surface-e:#ffffff;
   --surface-f:#ffffff;
@@ -5098,8 +5098,18 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   background: #ffffff;
   border: 0 none;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
-  width: 22.5rem;
+  width: 30rem;
 }
+
+.p-menubar-xs .p-submenu-list-xs {
+  padding: 0.25rem 0;
+  background: red;
+  border: 0 none;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  width: 10rem;
+}
+
+
 .p-menubar .p-submenu-list .p-menu-separator {
   border-top: 1px solid #dee2e6;
   margin: 0.25rem 0;
@@ -5397,7 +5407,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #495057;
   border: 1px solid #dee2e6;
   border-radius: 3px;
-  width: 22.5rem;
+  width: 30rem;
 }
 .p-slidemenu .p-menuitem-link {
   padding: 0.75rem 1rem;

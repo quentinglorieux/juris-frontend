@@ -18,6 +18,19 @@
     }
 }
 
+.cardX {
+    background: whitesmoke;
+    // border: 1px solid whitesmoke;
+    padding: 0.1rem;
+    margin-bottom: 0.1rem;
+    box-shadow: 2px;
+    border-radius: $borderRadius;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
 .card2 {
     padding: 2rem;
     margin-bottom: 2rem;

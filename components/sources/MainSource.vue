@@ -11,7 +11,7 @@
               <p v-if="source.data">[{{ source.data.type }}]</p>
             </div>
         <Splitter>
-          <SplitterPanel :size="40" class="">
+          <SplitterPanel :size="60" class="">
             <ScrollPanel>
               <div class="p-3" v-for="block in editorJScontent">
                 <div v-html="block"></div>
@@ -25,7 +25,7 @@
             </ScrollPanel>
           </SplitterPanel>
 
-          <SplitterPanel :size="60">
+          <SplitterPanel :size="40">
             
             <div class="split-menu">
               <div>

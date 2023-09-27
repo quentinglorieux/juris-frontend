@@ -5,7 +5,7 @@
     </div>
     <div v-if="theme">
       <div class="titre-page">
-        <h1>Thème : {{ theme.data.titre }}</h1>
+        <h1>  {{ theme.data.titre }}</h1>
       </div>
       <Splitter style="height: 55vh" layout="vertical">
               <div class="titre-page">

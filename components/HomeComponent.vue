@@ -63,16 +63,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-/*import { ProductService } from '@/service/ProductService';
-
-onMounted(() => {
-    ProductService.getProducts().then((data) => (products.value = data.slice(0, 12)));
-});
 
 
-
-const products = ref();*/
 const layout = ref("grid");
 
 const items = ref([

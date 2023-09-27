@@ -7,7 +7,7 @@
       <h1>{{ author.first_name + ' ' + author.last_name  }} </h1>
     </div>
 
-    <Panel class="px-2" header="Biographie" toggleable :collapsed="true">
+    <Panel class="px-2 mt-2" header="Biographie" toggleable :collapsed="true">
           <div>{{ author.short_cv }}</div>
         </Panel>
 

@@ -81,12 +81,7 @@ const initFilters1 = () => {
   };
 };
 const sourceIsSelected = ref(false);
-// const emit = defineEmits(["sourceSelected", "closeNavSource"]);
-// const onRowSelect = (node) => {
-// emit("sourceSelected", node);
-// sourceIsSelected.value = !sourceIsSelected.value;
-// console.log(listItems.value[node.index].titre);
-// }
+
 const onRowSelect = (node) => {
   sourceIsSelected.value = !sourceIsSelected.value;
   navStore.selectedSourceID = node.data.id;

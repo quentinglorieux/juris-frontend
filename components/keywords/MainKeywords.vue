@@ -23,7 +23,7 @@
           <h1>{{ kw.titre }}</h1>
         </div>
 
-        <Panel class="pr-2" header="Introduction" toggleable>
+        <Panel class="pr-2 pt-2" header="Introduction" toggleable>
           <div v-html="kw.introduction"></div>
         </Panel>
         <!-- <h4>Commentaires associés</h4> -->

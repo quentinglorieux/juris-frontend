@@ -1,21 +1,28 @@
 <template>
-  <div class="flex">
-    <NuxtLink class="link"
-      v-for="kw in kwList"
-      to="/keywords"
-      @click="navStore.selectedKeywordID = kw.id"
-      >{{ kw.titre }}</NuxtLink
-    >
-    <!-- <Tag
-      v-for="kw in kwList"
-      class="mr-2 text-sm"
-      severity="info"
-      icon="pi pi-link"
-      :value="kw.titre"
-    >
-    </Tag> -->
+  <div class="flex flex-wrap">
 
-  </div>
+ 
+      <NuxtLink
+        class="link"
+        v-for="kw in kwList"
+        to="/keywords"
+        @click="navStore.selectedKeywordID = kw.id"
+      >
+      <!-- {{ kw.titre }} -->
+
+      <div class="bg-slate-300 rounded-full flex flex-wrap gap-2">
+        <Chip class="pl-0 pr-3 flex">
+          <span
+            class="bg-primary border-circle w-2rem h-2rem flex align-items-center justify-content-center"
+            > {{ kw.titre[0] }}</span
+          >
+          <span class="ml-2 font-medium">{{ kw.titre }}</span>
+        </Chip>
+      </div>
+
+      </NuxtLink>
+    </div>
+ 
 </template>
 
 <script setup>
@@ -38,41 +45,28 @@ function listDuplicate() {
   }
   return kwList.value;
 }
-
-// const config = useRuntimeConfig();
-// const directus = new Directus(config.public.API_BASE_URL);
-// const listItems = ref([]);
-// async function retrieveKeywords() {
-//   const publicData = await directus.items("keywords").readByQuery();
-//   var L = publicData.data;
-//   listItems.value = L;
-// }
-// retrieveKeywords();
 </script>
 
 <style scoped>
-
-
-
 .link {
-	color: #18272F;
+  color: #18272f;
   position: relative;
   text-decoration: none;
-  margin-right: 10px;
+  padding: 10px;
 }
 
 .link::before {
-  content: '';
+  content: "";
   position: absolute;
-  width:100%;
+  width: 100%;
   height: 1px;
   border-radius: 1px;
-  background-color: #18272F;
+  background-color: #18272f;
   bottom: 0;
   left: 0;
   transform-origin: right;
   transform: scaleX(0);
-  transition: transform .3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .link:hover::before {
