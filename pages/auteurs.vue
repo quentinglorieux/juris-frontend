@@ -1,7 +1,10 @@
 <template>
     
-    <div class="w-2/3 mx-auto  mt-3 "> 
-        <h2 class="mb-0"> Les auteurs </h2>
+    <div class="w-3/4 mx-auto  mt-1"> 
+      <div class="titre-page">
+      <h1>Les auteurs </h1>
+    </div>
+        <!-- <h2 class="mb-0">  </h2> -->
   <DataTable :value="store.authors" tableStyle="min-width: 50rem">
     <Column field="name" header="">
       <template #body="slotProps" >

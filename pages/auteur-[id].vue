@@ -2,7 +2,7 @@
   <div v-if="!author"> 
     Chargement en cours
   </div>
-  <div v-else>
+  <div class="w-3/4 mx-auto mt-1" v-else>
     <div class="titre-page">
       <h1>{{ author.first_name + ' ' + author.last_name  }} </h1>
     </div>

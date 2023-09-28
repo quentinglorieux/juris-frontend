@@ -1,39 +1,46 @@
 <template>
-  <div class="layout-topbar">
-    <router-link to="/" class="layout-topbar-logo">
-      <!-- <img src="@/assets/logo.png" alt="logo" /> -->
-      <span>JURIS project</span>
+  <div>
+    <router-link to="/" class="layout-topbar-logo"><h1 class="home-titre" style="text-align: center">Projet JurisLab</h1>
     </router-link>
+    <div class="layout-topbar">
+      <!-- <router-link to="/" class="layout-topbar-logo"> -->
+        <!-- <img src="@/assets/logo.png" alt="logo" /> -->
+        <span>Logo</span>
+      <!-- </router-link> -->
 
-    <!-- <button
+      <!-- <button
       class="p-link layout-menu-button layout-topbar-button"
       @click="onMenuToggle()"
     >
       <i class="pi pi-bars"></i>
     </button> -->
 
-    <!-- <button
+      <!-- <button
       class="p-link layout-topbar-menu-button layout-topbar-button"
       @click="onTopBarMenuButton()"
     >
       <i class="pi pi-ellipsis-v"></i>
     </button> -->
 
-    <Menubar
-      class="layout-topbar-menu"
-      :class="topbarMenuClasses"
-      :model="items"
-    />
+      <Menubar
+        class="layout-topbar-menu"
+        :class="topbarMenuClasses"
+        :model="items"
+      />
 
-    <div class="layout-topbar-menu" :class="topbarMenuClasses">
-      <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
-        <i class="pi pi-search"></i>
-        <span>Search</span>
-      </button>
-      <button @click="onSettingsClick()" class="p-link layout-topbar-button">
-        <i class="pi pi-cog"></i>
-        <span>Settings</span>
-      </button>
+      <div class="layout-topbar-menu" :class="topbarMenuClasses">
+        <button
+          @click="onTopBarMenuButton()"
+          class="p-link layout-topbar-button"
+        >
+          <i class="pi pi-search"></i>
+          <span>Search</span>
+        </button>
+        <button @click="onSettingsClick()" class="p-link layout-topbar-button">
+          <i class="pi pi-cog"></i>
+          <span>Settings</span>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -84,15 +91,17 @@ async function retrieveAuthors() {
 
   store.authors = publicData.value.data;
 
-  items.value[4].items.push({label: ' - Tous les auteurs - ', to:"/auteurs"})
+  items.value[4].items.push({
+    label: " - Tous les auteurs - ",
+    to: "/auteurs",
+  });
   for (let author of store.authors) {
     // items.value[1].items[3].items.push({
     items.value[4].items.push({
-      label: author.first_name + ' ' + author.last_name ,
+      label: author.first_name + " " + author.last_name,
       to: "/auteur-" + author.last_name,
     });
   }
-  
 }
 
 async function retrieveThemes() {

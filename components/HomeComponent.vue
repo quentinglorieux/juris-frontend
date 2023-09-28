@@ -1,8 +1,8 @@
 <template>
   <div class="p-1">
-    <h1 class="home-titre" style="text-align: center">
-      Bienvenue au projet Juris
-    </h1>
+    <!-- <h1 class="home-titre" style="text-align: center">
+      Projet Juris
+    </h1> -->
     <div class="home-chapeau">
       <p>
         Courte description u projet : lorem ipsum dolor sit amet, consectetur

@@ -1,8 +1,15 @@
 :root {
-  --surface-a:#1b8eb786;
+  /* --surface-a:#1b8eb786;
   --surface-b:#dadddf;
   --surface-c:#90b9d554;
   --surface-d:#10263d;
+  --surface-e:#ffffff;
+  --surface-f:#ffffff;
+  --text-color:rgb(5, 23, 42); */
+  --surface-a:#407BAA;
+  --surface-b:#dadddf;
+  --surface-c:#306793;
+  --surface-d:  #ACCDE1;
   --surface-e:#ffffff;
   --surface-f:#ffffff;
   --text-color:rgb(5, 23, 42);
@@ -5004,26 +5011,29 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-menubar {
   padding: 0.5rem;
   background: #f8f9fa;
-  color: #495057;
+  color: var(--surface-c);
   border: 1px solid #dee2e6;
   border-radius: 3px;
 }
 .p-menubar .p-menuitem-link {
   padding: 0.75rem 1rem;
-  color: #495057;
+  color: var(--surface-c);
   border-radius: 0;
   transition: box-shadow 0.2s;
   user-select: none;
+  /* text-transform: uppercase; */
+  font-weight: 500;
+  font-size: 1.2rem;
 }
 .p-menubar .p-menuitem-link .p-menuitem-text {
-  color: #495057;
+  color: var(--surface-c);
 }
 .p-menubar .p-menuitem-link .p-menuitem-icon {
-  color: #6c757d;
+  color: var(--surface-c);
   margin-right: 0.5rem;
 }
 .p-menubar .p-menuitem-link .p-submenu-icon {
-  color: #6c757d;
+  color: var(--surface-c);
 }
 .p-menubar .p-menuitem-link:not(.p-disabled):hover {
   background: #e9ecef;
@@ -5116,9 +5126,11 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-menubar .p-submenu-list .p-submenu-icon {
   font-size: 0.875rem;
+  
 }
 .p-menubar .p-submenu-list .p-menuitem {
   margin: 0;
+ 
 }
 .p-menubar .p-submenu-list .p-menuitem:last-child {
   margin: 0;

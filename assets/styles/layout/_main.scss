@@ -43,11 +43,13 @@ a {
   display: flex;
   justify-content: center;
   color: var(--surface-ground);
-  background-color: var(--text-color);
+  background-color: var(--surface-a);
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
   text-align: center;
   font-size: 3em;
+  font-family: Garamond;
+  font-variant: small-caps;
 }
 
 .home-chapeau{

@@ -6,7 +6,7 @@
  //   top: 0;
     width: 100%;
     padding: 0 2rem;
-   // background-color: var(--surface-card);
+    background-color: var(--surface-d);
     transition: left $transitionDuration;
     display: flex;
     align-items: center;
@@ -80,6 +80,7 @@
         padding: 0;
         list-style: none;
         display: flex;
+        background-color: var(--surface-d);
 
         .layout-topbar-button {
             margin-left: 1rem;
@@ -151,7 +152,8 @@
 
 .p-menubar{
     border: none;
-    color: var(--text-color);
+    // color: var(--text-color);
+    // color: red;
 }
 
 .p-menubar .p-submenu-list {
