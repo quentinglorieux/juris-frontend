@@ -117,6 +117,9 @@ const visible = ref(false);
 const filters = ref();
 // const commentaire_fetched=ref();
 
+
+
+
 const initFilters = () => {
   filters.value = {
     global: { value: null },
@@ -130,12 +133,16 @@ const onCommentButtonClick = (com) => {
 };
 
 const kw = ref(false);
+
 onUpdated(() => {
   kw.value = store.keywords.find(
     (element) => element.id == navStore.selectedKeywordID
   );
 });
+
 onMounted(() => {
+  retrieveKeywords()
+  console.log(store.keywords)
   try {
     kw.value = store.keywords.find(
       (element) => element.id == navStore.selectedKeywordID
@@ -144,4 +151,7 @@ onMounted(() => {
     console.log(error);
   }
 });
+
+
+
 </script>

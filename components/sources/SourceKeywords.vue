@@ -26,8 +26,27 @@
 import { useNavStore } from "@/stores/navigation";
 const navStore = useNavStore();
 
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+
 const kwList = ref([]);
 const props = defineProps(["source"]);
+
+
+
+
+const { $directus } = useNuxtApp();
+async function retrieveKeywords() {
+  console.log('in')
+  const { data: publicData } = await useAsyncData(() => {
+    return $directus.items("keywords").readByQuery({
+      fields: [
+        "titre,id,meta,introduction,commentaires.commentaires_id.titre,commentaires.commentaires_id.id,commentaires.commentaires_id.auteur_id.first_name,commentaires.commentaires_id.auteur_id.last_name,commentaires.commentaires_id.source_id.titre",
+      ],
+    });
+  });
+  store.keywords = publicData.value.data; //Storage of Keywords data
+}
 
 
 function listDuplicate() {
@@ -51,6 +70,8 @@ watch(props, () => {
 
 onMounted(() => {
   kwList.value = listDuplicate();
+ if (!store.keyword)  {retrieveKeywords()} 
+  
 });
 
 </script>
