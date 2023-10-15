@@ -1,5 +1,5 @@
 <template>
-   A
+   AX
   <h3>{{ selectedCom }}</h3>
   {{ selectedCom.id }}
   {{ selectedCom.content }}

@@ -49,7 +49,7 @@
           <div class="col-12 sm:col-6 lg:col-12 xl:col-2 p-2">
             <div class="p-4">
               <a :href="slotProps.data.to">
-                <div class="flex flex-column align-items-center gap-3 py-5">
+                <div class=" flex flex-column align-items-center gap-3 py-5 hover:text-blue-800">
                   <i :class="slotProps.data.icon" style="font-size: 5rem"></i>
                   <div class="text-2xl">{{ slotProps.data.label }}</div>
                 </div>

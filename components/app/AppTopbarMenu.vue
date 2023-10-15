@@ -16,12 +16,12 @@ import { ref } from "vue";
 
 
 const items = ref([
-     { label: "Accueil", icon: "pi pi-fw pi-home", to: "/" },
-      { label: "Sources", icon: "pi pi-fw pi-file", to: "/sources" },
-      { label: "Thèmes", icon: "pi pi-fw pi-list", to: "/themes" },
-      { label: "Mots Clés", icon: "pi pi-fw pi-tags", to: "/keywords" },
-      { label: "Auteurs", icon: "pi pi-fw pi-user", to: "/autors" },
-
+  { label: "ACCUEIL", icon: "pi pi-fw pi-home", to: "/" },
+  { label: "SOURCES", icon: "pi pi-fw pi-th-large", to: "/sources" },
+  { label: "MOTS-CLÉS", icon: "pi pi-fw pi-tags", to: "/keywords" },
+  { label: "THÈMES", icon: "pi pi-fw pi-list", items: [] },
+  { label: "AUTEURS", icon: "pi pi-fw pi-users", items: [] }, // change the item.value[5] if remove Alt
+  { label: "MAP", icon: "pi pi-fw pi-share-alt", to: "/map" },
 ]);
 
 

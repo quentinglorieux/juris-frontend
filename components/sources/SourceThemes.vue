@@ -3,7 +3,6 @@
     <NuxtLink to="/themes" @click="navStore.selectedThemeID = source.data.theme_id.id"> 
       <Tag
         class="mr-2 text-sm"
-        severity="warning"
         :value="source.data.theme_id.titre"
       ></Tag>
     </NuxtLink>
