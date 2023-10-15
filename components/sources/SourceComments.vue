@@ -1,15 +1,12 @@
 <template>
   <div >
+    
     <li v-for="com in source.data.commentaires">
       <div class="flex p-1" >
         <Button rounded class="shrink-0 min-w-fit bg-gray-200 hover:bg-blue-100" icon="pi pi-eye" text   @click="retrieveComments(com)"/>
         <div class="grow-0 mr-3 text-lg" >
           {{com.titre}}
         </div>
-        <!--<Button v-if="comSelected == com.id" @click="togleCommentPanel(com)">
-          Close
-        </Button>-->
-
       </div>
     </li>
   </div>

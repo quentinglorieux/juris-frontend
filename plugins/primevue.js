@@ -26,6 +26,7 @@ import DataView from 'primevue/dataview';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions' 
 import Panel from 'primevue/panel';
 import Avatar from 'primevue/avatar';
+import Chip from 'primevue/chip';
 
 
 
@@ -54,6 +55,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('ScrollPanel', ScrollPanel);
     nuxtApp.vueApp.component('Panel', Panel);
     nuxtApp.vueApp.component('Avatar', Avatar);
+    nuxtApp.vueApp.component('Chip', Chip);
 
     
     

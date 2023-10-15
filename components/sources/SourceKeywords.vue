@@ -1,50 +1,58 @@
 <template>
   <div class="flex flex-wrap">
-
- 
-      <NuxtLink
-        class="link"
-        v-for="kw in kwList"
-        to="/keywords"
-        @click="navStore.selectedKeywordID = kw.id"
-      >
+    <NuxtLink
+      class="link"
+      v-for="kw in kwList"
+      to="/keywords"
+      @click="navStore.selectedKeywordID = kw.id"
+    >
       <!-- {{ kw.titre }} -->
 
       <div class="bg-slate-300 rounded-full flex flex-wrap gap-2">
         <Chip class="pl-0 pr-3 flex">
           <span
             class="bg-primary border-circle w-2rem h-2rem flex align-items-center justify-content-center"
-            > {{ kw.titre[0] }}</span
+          >
+            {{ kw.titre[0] }}</span
           >
           <span class="ml-2 font-medium">{{ kw.titre }}</span>
         </Chip>
       </div>
-
-      </NuxtLink>
-    </div>
- 
+    </NuxtLink>
+  </div>
 </template>
 
 <script setup>
 import { useNavStore } from "@/stores/navigation";
 const navStore = useNavStore();
 
-// import { Directus } from "@directus/sdk";
 const kwList = ref([]);
 const props = defineProps(["source"]);
-onBeforeMount(() => {
-  const list = listDuplicate();
-  kwList.value = [...new Set(list)];
-});
+
 
 function listDuplicate() {
+  const l1 = [];
   for (let com of props.source.data.commentaires) {
     for (let kw of com.keywords_id) {
-      kwList.value.push({ titre: kw.keywords_id.titre, id: kw.keywords_id.id });
+      l1.push({ titre: kw.keywords_id.titre, id: kw.keywords_id.id });
     }
   }
-  return kwList.value;
+  const uniqueMap = new Map();
+  const uniqueArray = l1.filter((obj) => {
+    const key = `${obj.titre}_${obj.id}`;
+    return !uniqueMap.has(key) && uniqueMap.set(key, obj);
+  });
+  return uniqueArray;
 }
+
+watch(props, () => {
+  kwList.value = listDuplicate();
+});
+
+onMounted(() => {
+  kwList.value = listDuplicate();
+});
+
 </script>
 
 <style scoped>
