@@ -5,7 +5,7 @@
       class="card2 bg-slate-100 p-0 pb-1"
       ref="pdfSection"
     >
-      <h1 class="flex  justify-between">
+     <h1 class="flex  justify-between">
         <div class="px-2">
           <h1 class="">{{ fetched_data.data.titre }}</h1>
         </div>
@@ -33,9 +33,15 @@
       <div class="pt-3 px-2 m-2 " v-html="parsedMarkdown"></div>
 
       <div class="bg-slate-200 p-2 mt-10 m-2 rounded ">
+        <h3 class="px-2">Références :</h3>
+        <div> <ul  class="px-2 pb-3" > <li v-for="ref in store.commentaires.references"> <a :id="'ref'+ ref.id"> [{{ ref.id }}] {{ ref.titre }} </a> <a :href="'#s' + ref.id"> - Retour </a></li> </ul> </div>
+      </div>
+
+      <div class="bg-slate-300 p-2 mt-10 m-2 rounded ">
         <h3 class="px-2">Citation :</h3>
         <div class="px-2 pb-3" v-html="fetched_data.data.citation"></div>
       </div>
+
     </div>
   </div>
 </template>
@@ -75,12 +81,13 @@ const { $directus } = useNuxtApp();
 async function retrieveCommentData(id) {
   fetched_data.value = await useAsyncData(() => {
     return $directus.items("commentaires").readOne(id, {
-      fields: ["id,titre,citation,abstract,content,auteur_type,auteur_name"],
+      fields: ["id,titre,citation,abstract,content,auteur_type,auteur_name,references"],
     });
   });
   parsedMarkdown.value = md.render(fetched_data.value.data.content) 
   // + '<div v-tooltip="' + "'Tooltip'" +'" type="text">Bonjour </div>';
   store.commentaires.titre = fetched_data.value.data.titre
+  store.commentaires.references = fetched_data.value.data.references
 }
 
 onMounted(() => {
@@ -92,3 +99,10 @@ watch(prop, () => {
   retrieveCommentData(prop.com);
 });
 </script>
+
+<style scoped>
+li{
+  list-style-type: none;
+}
+#ref1{scroll-behavior: smooth;}
+</style>

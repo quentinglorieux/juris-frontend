@@ -3,6 +3,7 @@
     <div v-if="!theme">
       <h1>Sélectionnez un Theme</h1>
     </div>
+    
     <div v-else class=" mx-auto mt-1">
       <div class="titre-page mx-2">
         <h1>  {{ theme.data.titre }}</h1>
