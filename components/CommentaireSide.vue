@@ -46,6 +46,10 @@ import MarkdownIt from "markdown-it";
 import { exportToPDF } from "#imports";
 const pdfSection = (ref < HTMLElement) | (null > null);
 
+import { useGlobalStore } from "~/stores/global";
+const store = useGlobalStore();
+
+
 const prop = defineProps(["com"]);
 
 const documentOptions = {
@@ -75,6 +79,7 @@ async function retrieveCommentData(id) {
     });
   });
   parsedMarkdown.value = md.render(fetched_data.value.data.content);
+  store.commentaires.titre = fetched_data.value.data.titre
 }
 
 onMounted(() => {

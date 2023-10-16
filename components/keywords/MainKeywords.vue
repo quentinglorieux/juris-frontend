@@ -58,12 +58,44 @@
               sortable
               field="commentaires_id.titre"
               header="Commentaires"
-            ></Column>
+            >
+            <template #body="slotSource">
+                <span class=" hover:bg-sky-200">
+                  <NuxtLink
+                    to="/sources"
+                    @click="
+                      setNavSource(
+                        slotSource.data.commentaires_id.source_id.id);
+                      setSelectedComment(
+                        slotSource.data.commentaires_id.id);
+                    "
+                    >{{ slotSource.data.commentaires_id.titre }}
+                  </NuxtLink>
+                </span>
+              </template>
+            </Column>
+
+
             <Column
               sortable
               field="commentaires_id.source_id.titre"
               header="Sources"
-            ></Column>
+            >
+              <template #body="slotSource">
+                <span class=" hover:bg-sky-200">
+                  <NuxtLink
+                    to="/sources"
+                    @click="
+                      setNavSource(
+                        slotSource.data.commentaires_id.source_id.id);
+                    "
+                    >{{ slotSource.data.commentaires_id.source_id.titre }}
+                  </NuxtLink>
+                </span>
+              </template>
+            </Column>
+
+
             <Column field="commentaires_id.auteur_id" header="Auteur">
               <template #body="slotAuteur">
                 <!-- {{ slotAuteur.data.commentaires_id.auteur_id}} -->
@@ -76,6 +108,8 @@
                 </span>
               </template>
             </Column>
+
+            
             <Column field="commentaires_id" header="">
               <template #body="SlotCom">
                 <div class="flex justify-center">
@@ -117,9 +151,6 @@ const visible = ref(false);
 const filters = ref();
 // const commentaire_fetched=ref();
 
-
-
-
 const initFilters = () => {
   filters.value = {
     global: { value: null },
@@ -131,6 +162,23 @@ const onCommentButtonClick = (com) => {
   visible.value = !visible.value;
   selectedCom.value = com;
 };
+
+function setNavSource(id) {
+  // console.log(id);
+  navStore.selectedSourceID = id;
+  navStore.comVisibility = false;
+  // navStore.navVisibility = false;
+}
+
+function setSelectedComment(id) {
+  // console.log(id);
+  navStore.comID = id
+  navStore.comVisibility = true;
+  navStore.navVisibility = false;
+}
+
+
+
 
 const kw = ref(false);
 
@@ -149,7 +197,4 @@ onMounted(() => {
     console.log(error);
   }
 });
-
-
-
 </script>

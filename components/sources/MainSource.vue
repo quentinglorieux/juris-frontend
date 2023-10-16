@@ -1,15 +1,14 @@
 <template>
   <div class="flex flex-column w-full">
-  
     <div v-if="!source">
       <h1>Sélectionnez une Source</h1>
     </div>
     <div v-else>
       <div>
         <div class="titre-page">
-              <h1>{{ source.data.titre }}</h1>
-              <p v-if="source.data">[{{ source.data.type }}]</p>
-            </div>
+          <h1>{{ source.data.titre }}</h1>
+          <p v-if="source.data">[{{ source.data.type }}]</p>
+        </div>
         <Splitter>
           <SplitterPanel :size="60" class="">
             <ScrollPanel>
@@ -26,87 +25,91 @@
           </SplitterPanel>
 
           <SplitterPanel :size="40">
-            
             <div class="split-menu">
               <div>
-              <TabView>
-                <TabPanel header="Commentaires">
-                  <div class="section" id="comments"></div>
-                  <SourceComments
-                    :source="source"
-                    :comSelected="store.commentaires"
-                  />
-                </TabPanel>
-
-                <TabPanel header="Mots-clés">
-                  <div class="section" id="keywords"></div>
-                  <SourceKeywords :source="source" />
-                </TabPanel>
-
-                <TabPanel header="Thèmes">
-                  <div class="section" id="themes"></div>
-                  <SourceThemes :source="source" />
-                </TabPanel>
-
-                <TabPanel header="Traduction(s)">
-                  <h2>Traduction(s)</h2>
-                </TabPanel>
-              </TabView>
-            </div>
-
-            <div class="source-commentaire" v-if="navStore.comVisibility">
-              <div class="close-button">
-                <Button
-                  icon="pi pi-times"
-                  text
-                  rounded
-                  @click="
-                    () => {
-                      navStore.comVisibility = false;
-                      store.commentaires = {};
-                    }
-                  "
-                >
-                </Button>
-              </div>
-              <TabView >
-                <TabPanel>
-                  <template #header>
-                    <span
-                      >{{ store.commentaires.titre.substring(0,35) }} {{ store.commentaires.titre.length > 40 ? "[ ...]" : ""  }}</span
-                    >
-                  </template>
-                  <ScrollPanel 
-                    style="margin: -1rem; height: 100%; background-color: white"
-                  >          
-                    <div class="p-3">
-                      <CommentaireSide :com="store.commentaires.id"></CommentaireSide>
-                      
-                      <!-- <div v-html="store.commentaires.content"></div> -->
-                     
-                    </div>
-                    <ScrollTop
-                      target="parent"
-                      :threshold="100"
-                      class="custom-scrolltop"
-                      icon="pi pi-arrow-up"
+                <TabView>
+                  <TabPanel header="Commentaires">
+                    <div class="section" id="comments"></div>
+                    <SourceComments
+                      :source="source"
+                      :comSelected="store.commentaires"
                     />
-                  </ScrollPanel>
-                </TabPanel>
-                <TabPanel>
-                  <template #header>
-                    <span>Mots-clés associés</span>
-                  </template> <ScrollPanel > 
-<CommentsKeywords :kwList="kwSelectectComment"></CommentsKeywords>
-                </ScrollPanel>
-                </TabPanel>
-                <!-- <TabPanel>
+                  </TabPanel>
+
+                  <TabPanel header="Mots-clés">
+                    <div class="section" id="keywords"></div>
+                    <SourceKeywords :source="source" />
+                  </TabPanel>
+
+                  <TabPanel header="Thèmes">
+                    <div class="section" id="themes"></div>
+                    <SourceThemes :source="source" />
+                  </TabPanel>
+
+                  <TabPanel header="Traduction(s)">
+                    <h2>Traduction(s)</h2>
+                  </TabPanel>
+                </TabView>
+              </div>
+
+              <div class="source-commentaire" v-if="navStore.comVisibility">
+                <div class="close-button">
+                  <Button
+                    icon="pi pi-times"
+                    text
+                    rounded
+                    @click="
+                      () => {
+                        navStore.comVisibility = false;
+                        // store.commentaires = {};
+                      }
+                    "
+                  >
+                  </Button>
+                </div>
+                <TabView>
+                  <TabPanel>
+                    <template #header>
+                      
+                      {{ comTitre }}
+                    </template>
+                    <ScrollPanel
+                      style="
+                        margin: -1rem;
+                        height: 100%;
+                        background-color: white;
+                      "
+                    >
+                      <div class="p-3">
+                        <CommentaireSide
+                          :com="navStore.comID"
+                        ></CommentaireSide>
+                      </div>
+                      <ScrollTop
+                        target="parent"
+                        :threshold="100"
+                        class="custom-scrolltop"
+                        icon="pi pi-arrow-up"
+                      />
+                    </ScrollPanel>
+                  </TabPanel>
+                  <TabPanel>
+                    <template #header>
+                      <span>Mots-clés associés</span>
+                    </template>
+                    <ScrollPanel>
+                      <CommentsKeywords
+                        :kwList="kwSelectectComment"
+                      ></CommentsKeywords>
+                    </ScrollPanel>
+                  </TabPanel>
+                  <!-- <TabPanel>
                   <template #header>
                     <span>Thèmes associés</span>
                   </template>
                 </TabPanel> -->
-              </TabView>
-            </div>
+                </TabView>
+              </div>
             </div>
           </SplitterPanel>
         </Splitter>
@@ -128,27 +131,31 @@ const oldID = ref();
 import edjsHTML from "editorjs-html";
 const edjsParser = edjsHTML();
 const editorJScontent = computed(() => {
-  if (source.value && source.value.data){
+  if (source.value && source.value.data) {
     return edjsParser.parse(source.value.data.texte);
+  } else {
+    return null;
   }
-  else{
-    return null
-  }
-  
 });
 
 
+
+const comTitre = computed(()=> { 
+if( store.commentaires.titre) { const a = store.commentaires.titre.substring(0, 35)
+const b = store.commentaires.titre.length > 35 ? "[ ...]" : "" 
+const c = a + b 
+return c } 
+return ''})
+
 onMounted(() => {
-  
   if (navStore.selectedSourceID) {
     retrieveSourceData(navStore.selectedSourceID);
   }
 });
 
 onUpdated(() => {
-
   if (navStore.selectedSourceID != oldID.value) {
-    navStore.comVisibility = false;
+    // navStore.comVisibility = false;
     retrieveSourceData(navStore.selectedSourceID);
   }
 
@@ -183,13 +190,17 @@ async function retrieveSourceData(id) {
     source.value.data;
 }
 
-
-
-const kwSelectectComment = computed( () => {
-  const dataSource = store.sources[store.sources.findIndex((x) => x.id === navStore.selectedSourceID)]
-  const dataSelectedComment = dataSource.commentaires[dataSource.commentaires.findIndex((x) => x.id === navStore.comID)]
-  return dataSelectedComment.keywords_id
-})
+const kwSelectectComment = computed(() => {
+  const dataSource =
+    store.sources[
+      store.sources.findIndex((x) => x.id === navStore.selectedSourceID)
+    ];
+  const dataSelectedComment =
+    dataSource.commentaires[
+      dataSource.commentaires.findIndex((x) => x.id === navStore.comID)
+    ];
+  return dataSelectedComment.keywords_id;
+});
 
 async function retrieveComments(id) {
   const { data } = await useAsyncData(() => {
