@@ -19,7 +19,7 @@
         <SplitterPanel>
           <div class="theme-content">
           <div style="width:50%;">
-            <h2>Mots Clefs</h2>
+            <h2>Mots-clés</h2>
           </div>
           <div style="width:50%">
           <h2>Sources</h2>

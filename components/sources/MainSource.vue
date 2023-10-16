@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-column p-1 w-full">
+  <div class="flex flex-column w-full">
   
     <div v-if="!source">
       <h1>Sélectionnez une Source</h1>
@@ -69,14 +69,14 @@
                 >
                 </Button>
               </div>
-              <TabView>
+              <TabView >
                 <TabPanel>
                   <template #header>
                     <span
-                      >{{ store.commentaires.titre }}</span
+                      >{{ store.commentaires.titre.substring(0, 40) }} {{ store.commentaires.titre.length > 40 ? "[ ...]" : ""  }}</span
                     >
                   </template>
-                  <ScrollPanel
+                  <ScrollPanel 
                     style="margin: -1rem; height: 100%; background-color: white"
                   >          
                     <div class="p-3">
@@ -95,7 +95,7 @@
                 </TabPanel>
                 <TabPanel>
                   <template #header>
-                    <span>Mots Clefs</span>
+                    <span>Mots-clés</span>
                   </template>
                 </TabPanel>
                 <TabPanel>
@@ -202,3 +202,9 @@ store.$subscribe((mutation, state) => {
   }
 });
 </script>
+
+<style>
+.p-tabview .p-tabview-panels {
+  padding: 0;
+}
+</style>

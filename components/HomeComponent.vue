@@ -74,7 +74,7 @@ const items = ref([
     to: "/sources",
   },
   {
-    label: "Mots Clés",
+    label: "Mots-clés",
     icon: "pi pi-fw pi-tags",
     to: "/keywords",
   },

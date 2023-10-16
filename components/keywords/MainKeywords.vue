@@ -141,8 +141,6 @@ onUpdated(() => {
 });
 
 onMounted(() => {
-  retrieveKeywords()
-  console.log(store.keywords)
   try {
     kw.value = store.keywords.find(
       (element) => element.id == navStore.selectedKeywordID

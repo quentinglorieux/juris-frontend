@@ -2,10 +2,14 @@
   <div class="flex">
     <div
       v-if="fetched_data"
-      class="card2 bg-slate-100 mt-2 p-1"
+      class="card2 bg-slate-100 p-0 pb-1"
       ref="pdfSection"
     >
-      <h1 class="flex">
+      <h1 class="flex  justify-between">
+       
+        <div class="px-2">
+          <h1 class="">{{ fetched_data.data.titre }}</h1>
+        </div>
         <div class="mt-1">
           <Button
             @click="
@@ -20,22 +24,18 @@
             icon="pi pi-file-pdf"
           />
         </div>
-        <div>
-          <h1 class="text-center">{{ fetched_data.data.titre }}</h1>
-        </div>
       </h1>
 
-      <div class="bg-slate-200 p-2">
-        <h3>Résumé:</h3>
-        <div v-html="fetched_data.data.abstract"></div>
+      <div class="bg-slate-200 p-2 rounded m-2">
+        <h3 class="px-2">Résumé:</h3>
+        <div class="p-2" v-html="fetched_data.data.abstract"></div>
       </div>
 
-      <h2></h2>
-      <div v-html="parsedMarkdown"></div>
+      <div class="pt-3 px-2 m-2 " v-html="parsedMarkdown"></div>
 
-      <div class="bg-slate-200 p-2 mt-10">
-        <h5>Citation :</h5>
-        <div v-html="fetched_data.data.citation"></div>
+      <div class="bg-slate-200 p-2 mt-10 m-2 rounded ">
+        <h3 class="px-2">Citation :</h3>
+        <div class="px-2 pb-3" v-html="fetched_data.data.citation"></div>
       </div>
     </div>
   </div>

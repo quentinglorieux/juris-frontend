@@ -1,6 +1,5 @@
 <template>
-  <div >
-    
+  <div class="p-3 pt-4" >
     <li v-for="com in source.data.commentaires">
       <div class="flex p-1" >
         <Button rounded class="shrink-0 min-w-fit bg-gray-200 hover:bg-blue-100" icon="pi pi-eye" text   @click="retrieveComments(com)"/>

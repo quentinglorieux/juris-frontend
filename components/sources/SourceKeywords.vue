@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap p-2 pt-3">
     <NuxtLink
       class="link"
       v-for="kw in kwList"
@@ -37,7 +37,6 @@ const props = defineProps(["source"]);
 
 const { $directus } = useNuxtApp();
 async function retrieveKeywords() {
-  console.log('in')
   const { data: publicData } = await useAsyncData(() => {
     return $directus.items("keywords").readByQuery({
       fields: [
