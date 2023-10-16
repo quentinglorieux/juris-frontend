@@ -137,6 +137,7 @@ const editorJScontent = computed(() => {
   }
 });
 
+const Cblock = computed((block) => {console.log(block);return 'block'})
 
 
 const comTitre = computed(()=> { 

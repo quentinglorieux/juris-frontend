@@ -29,7 +29,7 @@
         <h3 class="px-2">Résumé:</h3>
         <div class="p-2" v-html="fetched_data.data.abstract"></div>
       </div>
-
+      
       <div class="pt-3 px-2 m-2 " v-html="parsedMarkdown"></div>
 
       <div class="bg-slate-200 p-2 mt-10 m-2 rounded ">
@@ -47,8 +47,8 @@ const pdfSection = (ref < HTMLElement) | (null > null);
 
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
-import { useNavStore } from "@/stores/navigation";
-const navStore = useNavStore();
+// import { useNavStore } from "@/stores/navigation";
+// const navStore = useNavStore();
 
 const prop = defineProps(["com"]);
 
@@ -67,7 +67,7 @@ const options = {
 };
 
 const fetched_data = ref();
-const md = new MarkdownIt();
+const md = new MarkdownIt({html:true});
 const parsedMarkdown = ref();
 
 // DataFetching of the selected Commentaires(id)
@@ -78,7 +78,8 @@ async function retrieveCommentData(id) {
       fields: ["id,titre,citation,abstract,content,auteur_type,auteur_name"],
     });
   });
-  parsedMarkdown.value = md.render(fetched_data.value.data.content);
+  parsedMarkdown.value = md.render(fetched_data.value.data.content) 
+  // + '<div v-tooltip="' + "'Tooltip'" +'" type="text">Bonjour </div>';
   store.commentaires.titre = fetched_data.value.data.titre
 }
 

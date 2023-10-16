@@ -27,6 +27,8 @@ import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'
 import Panel from 'primevue/panel';
 import Avatar from 'primevue/avatar';
 import Chip from 'primevue/chip';
+import Tooltip from 'primevue/tooltip';
+
 
 
 
@@ -63,5 +65,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('Fieldset', Fieldset);
     nuxtApp.vueApp.component('DataView', DataView);
     nuxtApp.vueApp.component('DataViewLayoutOptions', DataViewLayoutOptions);
+    nuxtApp.vueApp.directive('tooltip', Tooltip);
 });
 
