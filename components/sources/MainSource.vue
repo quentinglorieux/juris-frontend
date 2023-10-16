@@ -38,7 +38,7 @@
                   />
                 </TabPanel>
 
-                <TabPanel header="Mots-Clés">
+                <TabPanel header="Mots-clés">
                   <div class="section" id="keywords"></div>
                   <SourceKeywords :source="source" />
                 </TabPanel>
@@ -73,7 +73,7 @@
                 <TabPanel>
                   <template #header>
                     <span
-                      >{{ store.commentaires.titre.substring(0, 40) }} {{ store.commentaires.titre.length > 40 ? "[ ...]" : ""  }}</span
+                      >{{ store.commentaires.titre.substring(0,35) }} {{ store.commentaires.titre.length > 40 ? "[ ...]" : ""  }}</span
                     >
                   </template>
                   <ScrollPanel 
@@ -95,14 +95,16 @@
                 </TabPanel>
                 <TabPanel>
                   <template #header>
-                    <span>Mots-clés</span>
-                  </template>
+                    <span>Mots-clés associés</span>
+                  </template> <ScrollPanel > 
+<CommentsKeywords :kwList="kwSelectectComment"></CommentsKeywords>
+                </ScrollPanel>
                 </TabPanel>
-                <TabPanel>
+                <!-- <TabPanel>
                   <template #header>
-                    <span>Auteurs</span>
+                    <span>Thèmes associés</span>
                   </template>
-                </TabPanel>
+                </TabPanel> -->
               </TabView>
             </div>
             </div>
@@ -181,11 +183,18 @@ async function retrieveSourceData(id) {
     source.value.data;
 }
 
+
+
+const kwSelectectComment = computed( () => {
+  const dataSource = store.sources[store.sources.findIndex((x) => x.id === navStore.selectedSourceID)]
+  const dataSelectedComment = dataSource.commentaires[dataSource.commentaires.findIndex((x) => x.id === navStore.comID)]
+  return dataSelectedComment.keywords_id
+})
+
 async function retrieveComments(id) {
   const { data } = await useAsyncData(() => {
     return $directus.items("commentaires").readOne(id);
   });
-
   store.commentaires = data.value;
   navStore.comVisibility = true;
   navStore.navVisibility = false;

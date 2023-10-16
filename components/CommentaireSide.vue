@@ -78,7 +78,7 @@ async function retrieveSourceData(id) {
 }
 
 onMounted(() => {
-  console.log(prop.com);
+  // console.log(prop.com);
   retrieveSourceData(prop.com);
 });
 </script>
