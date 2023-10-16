@@ -54,6 +54,9 @@
                 </span>
               </div>
             </template>
+
+
+            
             <Column
               sortable
               field="commentaires_id.titre"

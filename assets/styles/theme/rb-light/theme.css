@@ -7,6 +7,8 @@
   --surface-f:#ffffff;
   --text-color:rgb(5, 23, 42); */
   --surface-a:#407BAA;
+  --surface-link:#d3e8f6;
+  --surface-link-selected:#90bbd6;
   --surface-b:#dadddf;
   --surface-c:#306793;
   --surface-c-light:#0e2e48;
@@ -6235,6 +6237,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-radius: 50%;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  bottom: 60px;
 }
 .p-scrolltop.p-link {
   background: rgba(0, 0, 0, 0.7);

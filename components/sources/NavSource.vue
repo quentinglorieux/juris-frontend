@@ -85,5 +85,6 @@ const sourceIsSelected = ref(false);
 const onRowSelect = (node) => {
   sourceIsSelected.value = !sourceIsSelected.value;
   navStore.selectedSourceID = node.data.id;
+  navStore.comVisibility = false
 };
 </script>

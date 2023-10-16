@@ -1,28 +1,54 @@
 <template>
-  <div class="flex flex-column p-3 w-full">
+  <div class=" p-3 w-full">
     <div v-if="!theme">
       <h1>Sélectionnez un Theme</h1>
     </div>
-    <div v-if="theme">
-      <div class="titre-page">
+    <div v-else class=" mx-auto mt-1">
+      <div class="titre-page mx-2">
         <h1>  {{ theme.data.titre }}</h1>
       </div>
-      <Splitter style="height: 55vh" layout="vertical">
-              <div class="titre-page">
-        <h1>Thème : {{ theme.data.titre }}</h1>
+      
+      <div class="w-full">
+      <Panel class="px-2 mt-2" header="Introduction" toggleable :collapsed="isCollapsed" @click="isCollapsed=!isCollapsed">
+        <div v-html="theme.data.introduction"></div>
+        </Panel>
+
+          <div class="flex"> <div style="width:100%">
+          <Panel class="px-2 mt-2" header="Sources" toggleable :collapsed="isCollapsedSource" @click="isCollapsedSource=!isCollapsedSource">
+            <ul>
+            <li v-for="source in theme.data.sources">
+              <NuxtLink
+                class="hover:bg-sky-200"
+                :to="{ name: 'sources' }"
+                @click="updateRoute(source.id); navStore.comVisibility=false"
+              >
+                {{ source.titre }}</NuxtLink
+              >
+            </li>
+          </ul>
+        </Panel>
       </div>
-        <SplitterPanel style="height:40vh">
-          <ScrollPanel  style="height:100%">
-          <div v-html="theme.data.introduction"></div>
-          </ScrollPanel>
-        </SplitterPanel>
-        <SplitterPanel>
-          <div class="theme-content">
-          <div style="width:50%;">
-            <h2>Mots-clés</h2>
-          </div>
-          <div style="width:50%">
-          <h2>Sources</h2>
+      <!-- <div style="width:40%">
+        <Panel class="px-2 mt-2" header="Mots-clés" toggleable :collapsed="isCollapsedKW" @click="isCollapsedKW=!isCollapsedKW">
+            <ul>
+            <li v-for="source in theme.data.sources">
+              <NuxtLink
+                class="hover:bg-sky-200"
+                :to="{ name: 'keywords' }"
+                @click="updateRoute(source.id)"
+              >
+                {{ source.titre }}</NuxtLink
+              >
+            </li>
+          </ul>
+        </Panel>
+      </div> -->
+      </div>
+
+          <!-- <div class="theme-content">
+          <div style="width:60%">
+          <Panel header="Sources">
+            <div>
           <ul>
             <li v-for="source in theme.data.sources">
               <NuxtLink
@@ -34,10 +60,19 @@
               >
             </li>
           </ul>
+        </div>
+        </Panel>
           </div>
+
+         
+          <div style="width:40%;">
+            <h2>Mots-clés</h2>
           </div>
-        </SplitterPanel>
-      </Splitter>
+          
+          </div> -->
+        </div>
+        <!-- </SplitterPanel> -->
+      <!-- </Splitter> -->
     </div>
   </div>
 </template>
@@ -46,6 +81,9 @@
 import { useNavStore } from "@/stores/navigation";
 const navStore = useNavStore();
 const oldID = ref();
+const isCollapsed = ref(false)
+const isCollapsedSource = ref(false)
+const isCollapsedKW =ref(false)
 
 function updateRoute(id) {
   navStore.selectedSourceID = id;

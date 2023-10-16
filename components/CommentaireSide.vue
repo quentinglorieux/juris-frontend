@@ -6,7 +6,6 @@
       ref="pdfSection"
     >
       <h1 class="flex  justify-between">
-       
         <div class="px-2">
           <h1 class="">{{ fetched_data.data.titre }}</h1>
         </div>
@@ -48,7 +47,8 @@ const pdfSection = (ref < HTMLElement) | (null > null);
 
 import { useGlobalStore } from "~/stores/global";
 const store = useGlobalStore();
-
+import { useNavStore } from "@/stores/navigation";
+const navStore = useNavStore();
 
 const prop = defineProps(["com"]);
 
@@ -84,6 +84,10 @@ async function retrieveCommentData(id) {
 
 onMounted(() => {
   // console.log(prop.com);
+  retrieveCommentData(prop.com);
+});
+
+watch(prop, () => {
   retrieveCommentData(prop.com);
 });
 </script>

@@ -67,10 +67,9 @@ onBeforeUnmount(() => {
   unbindOutsideClickListener();
 });
 
-// le bon endroit pour modifier
 const items = ref([
   { label: "ACCUEIL", icon: "pi pi-fw pi-home", to: "/" },
-  { label: "SOURCES", icon: "pi pi-fw pi-th-large", to: "/sources" },
+  { label: "SOURCES", icon: "pi pi-fw pi-th-large", to: "/sources"  },
   { label: "MOTS-CLÉS", icon: "pi pi-fw pi-tags", to: "/keywords" },
   //   { label: "Thèmes", icon: "pi pi-fw pi-list", to: "/themes" },
   { label: "THÈMES", icon: "pi pi-fw pi-list", items: [] },

@@ -46,14 +46,14 @@
                     <SourceThemes :source="source" />
                   </TabPanel>
 
-                  <TabPanel header="Traduction(s)">
+                  <!-- <TabPanel header="Traduction(s)">
                     <h2>Traduction(s)</h2>
-                  </TabPanel>
+                  </TabPanel> -->
                 </TabView>
               </div>
 
               <div class="source-commentaire" v-if="navStore.comVisibility">
-                <div class="close-button">
+                <div class="close-button bg-slate-200 rounded pl-1 py-0 m-2">
                   <Button
                     icon="pi pi-times"
                     text
@@ -67,15 +67,14 @@
                   >
                   </Button>
                 </div>
-                <TabView>
+                <TabView >
                   <TabPanel>
                     <template #header>
-                      
-                      {{ comTitre }}
-                    </template>
+                      {{ comTitre }} 
+                    </template> 
                     <ScrollPanel
                       style="
-                        margin: -1rem;
+                        margin: 0.1rem;
                         height: 100%;
                         background-color: white;
                       "
@@ -88,7 +87,7 @@
                       <ScrollTop
                         target="parent"
                         :threshold="100"
-                        class="custom-scrolltop"
+                        style=".p-scrolltop{position: sticky; bottom: 60px; }"
                         icon="pi pi-arrow-up"
                       />
                     </ScrollPanel>
@@ -97,7 +96,7 @@
                     <template #header>
                       <span>Mots-clés associés</span>
                     </template>
-                    <ScrollPanel>
+                    <ScrollPanel class="pr-20">
                       <CommentsKeywords
                         :kwList="kwSelectectComment"
                       ></CommentsKeywords>
@@ -147,6 +146,8 @@ const c = a + b
 return c } 
 return ''})
 
+
+
 onMounted(() => {
   if (navStore.selectedSourceID) {
     retrieveSourceData(navStore.selectedSourceID);
@@ -155,10 +156,8 @@ onMounted(() => {
 
 onUpdated(() => {
   if (navStore.selectedSourceID != oldID.value) {
-    // navStore.comVisibility = false;
     retrieveSourceData(navStore.selectedSourceID);
   }
-
   oldID.value = navStore.selectedSourceID;
 
   const comments = document.getElementsByTagName("mark");
@@ -211,13 +210,13 @@ async function retrieveComments(id) {
   navStore.navVisibility = false;
 }
 
-store.$subscribe((mutation, state) => {
+store.$subscribe(() => {
   const comments = document.getElementsByTagName("mark");
   for (const el of comments) {
     if (el.getAttribute("data-linkedcomment") == store.commentaires.id) {
-      el.setAttribute("style", "background-color:var(--surface-a);");
+      el.setAttribute("style", "background-color:var(--surface-link-selected);");
     } else {
-      el.setAttribute("style", "background-color:var(--surface-c);");
+      el.setAttribute("style", "background-color:var(--surface-link);");
     }
   }
 });
@@ -227,4 +226,5 @@ store.$subscribe((mutation, state) => {
 .p-tabview .p-tabview-panels {
   padding: 0;
 }
+
 </style>

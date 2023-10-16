@@ -1,3 +1,3 @@
 <template>
-Hello
+WORK IN PROGRESS
 </template>
