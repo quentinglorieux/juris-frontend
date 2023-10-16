@@ -18,11 +18,7 @@ import { useNavStore } from "@/stores/navigation";
 import { useGlobalStore } from "~/stores/global";
 const navStore = useNavStore();
 const store = useGlobalStore();
-function CloseCommentPanel(com){
-  navStore.comVisibility = false;
-  // navStore.comID ='';
-  store.commentaires={}
-}
+
 const { $directus } = useNuxtApp();
 async function retrieveComments(com) {
   const id=com.id

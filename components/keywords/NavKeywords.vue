@@ -31,7 +31,7 @@
               <i class="pi pi-search" />
               <InputText
                 v-model="filter1['global'].value"
-                placeholder="Recherche"
+                placeholder="Recherche de mots-clés"
               />
             </span>
           </div>

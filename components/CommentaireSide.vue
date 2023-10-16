@@ -68,7 +68,7 @@ const parsedMarkdown = ref();
 
 // DataFetching of the selected Commentaires(id)
 const { $directus } = useNuxtApp();
-async function retrieveSourceData(id) {
+async function retrieveCommentData(id) {
   fetched_data.value = await useAsyncData(() => {
     return $directus.items("commentaires").readOne(id, {
       fields: ["id,titre,citation,abstract,content,auteur_type,auteur_name"],
@@ -79,6 +79,6 @@ async function retrieveSourceData(id) {
 
 onMounted(() => {
   // console.log(prop.com);
-  retrieveSourceData(prop.com);
+  retrieveCommentData(prop.com);
 });
 </script>
