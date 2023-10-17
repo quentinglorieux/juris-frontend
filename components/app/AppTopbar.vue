@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link to="/" class="layout-topbar-logo"><h1 class="home-titre" style="text-align: center">BRITANICUS - Grands arrêts britanniques</h1>
+    <router-link to="/" class="layout-topbar-logo"><h1 class="home-titre" style="text-align: center">BRITANNICUS - Grands arrêts britanniques</h1>
     </router-link>
     <div class="layout-topbar">
       <!-- <router-link to="/" class="layout-topbar-logo"> -->
@@ -36,10 +36,11 @@
           <i class="pi pi-search"></i>
           <span>Search</span>
         </button>
-        <button @click="onSettingsClick()" class="p-link layout-topbar-button">
+        <NuxtLink to="https://jurisdirectus.rubidiumweb.eu/" target="_blank"> <button @click="onSettingsClick()" class="p-link layout-topbar-button">
           <i class="pi pi-cog"></i>
           <span>Settings</span>
         </button>
+      </NuxtLink>
       </div>
     </div>
   </div>
