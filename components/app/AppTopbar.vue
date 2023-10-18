@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link to="/" class="layout-topbar-logo"><h1 class="home-titre" style="text-align: center">BRITANNICUS - Grands arrêts britanniques</h1>
+    <router-link to="/" class="layout-topbar-logo"><h1 class="home-titre" style="text-align: center">NOMOTECHNIA - Grands arrêts britanniques</h1>
     </router-link>
     <div class="layout-topbar">
       <!-- <router-link to="/" class="layout-topbar-logo"> -->

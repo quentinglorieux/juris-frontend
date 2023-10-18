@@ -1,9 +1,9 @@
 <template>
-  <div class="p-1">
+  <div class="p-1 min-h-screen">
     <!-- <h1 class="home-titre" style="text-align: center">
       Projet Juris
     </h1> -->
-    <div class="home-chapeau">
+    <div class="home-chapeau ">
       <p>
         Courte description u projet : lorem ipsum dolor sit amet, consectetur
         adipiscing elit. Morbi bibendum efficitur neque et congue. Phasellus ut
